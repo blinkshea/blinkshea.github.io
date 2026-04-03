@@ -1,0 +1,398 @@
+    : `<tr><td colspan="${Math.max(displayColumns.length, 1)}" class="muted">No products match the current search and filters.</td></tr>`;
+}
+
+function parseNullableNumber(value) {
+  const parsed = Number(String(value ?? "").trim());
+  return Number.isFinite(parsed) ? parsed : null;
+}
+
+function renderAddons() {
+  if (state.filters.catalogSection === "coating") {
+    const columns = state.clientView ? clientFacingCoatingColumns() : visibleCoatingColumns();
+    renderColumnControls();
+    el.addonsList.className = "table-wrap";
+    const items = getVisibleCoatings();
+    el.addonsList.innerHTML = `
+      <table>
+        <thead>
+          <tr>
+            ${columns
+              .map(
+                (column) =>
+                  state.clientView
+                    ? `<th>${column.label}</th>`
+                    : `<th><button class="column-header-button triangle-toggle-visible" type="button" data-column-toggle="${column.key}" aria-label="Hide ${column.label}">${column.label}</button></th>`
+              )
+              .join("")}
+          </tr>
+        </thead>
+        <tbody>
+          ${
+            items.length
+              ? items
+                  .map(
+                    (item) => `
+                      <tr>
+                        ${columns
+                          .map((column) => `<td class="${column.className || ""}">${column.render(item)}</td>`)
+                          .join("")}
+                      </tr>
+                    `
+                  )
+                  .join("")
+              : `<tr><td colspan="${Math.max(columns.length, 1)}" class="muted">No add-ons match the current search.</td></tr>`
+          }
+        </tbody>
+      </table>
+    `;
+    return;
+  }
+
+  el.addonsControls.innerHTML = "";
+  el.addonsList.className = "stack-list";
+  el.addonsList.innerHTML = "";
+}
+
+function openPrintBooklet() {
+  const products = state.catalog.products.filter((item) => !isConantItem(item));
+  const sortBookletRows = (rows) =>
+    [...rows].sort((left, right) => {
+      const leftIndex = INDEX_DISPLAY_ORDER.indexOf(displayMaterialName(normalizeIndex(left.material)));
+      const rightIndex = INDEX_DISPLAY_ORDER.indexOf(displayMaterialName(normalizeIndex(right.material)));
+      if (leftIndex !== -1 || rightIndex !== -1) {
+        if (leftIndex === -1) return 1;
+        if (rightIndex === -1) return -1;
+        if (leftIndex !== rightIndex) return leftIndex - rightIndex;
+      }
+      const usageCompare = String(left.usage || "").localeCompare(String(right.usage || ""));
+      if (usageCompare !== 0) return usageCompare;
+      const featureCompare = String(left.feature || "").localeCompare(String(right.feature || ""));
+      if (featureCompare !== 0) return featureCompare;
+      const materialCompare = String(displayMaterialName(left.material) || "").localeCompare(
+        String(displayMaterialName(right.material) || ""),
+        undefined,
+        { numeric: true }
+      );
+      if (materialCompare !== 0) return materialCompare;
+      return String(left.design || "").localeCompare(String(right.design || ""));
+    });
+  const makeLensSection = (title, rows, eyebrow = "Catalog") => ({
+    type: "lens",
+    eyebrow,
+    title,
+    rows: sortBookletRows(rows),
+  });
+  const makeSectionBreak = (title, message, theme = "mandalay") => ({
+    type: "divider",
+    eyebrow: "Series",
+    title,
+    message,
+    theme,
+  });
+  const sections = [
+    makeLensSection("Single Vision", products.filter((item) => item.category === "Single Vision")),
+    makeLensSection(
+      "Mandalay Anti-Fatigue",
+      products.filter((item) => item.tier === "Anti-Fatigue" && item.family === "Acomoda II")
+    ),
+    makeLensSection(
+      "IOT Anti-Fatigue",
+      products.filter((item) => item.tier === "Anti-Fatigue" && item.family === "IOT")
+    ),
+    makeLensSection("Bifocal", products.filter((item) => item.category === "Multifocal")),
+    makeSectionBreak("Mandalay Series", "Mandalay progressive designs arranged from good to better to best.", "mandalay"),
+    makeLensSection(
+      "Mandalay Good",
+      products.filter((item) => item.family === "Mandalay" && item.tier === "Essential")
+    ),
+    makeLensSection(
+      "Mandalay Better",
+      products.filter((item) => item.family === "Mandalay Plus" && item.tier === "Endless")
+    ),
+    makeLensSection(
+      "Mandalay Best",
+      products.filter((item) => item.family === "Horizon" && item.tier === "Camber")
+    ),
+    makeSectionBreak("IOT Series", "The following sections cover IOT good, better, and best progressive designs.", "iot"),
+    makeLensSection(
+      "IOT Good",
+      products.filter((item) => item.family === "IOT" && item.tier === "Essential")
+    ),
+    makeLensSection(
+      "IOT Better",
+      products.filter((item) => item.family === "IOT" && item.tier === "Endless")
+    ),
+    makeLensSection(
+      "IOT Best",
+      products.filter((item) => item.family === "IOT" && item.tier === "Camber")
+    ),
+  ].filter((section) => section.type === "divider" || section.rows.length);
+  const coatingRows = sortBookletRows(
+    state.catalog.addons.filter((item) => mainPrice(item) !== null && mainPrice(item) !== undefined)
+  );
+  const popup = window.open("", "doctor-booklet", "width=1100,height=900");
+  if (!popup) return window.alert("Please allow pop-ups so the booklet can open for printing.");
+  popup.document.write(`
+    <!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Doctor Booklet</title>
+    <style>body{font-family:Georgia,serif;padding:18px;color:#221a14;background:#fff;font-size:12px;line-height:1.3}h1{margin:0 0 8px;font-size:26px}h2{margin:0 0 8px;font-size:18px}h3{margin:0 0 6px;font-size:13px}section{margin-bottom:14px;break-inside:avoid}.cover-page,.series-break{page-break-after:always;break-after:page}.cover-page{min-height:30vh;padding:8px 0 4px}.eyebrow{text-transform:uppercase;letter-spacing:.18em;color:#2f6dcf;font:700 10px Arial,sans-serif}.lead{max-width:680px;color:#6f5b4d;line-height:1.4;margin:0}.booklet-section{padding:10px 0 4px;border-top:1px solid #e6d9cb}.booklet-table{width:100%;border-collapse:collapse;margin-top:8px;font-size:11px}.booklet-table th,.booklet-table td{border:1px solid #d7c6b2;padding:4px 6px;text-align:left;vertical-align:top}.booklet-table th{background:#1f5fbf;color:#fff}.series-break{display:flex;align-items:center;justify-content:center;min-height:18vh;border:1px solid #d7c6b2;border-radius:10px;background:#f8f5f0;padding:18px;text-align:center}.series-break.series-break-iot{background:#f4f8ff}.series-break-copy p{margin:8px auto 0;max-width:520px;color:#6f5b4d;font-size:13px;line-height:1.45}.coating-group{margin-top:10px}.coating-group:first-child{margin-top:0}.coating-group h3{font-size:13px;color:#2f6dcf;margin-bottom:4px}@media print{body{padding:0.2in}.cover-page,.series-break{min-height:auto}}</style></head><body>
+    <section class="cover-page"><p class="eyebrow">Doctor Ordering Booklet</p><h1>Mandalay Optical Lens Book</h1><p class="lead">A doctor-facing booklet organized in prescribing order, with single vision, bifocal, Mandalay progressives, IOT progressives, and coatings grouped for quicker review.</p></section>
+    ${sections
+      .map(
+        (section) =>
+          section.type === "divider"
+            ? `<section class="series-break ${section.theme === "iot" ? "series-break-iot" : ""}"><div class="series-break-copy"><p class="eyebrow">${esc(section.eyebrow)}</p><h1>${esc(section.title)}</h1><p>${esc(section.message)}</p></div></section>`
+            : `<section class="booklet-section"><p class="eyebrow">${esc(section.eyebrow)}</p><h2>${esc(section.title)}</h2><table class="booklet-table"><thead><tr><th>Lens</th><th>Usage</th><th>Feature</th><th>Pricing</th></tr></thead><tbody>${section.rows
+                .map((item) => `<tr><td>${esc([displayMaterialName(item.material), item.design].filter(Boolean).join(" / "))}</td><td>${esc(item.usage || "")}</td><td>${esc(item.feature || "")}</td><td>${currency(mainPrice(item))}</td></tr>`)
+                .join("")}</tbody></table></section>`
+      )
+      .join("")}
+    <section class="booklet-section"><p class="eyebrow">Coatings</p><h2>Coatings and Add-Ons</h2>${[...new Set(coatingRows.map((item) => item.section || "Extras"))]
+      .map((sectionName) => {
+        const rows = coatingRows.filter((item) => (item.section || "Extras") === sectionName);
+        return `<div class="coating-group"><h3>${esc(sectionName)}</h3><table class="booklet-table"><thead><tr><th>Add-On</th><th>Pricing</th></tr></thead><tbody>${rows
+          .map((item) => `<tr><td>${esc(item.name)}</td><td>${currency(mainPrice(item))}</td></tr>`)
+          .join("")}</tbody></table></div>`;
+      })
+      .join("")}</section>
+    </body></html>`);
+  popup.document.close();
+  popup.focus();
+  popup.print();
+}
+
+function exportCatalog() {
+  const blob = new Blob([JSON.stringify(state.catalog, null, 2)], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = "optical-lens-catalog.json";
+  link.click();
+  URL.revokeObjectURL(url);
+}
+
+function resetCatalog() {
+  const confirmed = window.confirm(
+    "Reset the portal back to the original workbook data? This will remove your current local edits unless you export them first."
+  );
+  if (!confirmed) return;
+
+  window.localStorage.removeItem(STORAGE_KEY);
+  state.catalog = structuredClone(window.DEFAULT_CATALOG || DEFAULT_CATALOG);
+  state.filters = {
+    search: "",
+    catalogSection: "none",
+    singleVisionType: "single-vision-core",
+    singleVisionIndex: "all",
+    singleVisionTreatment: "all",
+    progressiveProgram: "mandalay",
+    progressiveTier: "good",
+  };
+  el.searchInput.value = "";
+  render();
+}
+
+function openAddItemDialog(type) {
+  state.addingItemType = type;
+  el.adminMenu.open = false;
+  el.addItemTitle.textContent = type === "addon" ? "Add coating / add-on" : "Add lens product";
+  el.addItemFamily.value = type === "addon" ? "Coatings" : "Custom";
+  el.addItemTier.value = type === "addon" ? "" : "Draft";
+  el.addItemCategory.value = type === "addon" ? "Add-On" : "Single Vision";
+  el.addItemMaterial.value = "";
+  el.addItemDesign.value = "";
+  el.addItemUsage.value = "";
+  el.addItemFeature.value = "";
+  el.addItemPrice.value = "";
+  el.addItemWholesale.value = "";
+  el.addItemTog.value = "";
+  el.addItemDialog.showModal();
+}
+
+function closeAddItemDialog() {
+  if (el.addItemDialog.open) el.addItemDialog.close();
+}
+
+function renderRemoveLensOptions() {
+  const filterValue = String(el.removeItemFilter.value || "").trim().toLowerCase();
+  const options = state.catalog.products
+    .map((item) => ({
+      id: item.id,
+      label: removeLensLabel(item),
+      search: removeLensLabel(item).toLowerCase(),
+    }))
+    .filter((item) => !filterValue || item.search.includes(filterValue))
+    .sort((a, b) => a.label.localeCompare(b.label));
+
+  el.removeItemSelect.innerHTML = options
+    .map((option) => `<option value="${esc(option.id)}">${esc(option.label)}</option>`)
+    .join("");
+
+  return options;
+}
+
+function openRemoveLensDialog() {
+  el.adminMenu.open = false;
+  el.removeItemFilter.value = "";
+  const options = renderRemoveLensOptions();
+
+  if (!options.length) {
+    window.alert("There are no lens products to remove.");
+    return;
+  }
+
+  el.removeItemDialog.showModal();
+}
+
+function closeRemoveLensDialog() {
+  if (el.removeItemDialog.open) el.removeItemDialog.close();
+}
+
+function removeSelectedLens(event) {
+  event.preventDefault();
+  const id = el.removeItemSelect.value;
+  const item = byId(id);
+  if (!item) {
+    closeRemoveLensDialog();
+    return;
+  }
+
+  const confirmed = window.confirm(
+    `Remove ${displayFamilyName(item)} ${[displayMaterialName(item.material), item.design].filter(Boolean).join(" ")} from the catalog?`
+  );
+  if (!confirmed) return;
+
+  state.catalog.products = state.catalog.products.filter((product) => product.id !== id);
+  saveLocalCatalog();
+  render();
+  closeRemoveLensDialog();
+}
+
+function saveNewItem(event) {
+  event.preventDefault();
+  const id = `custom-${Date.now()}`;
+  const proposedPrice = parseFormNumber(el.addItemPrice.value);
+  const mandalayWholesale = parseFormNumber(el.addItemWholesale.value);
+  const togReference = parseFormNumber(el.addItemTog.value);
+
+  if (state.addingItemType === "addon") {
+    state.catalog.addons.unshift({
+      id,
+      section: el.addItemFamily.value.trim() || "Coatings",
+      name: el.addItemMaterial.value.trim() || "New add-on",
+      notes: el.addItemUsage.value.trim(),
+      proposedPrice,
+      mandalayWholesale,
+      togReference,
+    });
+  } else {
+    state.catalog.products.unshift({
+      id,
+      family: el.addItemFamily.value.trim() || "Custom",
+      tier: el.addItemTier.value.trim() || "Draft",
+      category: el.addItemCategory.value.trim() || "Single Vision",
+      sourceSheet: "Manual entry",
+      material: el.addItemMaterial.value.trim() || "CR-39",
+      design: el.addItemDesign.value.trim() || "New product",
+      usage: el.addItemUsage.value.trim() || "Clear",
+      feature: el.addItemFeature.value.trim(),
+      mandalayWholesale,
+      togReference,
+      mandalayRetail: null,
+      proposedPrice,
+      benchmarkRetail: null,
+      pivotalRetail: null,
+      targetSellingPrice: null,
+      grossMarginPercent: marginFromPrice(proposedPrice, mandalayWholesale),
+    });
+  }
+
+  saveLocalCatalog();
+  render();
+  closeAddItemDialog();
+}
+
+function handleImport(event) {
+  const [file] = event.target.files || [];
+  if (!file) return;
+  const confirmed = window.confirm(
+    "Importing JSON will replace the current portal data in this browser. Continue?"
+  );
+  if (!confirmed) {
+    event.target.value = "";
+    return;
+  }
+  file.text().then((text) => {
+    state.catalog = JSON.parse(text);
+    saveLocalCatalog();
+    render();
+    event.target.value = "";
+  });
+}
+
+function render() {
+  ensureAvailableFilters();
+  el.controlsPanel.hidden = false;
+  el.contentGrid.hidden = state.filters.catalogSection === "coating";
+  el.lockAdminButton.hidden = !state.adminUnlocked;
+  el.toggleSkuButton.textContent = state.skuVisible ? "Hide SKUs" : "Show SKUs";
+  el.toggleConantButton.textContent = state.providerMode === "conant" ? "Viewing Conant" : "View Conant";
+  el.toggleTogButton.textContent = state.providerMode === "tog" ? "Viewing TOG" : "View TOG";
+  el.clientViewButton.textContent = state.clientView ? "Exit Client View" : "Client View";
+  el.adminMenu.hidden = state.clientView;
+  el.catalogListingPanel.hidden = false;
+  el.singleVisionFiltersPanel.hidden = state.filters.catalogSection !== "single-vision";
+  el.progressiveFiltersPanel.hidden = state.filters.catalogSection !== "progressive";
+  el.lensFiltersPanel.hidden = !["single-vision", "progressive"].includes(state.filters.catalogSection);
+  el.searchWrap.hidden = state.filters.catalogSection === "none";
+  el.secondaryPanelControls.hidden = state.clientView;
+  renderCatalogSwitcher();
+  renderSingleVisionFilters();
+  renderProgressiveFilters();
+  renderLensFilters();
+  const rows = state.filters.catalogSection === "coating" ? getVisibleCoatings() : getFilteredProducts();
+  renderResults(rows);
+  renderAddons();
+  renderSecondaryPanels();
+}
+
+function openPriceEditor(productId) {
+  const item = byId(productId);
+  if (!item) return;
+  state.editingProductId = productId;
+  el.priceEditorTitle.textContent = `Edit pricing for ${displayFamilyName(item)} ${[displayMaterialName(item.material), item.design].filter(Boolean).join(" ")}`.trim();
+  el.priceEditorMainPrice.value = mainPrice(item) ?? "";
+  el.priceEditorWholesale.value = item.mandalayWholesale ?? "";
+  el.priceEditorTog.value = item.togReference ?? "";
+  el.priceEditorDialog.showModal();
+}
+
+function closePriceEditor() {
+  state.editingProductId = null;
+  if (el.priceEditorDialog.open) el.priceEditorDialog.close();
+}
+
+function lockAdmin() {
+  state.adminUnlocked = false;
+  el.adminMenu.open = false;
+  closePriceEditor();
+  render();
+}
+
+function requestPassword({ eyebrow = "Secure Access", title = "Enter password", message = "Enter your password to continue." }) {
+  if (pendingPasswordResolver) {
+    pendingPasswordResolver(null);
+    pendingPasswordResolver = null;
+  }
+  el.passwordDialogEyebrow.textContent = eyebrow;
+  el.passwordDialogTitle.textContent = title;
+  el.passwordDialogMessage.textContent = message;
+  el.passwordInput.value = "";
+  el.passwordError.hidden = true;
+  el.passwordDialog.showModal();
+  window.setTimeout(() => el.passwordInput.focus(), 0);
+  return new Promise((resolve) => {
+    pendingPasswordResolver = resolve;
+  });
+}
+
+async function confirmPassword(expectedValue, option
