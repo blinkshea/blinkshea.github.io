@@ -4,14 +4,20 @@ window.loadCompressedText = async function loadCompressedText(path) {
     throw new Error(`Unable to load ${path}: ${response.status}`);
   }
 
-  if (typeof DecompressionStream !== "function") {
-    throw new Error("This browser does not support gzip decompression.");
-  }
-
   const base64 = (await response.text()).trim();
   const binary = Uint8Array.from(atob(base64), (character) => character.charCodeAt(0));
-  const stream = new Blob([binary]).stream().pipeThrough(new DecompressionStream("gzip"));
-  return new Response(stream).text();
+
+  if (typeof DecompressionStream === "function") {
+    const stream = new Blob([binary]).stream().pipeThrough(new DecompressionStream("gzip"));
+    return new Response(stream).text();
+  }
+
+  if (window.fflate && typeof window.fflate.gunzipSync === "function") {
+    const decompressed = window.fflate.gunzipSync(binary);
+    return new TextDecoder().decode(decompressed);
+  }
+
+  throw new Error("This browser does not support gzip decompression.");
 };
 
 (async function mountHostedCatalog() {
