@@ -1,0 +1,252 @@
+s) {
+  while (true) {
+    const entry = await requestPassword(options);
+    if (entry === null) return false;
+    if (entry === expectedValue) return true;
+    el.passwordError.hidden = false;
+    el.passwordInput.value = "";
+    el.passwordInput.focus();
+  }
+}
+
+function closePasswordDialog(result = null) {
+  if (pendingPasswordResolver) {
+    pendingPasswordResolver(result);
+    pendingPasswordResolver = null;
+  }
+  el.passwordInput.value = "";
+  el.passwordError.hidden = true;
+  el.passwordDialog.close();
+}
+
+function savePriceEditor(event) {
+  event.preventDefault();
+  const item = byId(state.editingProductId);
+  if (!item) {
+    closePriceEditor();
+    return;
+  }
+
+  const updatedPrice = parseFormNumber(el.priceEditorMainPrice.value);
+  const updatedWholesale = parseFormNumber(el.priceEditorWholesale.value);
+  const updatedTog = parseFormNumber(el.priceEditorTog.value);
+
+  item.proposedPrice = updatedPrice;
+  item.mandalayWholesale = updatedWholesale;
+  item.togReference = updatedTog;
+  item.grossMarginPercent = marginFromPrice(updatedPrice, updatedWholesale);
+
+  saveLocalCatalog();
+  render();
+  closePriceEditor();
+}
+
+function toggleColumnVisibility(key) {
+  const isCoating = state.filters.catalogSection === "coating";
+  const hiddenKeyList = isCoating ? state.hiddenCoatingColumns : state.hiddenProductColumns;
+  const visibleColumns = isCoating ? visibleCoatingColumns() : visibleProductColumns();
+
+  if (hiddenKeyList.includes(key)) {
+    if (isCoating) {
+      state.hiddenCoatingColumns = state.hiddenCoatingColumns.filter((columnKey) => columnKey !== key);
+    } else {
+      state.hiddenProductColumns = state.hiddenProductColumns.filter((columnKey) => columnKey !== key);
+    }
+  } else if (visibleColumns.length > 1) {
+    hiddenKeyList.push(key);
+  }
+
+  render();
+}
+
+function attachEvents() {
+  el.searchInput.addEventListener("input", (event) => {
+    state.filters.search = event.target.value.trim();
+    render();
+  });
+  el.indexFilter.addEventListener("change", (event) => {
+    state.filters.singleVisionIndex = event.target.value;
+    render();
+  });
+  el.treatmentFilter.addEventListener("change", (event) => {
+    state.filters.singleVisionTreatment = TREATMENT_OPTIONS.find((item) => item.label === event.target.value)?.value || "all";
+    render();
+  });
+  document.addEventListener("click", (event) => {
+    if (state.clientView) return;
+    const editButton = event.target.closest("[data-edit-product]");
+    if (editButton) {
+      openPriceEditor(editButton.dataset.editProduct);
+      return;
+    }
+
+    const headerToggle = event.target.closest("[data-column-toggle]");
+    if (headerToggle && (el.resultsHead.contains(headerToggle) || el.addonsList.contains(headerToggle))) {
+      const key = headerToggle.dataset.columnToggle;
+      const hiddenKeyList = state.filters.catalogSection === "coating" ? state.hiddenCoatingColumns : state.hiddenProductColumns;
+      const visibleColumns = state.filters.catalogSection === "coating" ? visibleCoatingColumns() : visibleProductColumns();
+      if (!hiddenKeyList.includes(key) && visibleColumns.length > 1) {
+        hiddenKeyList.push(key);
+        render();
+      }
+      return;
+    }
+
+    const toggle = event.target.closest("[data-column-toggle]");
+    if (toggle && (el.columnControls.contains(toggle) || el.addonsControls.contains(toggle))) {
+      toggleColumnVisibility(toggle.dataset.columnToggle);
+      return;
+    }
+
+    const restore = event.target.closest("[data-column-restore]");
+    if (restore && (el.columnControls.contains(restore) || el.addonsControls.contains(restore))) {
+      const key = restore.dataset.columnRestore;
+      if (state.filters.catalogSection === "coating") {
+        state.hiddenCoatingColumns = state.hiddenCoatingColumns.filter((columnKey) => columnKey !== key);
+      } else {
+        state.hiddenProductColumns = state.hiddenProductColumns.filter((columnKey) => columnKey !== key);
+      }
+      render();
+      return;
+    }
+
+    const resetButton = event.target.closest("[data-reset-columns]");
+    if (resetButton && (el.columnControls.contains(resetButton) || el.addonsControls.contains(resetButton))) {
+      if (state.filters.catalogSection === "coating") {
+        state.hiddenCoatingColumns = [];
+      } else {
+        state.hiddenProductColumns = [];
+      }
+      render();
+    }
+  });
+  document.addEventListener("click", (event) => {
+    const hideButton = event.target.closest("[data-panel-hide]");
+    if (hideButton) {
+      const key = hideButton.dataset.panelHide;
+      if (!state.hiddenPanels.includes(key)) {
+        state.hiddenPanels.push(key);
+        render();
+      }
+      return;
+    }
+
+    const restoreButton = event.target.closest("[data-panel-restore]");
+    if (restoreButton) {
+      const key = restoreButton.dataset.panelRestore;
+      state.hiddenPanels = state.hiddenPanels.filter((panelKey) => panelKey !== key);
+      render();
+      return;
+    }
+
+    if (event.target.closest("[data-panels-reset]")) {
+      state.hiddenPanels = [];
+      render();
+    }
+  });
+  el.familySwitcher.addEventListener("click", (event) => {
+    const chip = event.target.closest("[data-catalog-section]");
+    if (!chip) return;
+    state.filters.catalogSection = chip.dataset.catalogSection;
+    state.filters.singleVisionType = "single-vision-core";
+    state.filters.singleVisionIndex = "all";
+    state.filters.singleVisionTreatment = "all";
+    state.filters.progressiveProgram = "mandalay";
+    state.filters.progressiveTier = "good";
+    render();
+  });
+  el.singleVisionTypeSwitcher.addEventListener("click", (event) => {
+    const chip = event.target.closest("[data-single-vision-type]");
+    if (!chip) return;
+    state.filters.singleVisionType = chip.dataset.singleVisionType;
+    state.filters.singleVisionIndex = "all";
+    state.filters.singleVisionTreatment = "all";
+    render();
+  });
+  el.progressiveProgramSwitcher.addEventListener("click", (event) => {
+    const chip = event.target.closest("[data-progressive-program]");
+    if (!chip) return;
+    state.filters.progressiveProgram = chip.dataset.progressiveProgram;
+    state.filters.progressiveTier = "good";
+    render();
+  });
+  el.progressiveTierSwitcher.addEventListener("click", (event) => {
+    const chip = event.target.closest("[data-progressive-tier]");
+    if (!chip) return;
+    state.filters.progressiveTier = chip.dataset.progressiveTier;
+    render();
+  });
+  el.clientViewButton.addEventListener("click", async () => {
+    if (state.clientView) {
+      const matches = await confirmPassword(CLIENT_EXIT_PASSWORD, {
+        eyebrow: "Client View",
+        title: "Exit client view",
+        message: "Enter the client-view exit password to return to the admin-facing mode.",
+      });
+      if (!matches) return;
+      state.clientView = false;
+    } else {
+      state.clientView = true;
+    }
+    el.adminMenu.open = false;
+    closePriceEditor();
+    render();
+  });
+  el.adminMenuSummary.addEventListener("click", async (event) => {
+    event.preventDefault();
+    if (!state.adminUnlocked) {
+      const matches = await confirmPassword(ADMIN_PASSWORD, {
+        eyebrow: "Admin Access",
+        title: "Unlock admin tools",
+        message: "Enter the admin password to open pricing, import, export, and editing controls.",
+      });
+      if (!matches) {
+        el.adminMenu.open = false;
+        return;
+      }
+      state.adminUnlocked = true;
+      render();
+    }
+    el.adminMenu.open = !el.adminMenu.open;
+  });
+  el.lockAdminButton.addEventListener("click", lockAdmin);
+  el.toggleSkuButton.addEventListener("click", () => {
+    state.skuVisible = !state.skuVisible;
+    render();
+  });
+  el.toggleConantButton.addEventListener("click", () => {
+    state.providerMode = state.providerMode === "conant" ? "default" : "conant";
+    render();
+  });
+  el.toggleTogButton.addEventListener("click", () => {
+    state.providerMode = state.providerMode === "tog" ? "default" : "tog";
+    render();
+  });
+  el.addLensButton.addEventListener("click", () => openAddItemDialog("product"));
+  el.removeLensButton.addEventListener("click", openRemoveLensDialog);
+  el.addAddonButton.addEventListener("click", () => openAddItemDialog("addon"));
+  el.addItemForm.addEventListener("submit", saveNewItem);
+  el.addItemCancelButton.addEventListener("click", closeAddItemDialog);
+  el.removeItemFilter.addEventListener("input", renderRemoveLensOptions);
+  el.removeItemForm.addEventListener("submit", removeSelectedLens);
+  el.removeItemCancelButton.addEventListener("click", closeRemoveLensDialog);
+  el.passwordForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    closePasswordDialog(el.passwordInput.value);
+  });
+  el.passwordCancelButton.addEventListener("click", () => closePasswordDialog(null));
+  el.passwordDialog.addEventListener("cancel", (event) => {
+    event.preventDefault();
+    closePasswordDialog(null);
+  });
+  el.priceEditorForm.addEventListener("submit", savePriceEditor);
+  el.priceEditorCancelButton.addEventListener("click", closePriceEditor);
+  el.exportDataButton.addEventListener("click", exportCatalog);
+  el.printBookletButton.addEventListener("click", openPrintBooklet);
+  el.resetDataButton.addEventListener("click", resetCatalog);
+  el.importFileInput.addEventListener("change", handleImport);
+}
+
+loadLocalCatalog();
+attachEvents();
+render();
