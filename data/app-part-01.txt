@@ -1,0 +1,373 @@
+const STORAGE_KEY = "optical-lens-book.catalog";
+const DEFAULT_CATALOG = { products: [], addons: [], shipping: [], stockReference: [] };
+const SINGLE_VISION_CATEGORIES = ["Single Vision", "Lifestyle / Digital SV"];
+const SECTION_LABELS = {
+  none: "Choose a section",
+  "single-vision": "Single vision",
+  bifocal: "Bifocal",
+  progressive: "Progressive",
+  coating: "Coating",
+};
+const TREATMENT_OPTIONS = [
+  { value: "all", label: "All treatments" },
+  { value: "clear", label: "Clear" },
+  { value: "photochromic", label: "Photochromic" },
+  { value: "transition", label: "Transition" },
+  { value: "polarized", label: "Polarized" },
+];
+const SINGLE_VISION_TYPE_LABELS = {
+  "single-vision-core": "Single vision",
+  "anti-fatigue": "Anti-Fatigue",
+  "iot-anti-fatigue": "IOT Anti-Fatigue",
+};
+const PROGRESSIVE_PROGRAM_LABELS = {
+  mandalay: "Mandalay",
+  iot: "IOT",
+};
+const PROGRESSIVE_TIER_LABELS = {
+  mandalay: {
+    good: "Mandalay (Good)",
+    better: "Mandalay + (Better)",
+    best: "Horizen Iden (Best)",
+  },
+  iot: {
+    good: "IOT Essential (Good)",
+    better: "IOT Endless (Better)",
+    best: "IOT Camber (Best)",
+  },
+};
+const INDEX_DISPLAY_ORDER = ["CR-39", "Poly", "1.56", "TriVex", "1.60", "1.67", "1.74"];
+const ADMIN_PASSWORD = "Heypeeps";
+const CLIENT_EXIT_PASSWORD = "Mandalay";
+
+const state = {
+  catalog: normalizeCatalogSpelling(window.DEFAULT_CATALOG || DEFAULT_CATALOG),
+  hiddenProductColumns: [],
+  hiddenCoatingColumns: [],
+  hiddenPanels: [],
+  skuVisible: false,
+  providerMode: "default",
+  adminUnlocked: false,
+  editingProductId: null,
+  addingItemType: "product",
+  clientView: false,
+  filters: {
+    search: "",
+    catalogSection: "none",
+    singleVisionType: "single-vision-core",
+    singleVisionIndex: "all",
+    singleVisionTreatment: "all",
+    progressiveProgram: "mandalay",
+    progressiveTier: "good",
+  },
+};
+
+const el = {
+  searchInput: document.querySelector("#searchInput"),
+  indexFilter: document.querySelector("#indexFilter"),
+  treatmentFilter: document.querySelector("#treatmentFilter"),
+  contentGrid: document.querySelector("#contentGrid"),
+  controlsPanel: document.querySelector("#controlsPanel"),
+  resultsHead: document.querySelector("#resultsHead"),
+  resultsBody: document.querySelector("#resultsBody"),
+  columnControls: document.querySelector("#columnControls"),
+  clientViewButton: document.querySelector("#clientViewButton"),
+  activeFamilyTitle: document.querySelector("#activeFamilyTitle"),
+  catalogListingPanel: document.querySelector("#catalogListingPanel"),
+  familySwitcher: document.querySelector("#familySwitcher"),
+  activeTierTitle: document.querySelector("#activeTierTitle"),
+  singleVisionFiltersPanel: document.querySelector("#singleVisionFiltersPanel"),
+  singleVisionTypeSwitcher: document.querySelector("#singleVisionTypeSwitcher"),
+  progressiveFiltersPanel: document.querySelector("#progressiveFiltersPanel"),
+  progressiveTitle: document.querySelector("#progressiveTitle"),
+  progressiveProgramSwitcher: document.querySelector("#progressiveProgramSwitcher"),
+  progressiveTierSwitcher: document.querySelector("#progressiveTierSwitcher"),
+  lensFiltersPanel: document.querySelector("#lensFiltersPanel"),
+  lensFiltersTitle: document.querySelector("#lensFiltersTitle"),
+  adminMenu: document.querySelector(".admin-menu"),
+  adminMenuSummary: document.querySelector(".admin-menu summary"),
+  lockAdminButton: document.querySelector("#lockAdminButton"),
+  toggleSkuButton: document.querySelector("#toggleSkuButton"),
+  toggleConantButton: document.querySelector("#toggleConantButton"),
+  toggleTogButton: document.querySelector("#toggleTogButton"),
+  priceEditorDialog: document.querySelector("#priceEditorDialog"),
+  priceEditorForm: document.querySelector("#priceEditorForm"),
+  priceEditorTitle: document.querySelector("#priceEditorTitle"),
+  priceEditorMainPrice: document.querySelector("#priceEditorMainPrice"),
+  priceEditorWholesale: document.querySelector("#priceEditorWholesale"),
+  priceEditorTog: document.querySelector("#priceEditorTog"),
+  priceEditorCancelButton: document.querySelector("#priceEditorCancelButton"),
+  addonsControls: document.querySelector("#addonsControls"),
+  addonsList: document.querySelector("#addonsList"),
+  addonsPanel: document.querySelector("#addonsPanel"),
+  secondaryPanelControls: document.querySelector("#secondaryPanelControls"),
+  printBookletButton: document.querySelector("#printBookletButton"),
+  exportDataButton: document.querySelector("#exportDataButton"),
+  resetDataButton: document.querySelector("#resetDataButton"),
+  importFileInput: document.querySelector("#importFileInput"),
+  addLensButton: document.querySelector("#addLensButton"),
+  removeLensButton: document.querySelector("#removeLensButton"),
+  addAddonButton: document.querySelector("#addAddonButton"),
+  searchWrap: document.querySelector("#searchWrap"),
+  addItemDialog: document.querySelector("#addItemDialog"),
+  addItemForm: document.querySelector("#addItemForm"),
+  addItemTitle: document.querySelector("#addItemTitle"),
+  addItemFamily: document.querySelector("#addItemFamily"),
+  addItemTier: document.querySelector("#addItemTier"),
+  addItemCategory: document.querySelector("#addItemCategory"),
+  addItemMaterial: document.querySelector("#addItemMaterial"),
+  addItemDesign: document.querySelector("#addItemDesign"),
+  addItemUsage: document.querySelector("#addItemUsage"),
+  addItemFeature: document.querySelector("#addItemFeature"),
+  addItemPrice: document.querySelector("#addItemPrice"),
+  addItemWholesale: document.querySelector("#addItemWholesale"),
+  addItemTog: document.querySelector("#addItemTog"),
+  addItemCancelButton: document.querySelector("#addItemCancelButton"),
+  removeItemDialog: document.querySelector("#removeItemDialog"),
+  removeItemForm: document.querySelector("#removeItemForm"),
+  removeItemFilter: document.querySelector("#removeItemFilter"),
+  removeItemSelect: document.querySelector("#removeItemSelect"),
+  removeItemCancelButton: document.querySelector("#removeItemCancelButton"),
+  passwordDialog: document.querySelector("#passwordDialog"),
+  passwordForm: document.querySelector("#passwordForm"),
+  passwordDialogEyebrow: document.querySelector("#passwordDialogEyebrow"),
+  passwordDialogTitle: document.querySelector("#passwordDialogTitle"),
+  passwordDialogMessage: document.querySelector("#passwordDialogMessage"),
+  passwordInput: document.querySelector("#passwordInput"),
+  passwordError: document.querySelector("#passwordError"),
+  passwordCancelButton: document.querySelector("#passwordCancelButton"),
+};
+
+let pendingPasswordResolver = null;
+
+const esc = (value) =>
+  String(value ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#39;");
+
+const currency = (value) =>
+  value === null || value === undefined || Number.isNaN(Number(value))
+    ? "-"
+    : new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 2 }).format(Number(value));
+
+const percent = (value) =>
+  value === null || value === undefined || Number.isNaN(Number(value)) ? "-" : `${Number(value).toFixed(1)}%`;
+
+const isConantItem = (item) => item.proposedPrice === null || item.proposedPrice === undefined;
+const mainPrice = (item) => item.proposedPrice ?? item.targetSellingPrice ?? item.mandalayRetail ?? item.pivotalRetail ?? null;
+const hasConantOption = (item) =>
+  (item.mandalayWholesale !== null && item.mandalayWholesale !== undefined) ||
+  (item.mandalayRetail !== null && item.mandalayRetail !== undefined);
+const hasTogOption = (item) => item.proposedPrice !== null && item.proposedPrice !== undefined;
+const byId = (id) => state.catalog.products.find((item) => item.id === id);
+const normalizeIndex = (value) => (String(value || "").trim().toUpperCase() === "1.60" ? "1.6" : String(value || "").trim());
+const marginFromPrice = (sellPrice, wholesale) =>
+  sellPrice !== null && sellPrice !== undefined && wholesale !== null && wholesale !== undefined && Number(sellPrice) !== 0
+    ? Number((((Number(sellPrice) - Number(wholesale)) / Number(sellPrice)) * 100).toFixed(1))
+    : null;
+const displayMaterialName = (value) => {
+  const normalized = String(value || "").trim().toUpperCase();
+  if (normalized === "HI-VEX") return "TriVex";
+  if (normalized === "1.6" || normalized === "1.60") return "1.60";
+  return String(value || "").trim();
+};
+
+function normalizeMandalayText(value) {
+  return String(value || "")
+    .replace(/Madalay/gi, "Mandalay")
+    .replace(/Mandaly/gi, "Mandalay")
+    .replace(/Mandlay/gi, "Mandalay")
+    .replace(/MandalayPlus/gi, "Mandalay Plus");
+}
+
+function normalizeCatalogSpelling(catalog) {
+  const normalized = structuredClone(catalog || DEFAULT_CATALOG);
+
+  normalized.products = (normalized.products || []).map((item) => ({
+    ...item,
+    family: normalizeMandalayText(item.family),
+    sourceSheet: normalizeMandalayText(item.sourceSheet),
+  }));
+
+  normalized.shipping = (normalized.shipping || []).map((item) => ({
+    ...item,
+    vendor: normalizeMandalayText(item.vendor),
+    method: normalizeMandalayText(item.method),
+  }));
+
+  normalized.generatedAt = catalog?.generatedAt;
+  normalized.sourceWorkbook = catalog?.sourceWorkbook;
+  return normalized;
+}
+
+function skuToken(value, fallback = "NA", maxLength = 4) {
+  const normalized = String(value || "")
+    .toUpperCase()
+    .replace(/HI[- ]?VEX/g, "TRIVEX")
+    .replace(/TRANSITIONS?/g, "TRN")
+    .replace(/XTRACTIVE/g, "XTA")
+    .replace(/PHOTOCHROMIC/g, "PHO")
+    .replace(/POLARIZED/g, "POL")
+    .replace(/PROGRESSIVE/g, "PRG")
+    .replace(/LIFESTYLE/g, "LFS")
+    .replace(/DIGITAL/g, "DIG")
+    .replace(/ANTI[- ]FATIGUE/g, "AF")
+    .replace(/SINGLE VISION/g, "SV")
+    .replace(/MULTIFOCAL/g, "MF")
+    .replace(/[^A-Z0-9]+/g, "");
+
+  if (!normalized) return fallback;
+  return normalized.slice(0, maxLength);
+}
+
+function lensSku(item) {
+  return [
+    "MOL",
+    skuToken(displayFamilyName(item), "LENS", 4),
+    skuToken(item.tier, "BASE", 4),
+    skuToken(item.category, "CAT", 3),
+    skuToken(displayMaterialName(item.material), "MAT", 4),
+    skuToken(item.design, "DSGN", 4),
+    skuToken(item.usage || "CLEAR", "USE", 4),
+    skuToken(item.feature || "STD", "STD", 4),
+  ].join("-");
+}
+
+function activeDisplayPrice(item) {
+  if (state.providerMode === "conant") return item.mandalayRetail ?? null;
+  if (state.providerMode === "tog") return item.proposedPrice ?? null;
+  return mainPrice(item);
+}
+
+function activePriceLabel() {
+  if (state.providerMode === "conant") return "Conant Price";
+  if (state.providerMode === "tog") return "TOG Proposal";
+  return "Price";
+}
+
+const PRODUCT_COLUMNS = [
+  { key: "family", label: "Family", render: (item) => esc(displayFamilyName(item)) },
+  { key: "sku", label: "SKU", render: (item) => `<span class="sku-text">${esc(lensSku(item))}</span>` },
+  {
+    key: "product",
+    label: "Product",
+    render: (item) =>
+      `<strong>${esc([displayMaterialName(item.material), item.design].filter(Boolean).join(" · "))}</strong>${state.skuVisible ? `<br /><span class="sku-badge">${esc(lensSku(item))}</span>` : ""}<br /><span class="muted">${esc(item.category)}</span>`,
+  },
+  { key: "usage", label: "Usage", render: (item) => `<span class="pill">${esc(item.usage || "General")}</span>` },
+  { key: "price", label: "Price", className: "price", render: (item) => currency(activeDisplayPrice(item)) },
+  { key: "wholesale-conant", label: "Wholesale Conant", className: "price", render: (item) => currency(item.mandalayWholesale) },
+  { key: "margin", label: "Margin", className: "price", render: (item) => percent(item.grossMarginPercent) },
+  { key: "wholesale-tog", label: "Wholesale TOG", className: "price", render: (item) => currency(item.togReference) },
+  {
+    key: "margin-tog",
+    label: "Margin TOG",
+    className: "price",
+    render: (item) => percent(marginFromPrice(activeDisplayPrice(item), item.togReference)),
+  },
+];
+const COATING_COLUMNS = [
+  { key: "section", label: "Section", render: (item) => esc(item.section) },
+  { key: "add-on", label: "Add-On", render: (item) => `<strong>${esc(item.name)}</strong>` },
+  { key: "price", label: "Price", className: "price", render: (item) => currency(activeDisplayPrice(item)) },
+  { key: "wholesale-conant", label: "Wholesale Conant", className: "price", render: (item) => currency(item.mandalayWholesale) },
+  { key: "margin", label: "Margin", className: "price", render: (item) => percent(marginFromPrice(activeDisplayPrice(item), item.mandalayWholesale)) },
+  { key: "wholesale-tog", label: "Wholesale TOG", className: "price", render: (item) => currency(item.togReference) },
+  { key: "margin-tog", label: "Margin TOG", className: "price", render: (item) => percent(marginFromPrice(activeDisplayPrice(item), item.togReference)) },
+];
+const SECONDARY_PANELS = [
+  { key: "addons", label: "Coatings and extras", element: () => el.addonsPanel },
+];
+
+function displayFamilyName(item) {
+  if (item.tier === "Anti-Fatigue" && item.family === "Acomoda II") return "Anti-fatigue";
+  if (item.tier === "Anti-Fatigue" && item.family === "IOT") return "IOT Endless Anti Fatigue";
+  return item.family;
+}
+
+function loadLocalCatalog() {
+  try {
+    const raw = window.localStorage.getItem(STORAGE_KEY);
+    if (!raw) return;
+
+    const savedCatalog = normalizeCatalogSpelling(JSON.parse(raw));
+    const bundledCatalog = normalizeCatalogSpelling(window.DEFAULT_CATALOG || DEFAULT_CATALOG);
+    const savedGeneratedAt = Date.parse(savedCatalog.generatedAt || "");
+    const bundledGeneratedAt = Date.parse(bundledCatalog.generatedAt || "");
+
+    if (Number.isFinite(bundledGeneratedAt) && (!Number.isFinite(savedGeneratedAt) || bundledGeneratedAt > savedGeneratedAt)) {
+      state.catalog = structuredClone(bundledCatalog);
+      saveLocalCatalog();
+      return;
+    }
+
+    state.catalog = savedCatalog;
+    saveLocalCatalog();
+  } catch (error) {
+    console.warn("Unable to load saved catalog", error);
+  }
+}
+
+function saveLocalCatalog() {
+  window.localStorage.setItem(STORAGE_KEY, JSON.stringify(state.catalog));
+}
+
+function fillSelect(select, values, currentValue, allLabel) {
+  select.innerHTML = "";
+  [{ value: "all", label: allLabel }, ...values.map((value) => ({ value, label: value }))].forEach((optionData) => {
+    const option = document.createElement("option");
+    option.value = optionData.value;
+    option.textContent = optionData.label;
+    if (optionData.value === currentValue) option.selected = true;
+    select.appendChild(option);
+  });
+}
+
+function parseFormNumber(value) {
+  const trimmed = String(value ?? "").trim();
+  if (!trimmed) return null;
+  const parsed = Number(trimmed);
+  return Number.isFinite(parsed) ? parsed : null;
+}
+
+function searchableText(item) {
+  return [item.family, item.tier, item.category, item.material, item.design, item.usage, item.feature, item.sourceSheet, lensSku(item)]
+    .filter(Boolean)
+    .join(" ")
+    .toLowerCase();
+}
+
+function searchableAddonText(item) {
+  return [item.section, item.name, item.notes].filter(Boolean).join(" ").toLowerCase();
+}
+
+function removeLensLabel(item) {
+  return [
+    displayFamilyName(item),
+    item.tier,
+    item.category,
+    displayMaterialName(item.material),
+    item.design,
+    item.usage,
+    item.feature,
+  ]
+    .filter(Boolean)
+    .join(" | ");
+}
+
+function matchesSingleVisionType(item) {
+  const type = state.filters.singleVisionType;
+  if (type === "single-vision-core") return item.category === "Single Vision";
+  if (type === "anti-fatigue") return item.tier === "Anti-Fatigue" && item.family === "Acomoda II";
+  if (type === "iot-anti-fatigue") return item.tier === "Anti-Fatigue" && item.family === "IOT";
+  return SINGLE_VISION_CATEGORIES.includes(item.category);
+}
+
+function matchesSection(item) {
+  const section = state.filters.catalogSection;
+  if (section === "none") return false;
+  if (section === "single-vision") return matchesSingleVisionType(item);
+  if (section === "bifoca
