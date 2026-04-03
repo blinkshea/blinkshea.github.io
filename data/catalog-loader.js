@@ -1,22 +1,23 @@
+window.loadCompressedText = async function loadCompressedText(path) {
+  const response = await fetch(path, { cache: "no-store" });
+  if (!response.ok) {
+    throw new Error(`Unable to load ${path}: ${response.status}`);
+  }
+
+  if (typeof DecompressionStream !== "function") {
+    throw new Error("This browser does not support gzip decompression.");
+  }
+
+  const base64 = (await response.text()).trim();
+  const binary = Uint8Array.from(atob(base64), (character) => character.charCodeAt(0));
+  const stream = new Blob([binary]).stream().pipeThrough(new DecompressionStream("gzip"));
+  return new Response(stream).text();
+};
+
 (async function mountHostedCatalog() {
-  const partCount = 17;
-  const partPaths = Array.from({ length: partCount }, (_, index) => {
-    const number = String(index + 1).padStart(2, "0");
-    return `./data/catalog-part-${number}.txt`;
-  });
-
   try {
-    const responses = await Promise.all(partPaths.map((path) => fetch(path, { cache: "no-store" })));
-    const texts = await Promise.all(
-      responses.map(async (response, index) => {
-        if (!response.ok) {
-          throw new Error(`Catalog part ${index + 1} failed with ${response.status}`);
-        }
-        return response.text();
-      })
-    );
-
-    new Function(texts.join(""))();
+    const catalogText = await window.loadCompressedText("./data/catalog-data.b64.gz.txt");
+    new Function(catalogText)();
 
     const appScript = document.createElement("script");
     appScript.src = "./app.js";
