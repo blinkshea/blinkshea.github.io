@@ -1,3 +1,33 @@
+if (typeof window.structuredClone !== "function") {
+  window.structuredClone = (value) => JSON.parse(JSON.stringify(value));
+}
+
+(function polyfillDialogMethods() {
+  const dialogPrototype = Object.getPrototypeOf(document.createElement("dialog"));
+  if (!dialogPrototype) return;
+
+  if (typeof dialogPrototype.showModal !== "function") {
+    dialogPrototype.showModal = function showModalPolyfill() {
+      this.setAttribute("open", "open");
+      this.style.display = "block";
+    };
+  }
+
+  if (typeof dialogPrototype.show !== "function") {
+    dialogPrototype.show = function showPolyfill() {
+      this.setAttribute("open", "open");
+      this.style.display = "block";
+    };
+  }
+
+  if (typeof dialogPrototype.close !== "function") {
+    dialogPrototype.close = function closePolyfill() {
+      this.removeAttribute("open");
+      this.style.display = "none";
+    };
+  }
+})();
+
 window.loadCompressedText = async function loadCompressedText(path) {
   const response = await fetch(path, { cache: "no-store" });
   if (!response.ok) {
