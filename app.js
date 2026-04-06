@@ -4,7 +4,7 @@
   var INDEX_ORDER = ["CR-39", "Poly", "1.56", "TriVex", "1.60", "1.67", "1.74"];
   var TREATMENTS = [["all", "All treatments"], ["clear", "Clear"], ["photochromic", "Photochromic"], ["transition", "Transition"], ["polarized", "Polarized"]];
   var catalog = window.DEFAULT_CATALOG || { products: [], addons: [] };
-  var state = { section: "none", svType: "single-vision-core", index: "all", treatment: "all", program: "mandalay", tier: "good", search: "", provider: "default", clientView: false, adminUnlocked: false, skuVisible: false, adminColumns: "pricing" };
+  var state = { section: "none", svType: "single-vision-core", index: "all", treatment: "all", program: "mandalay", tier: "good", search: "", provider: "default", clientView: false, adminUnlocked: false, skuVisible: false, hiddenProductColumns: [] };
 
   function $(id) { return document.getElementById(id); }
   function q(selector) { return document.querySelector(selector); }
@@ -41,9 +41,8 @@
   function treatmentValue(label) { for (var i = 0; i < TREATMENTS.length; i++) if (TREATMENTS[i][1] === label) return TREATMENTS[i][0]; return "all"; }
 
   function ensureAdminControls() {
-    var panel = q(".admin-menu-panel");
-    if (!panel || $("hostedAdminControls")) return;
-    panel.insertAdjacentHTML("afterbegin", '<div id="hostedAdminControls" class="admin-qr-card"><p class="admin-qr-label">Admin View</p><label class="password-dialog-field">Provider<select id="adminProviderSelect"><option value="default">All pricing</option><option value="conant">Conant only</option><option value="tog">TOG only</option></select></label><label class="password-dialog-field">Columns<select id="adminColumnModeSelect"><option value="pricing">Pricing columns</option><option value="full">Full admin columns</option><option value="client">Client columns</option></select></label><p class="admin-qr-note">Admin mode shows wholesale, retail/proposal, and margin columns.</p></div>');
+    var hostedControls = $("hostedAdminControls");
+    if (hostedControls) hostedControls.remove();
   }
 
   function renderFilters() {
@@ -64,41 +63,61 @@
     $("toggleSkuButton").textContent = state.skuVisible ? "Hide SKUs" : "Show SKUs";
     $("toggleConantButton").textContent = state.provider === "conant" ? "Viewing Conant" : "View Conant";
     $("toggleTogButton").textContent = state.provider === "tog" ? "Viewing TOG" : "View TOG";
-    if ($("hostedAdminControls")) $("hostedAdminControls").hidden = !state.adminUnlocked;
-    if ($("adminProviderSelect")) $("adminProviderSelect").value = state.provider;
-    if ($("adminColumnModeSelect")) $("adminColumnModeSelect").value = state.adminColumns;
   }
 
   function productColumns() {
     var base = [
       { key: "family", label: "Family", render: function (item) { return esc(familyName(item)); } },
-      { key: "product", label: "Product", render: function (item) { return '<strong>' + esc(materialName(item.material) + ' ' + (item.design || item.category || 'Lens')) + '</strong><br><span class="muted">' + esc(item.tier || item.category || '') + '</span>'; } },
+      { key: "product", label: "Product", render: function (item) { return '<strong>' + esc(materialName(item.material) + ' ' + (item.design || item.category || 'Lens')) + '</strong>' + (state.skuVisible ? '<br><span class="sku-badge">' + esc(sku(item)) + '</span>' : '') + '<br><span class="muted">' + esc(item.category || item.tier || '') + '</span>'; } },
       { key: "usage", label: "Usage", render: function (item) { return '<span class="pill">' + esc(item.usage || 'Clear') + '</span>' + (item.feature ? '<br><span class="muted">' + esc(item.feature) + '</span>' : ''); } },
       { key: "price", label: priceLabel(), className: "price", render: function (item) { return money(displayPrice(item)); } }
     ];
     var admin = [
-      { key: "conantWholesale", label: "Wholesale Conant", className: "price", render: function (item) { return money(item.mandalayWholesale); } },
-      { key: "conantRetail", label: "Conant Retail", className: "price", render: function (item) { return money(conantPrice(item)); } },
-      { key: "conantMargin", label: "Conant Margin", className: "price", render: function (item) { return percent(marginPercent(conantPrice(item), item.mandalayWholesale)); } },
-      { key: "togWholesale", label: "Wholesale TOG", className: "price", render: function (item) { return money(item.togReference); } },
-      { key: "togProposal", label: "TOG Proposal", className: "price", render: function (item) { return money(togPrice(item)); } },
-      { key: "togMargin", label: "TOG Margin", className: "price", render: function (item) { return percent(marginPercent(togPrice(item), item.togReference)); } }
+      { key: "wholesale-conant", label: "Wholesale Conant", className: "price", render: function (item) { return money(item.mandalayWholesale); } },
+      { key: "margin", label: "Margin", className: "price", render: function (item) { return percent(marginPercent(displayPrice(item), item.mandalayWholesale)); } },
+      { key: "wholesale-tog", label: "Wholesale TOG", className: "price", render: function (item) { return money(item.togReference); } },
+      { key: "margin-tog", label: "Margin TOG", className: "price", render: function (item) { return percent(marginPercent(displayPrice(item), item.togReference)); } }
     ];
     var skuColumn = { key: "sku", label: "SKU", render: function (item) { return '<span class="sku-text">' + esc(sku(item)) + '</span>'; } };
     var columns;
-    if (state.clientView || !state.adminUnlocked || state.adminColumns === "client") {
+    if (state.clientView || !state.adminUnlocked) {
       columns = base;
     } else if (state.provider === "conant") {
-      columns = [base[0], base[1], base[2], admin[0], admin[1], admin[2]];
+      columns = [base[0], base[1], base[2], base[3], admin[0], admin[1]];
     } else if (state.provider === "tog") {
-      columns = [base[0], base[1], base[2], admin[3], admin[4], admin[5]];
-    } else if (state.adminColumns === "full") {
-      columns = [base[0], base[1], base[2], base[3]].concat(admin);
+      columns = [base[0], base[1], base[2], base[3], admin[2], admin[3]];
     } else {
-      columns = [base[0], base[1], base[2], admin[0], admin[1], admin[2], admin[3], admin[4], admin[5]];
+      columns = base.concat(admin);
     }
-    if (state.skuVisible || (state.adminUnlocked && state.adminColumns === "full")) columns.splice(1, 0, skuColumn);
-    return columns;
+    if (state.skuVisible) columns.splice(1, 0, skuColumn);
+    return columns.filter(function (column) { return state.hiddenProductColumns.indexOf(column.key) < 0; });
+  }
+
+  function allProductColumnChoices() {
+    return [
+      { key: "family", label: "Family" },
+      { key: "sku", label: "SKU" },
+      { key: "product", label: "Product" },
+      { key: "usage", label: "Usage" },
+      { key: "price", label: "Price" },
+      { key: "wholesale-conant", label: "Wholesale Conant" },
+      { key: "margin", label: "Margin" },
+      { key: "wholesale-tog", label: "Wholesale TOG" },
+      { key: "margin-tog", label: "Margin TOG" }
+    ];
+  }
+
+  function renderColumnControls() {
+    var controls = $("columnControls");
+    if (!controls) return;
+    if (state.clientView || !state.adminUnlocked || state.section === "none" || state.section === "coating") {
+      controls.innerHTML = "";
+      return;
+    }
+    controls.innerHTML = allProductColumnChoices().map(function (column) {
+      var hidden = state.hiddenProductColumns.indexOf(column.key) >= 0 || (column.key === "sku" && !state.skuVisible);
+      return '<button class="column-toggle-chip ' + (hidden ? 'is-hidden triangle-toggle-hidden' : 'triangle-toggle-visible') + '" type="button" data-column-toggle="' + esc(column.key) + '">' + esc(column.label) + '</button>';
+    }).join("") + '<button class="column-reset-button" type="button" data-reset-columns>Show all columns</button>';
   }
 
   function renderRows() {
@@ -112,22 +131,23 @@
     }
     addonsPanel.hidden = true; addonsList.innerHTML = "";
     var rows = filteredProducts(); var columns = productColumns();
-    head.innerHTML = '<tr>' + columns.map(function (column) { return '<th>' + esc(column.label) + '</th>'; }).join("") + '</tr>';
-    if (state.section === "none") { body.innerHTML = '<tr><td colspan="' + columns.length + '" class="muted">Choose Single vision, Bifocal, Progressive, or Coating to view lenses.</td></tr>'; return; }
-    body.innerHTML = rows.length ? rows.map(function (item) { return '<tr>' + columns.map(function (column) { return '<td class="' + esc(column.className || '') + '">' + column.render(item) + '</td>'; }).join("") + '</tr>'; }).join("") : '<tr><td colspan="' + columns.length + '" class="muted">No products match the current filters.</td></tr>';
+    renderColumnControls();
+    var displayColumns = state.adminUnlocked && !state.clientView ? [{ key: "admin-edit", label: "Edit", className: "price", render: function () { return '<button class="button button-ghost row-edit-button" type="button" data-edit-note>Edit</button>'; } }].concat(columns) : columns;
+    head.innerHTML = '<tr>' + displayColumns.map(function (column) { return '<th>' + esc(column.label) + '</th>'; }).join("") + '</tr>';
+    if (state.section === "none") { renderColumnControls(); body.innerHTML = '<tr><td colspan="' + displayColumns.length + '" class="muted">Choose Single vision, Bifocal, Progressive, or Coating to view lenses.</td></tr>'; return; }
+    body.innerHTML = rows.length ? rows.map(function (item) { return '<tr>' + displayColumns.map(function (column) { return '<td class="' + esc(column.className || '') + '">' + column.render(item) + '</td>'; }).join("") + '</tr>'; }).join("") : '<tr><td colspan="' + displayColumns.length + '" class="muted">No products match the current filters.</td></tr>';
   }
 
-  function render() { renderFilters(); renderRows(); }
+  function render() { renderFilters(); renderRows(); renderColumnControls(); }
   function askPassword(expected, title, message, callback) { var dialog = $("passwordDialog"); var input = $("passwordInput"); if (!dialog || typeof dialog.showModal !== "function") { callback(window.prompt(message || "Password") === expected); return; } $("passwordDialogTitle").textContent = title; $("passwordDialogMessage").textContent = message; $("passwordError").hidden = true; input.value = ""; dialog.showModal(); window.setTimeout(function () { input.focus(); }, 0); var done = function (ok) { dialog.close(); $("passwordForm").onsubmit = null; $("passwordCancelButton").onclick = null; callback(ok); }; $("passwordForm").onsubmit = function (event) { event.preventDefault(); done(input.value === expected); }; $("passwordCancelButton").onclick = function () { done(false); }; }
   function openPrint() { var rows = (catalog.products || []).filter(function (item) { return hasTog(item); }).slice(0, 500); var html = '<!doctype html><title>Mandalay Price Guide</title><style>body{font-family:Arial,sans-serif;padding:24px}table{width:100%;border-collapse:collapse}td,th{border-bottom:1px solid #ddd;padding:6px;text-align:left;font-size:12px}h1{color:#111}</style><h1>Mandalay Optical Lab Price Guide</h1><table><thead><tr><th>Family</th><th>Product</th><th>Usage</th><th>Price</th></tr></thead><tbody>' + rows.map(function (item) { return '<tr><td>' + esc(familyName(item)) + '</td><td>' + esc(materialName(item.material) + ' ' + item.design) + '</td><td>' + esc(item.usage || '') + '</td><td>' + money(displayPrice(item)) + '</td></tr>'; }).join("") + '</tbody></table>'; var popup = window.open("", "_blank"); if (popup) { popup.document.write(html); popup.document.close(); popup.focus(); popup.print(); } }
 
-  document.addEventListener("click", function (event) { var target = event.target; var section = target.getAttribute && target.getAttribute("data-section"); var sv = target.getAttribute && target.getAttribute("data-sv"); var program = target.getAttribute && target.getAttribute("data-program"); var tier = target.getAttribute && target.getAttribute("data-tier"); if (section) { state.section = section; state.search = ""; $("searchInput").value = ""; render(); return; } if (sv) { state.svType = sv; render(); return; } if (program) { state.program = program; state.tier = "good"; render(); return; } if (tier) { state.tier = tier; render(); return; } });
-  document.addEventListener("change", function (event) { if (event.target.id === "adminProviderSelect") { state.provider = event.target.value; render(); } if (event.target.id === "adminColumnModeSelect") { state.adminColumns = event.target.value; render(); } });
+  document.addEventListener("click", function (event) { var target = event.target; var section = target.getAttribute && target.getAttribute("data-section"); var sv = target.getAttribute && target.getAttribute("data-sv"); var program = target.getAttribute && target.getAttribute("data-program"); var tier = target.getAttribute && target.getAttribute("data-tier"); var column = target.getAttribute && target.getAttribute("data-column-toggle"); if (target.getAttribute && target.getAttribute("data-edit-note") !== null) { window.alert("Use the local desktop portal to edit saved pricing."); return; } if (column) { if (column === "sku") { state.skuVisible = !state.skuVisible; } else if (state.hiddenProductColumns.indexOf(column) >= 0) { state.hiddenProductColumns = state.hiddenProductColumns.filter(function (key) { return key !== column; }); } else { state.hiddenProductColumns.push(column); } render(); return; } if (target.getAttribute && target.getAttribute("data-reset-columns") !== null) { state.hiddenProductColumns = []; state.skuVisible = true; render(); return; } if (section) { state.section = section; state.search = ""; $("searchInput").value = ""; render(); return; } if (sv) { state.svType = sv; render(); return; } if (program) { state.program = program; state.tier = "good"; render(); return; } if (tier) { state.tier = tier; render(); return; } });
   $("searchInput").addEventListener("input", function (event) { state.search = event.target.value; render(); });
   $("indexFilter").addEventListener("change", function (event) { state.index = event.target.value; render(); });
   $("treatmentFilter").addEventListener("change", function (event) { state.treatment = treatmentValue(event.target.value); render(); });
   $("clientViewButton").addEventListener("click", function () { if (state.clientView) { askPassword(CLIENT_EXIT_PASSWORD, "Exit client view", "Enter the client-view exit password.", function (ok) { if (ok) { state.clientView = false; render(); } }); } else { state.clientView = true; render(); } });
-  q(".admin-menu summary").addEventListener("click", function (event) { event.preventDefault(); var menu = q(".admin-menu"); if (state.adminUnlocked) { menu.open = !menu.open; return; } askPassword(ADMIN_PASSWORD, "Unlock admin tools", "Enter the admin password.", function (ok) { if (ok) { state.adminUnlocked = true; state.adminColumns = "pricing"; menu.open = true; render(); } }); });
+  q(".admin-menu summary").addEventListener("click", function (event) { event.preventDefault(); var menu = q(".admin-menu"); if (state.adminUnlocked) { menu.open = !menu.open; return; } askPassword(ADMIN_PASSWORD, "Unlock admin tools", "Enter the admin password.", function (ok) { if (ok) { state.adminUnlocked = true; menu.open = true; render(); } }); });
   $("toggleSkuButton").addEventListener("click", function () { state.skuVisible = !state.skuVisible; render(); });
   $("toggleConantButton").addEventListener("click", function () { state.provider = state.provider === "conant" ? "default" : "conant"; render(); });
   $("toggleTogButton").addEventListener("click", function () { state.provider = state.provider === "tog" ? "default" : "tog"; render(); });

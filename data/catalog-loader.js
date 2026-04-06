@@ -13,7 +13,7 @@ function showHostedCatalogError(message) {
   notice.style.borderRadius = "18px";
   notice.style.background = "rgba(9, 14, 24, 0.92)";
   notice.style.color = "#f5f8ff";
-  notice.style.fontFamily = '"Manrope", sans-serif';
+  notice.style.fontFamily = "\"Manrope\", sans-serif";
   notice.style.lineHeight = "1.6";
   notice.textContent = message;
   document.body.appendChild(notice);
@@ -36,11 +36,11 @@ window.loadCompressedText = async function loadCompressedText(path) {
 
 (async function mountHostedCatalog() {
   try {
-    var catalogText = await window.loadCompressedText("./data/catalog-data.b64.gz.txt?v=public-admin-1");
+    var catalogText = await window.loadCompressedText("./data/catalog-data.b64.gz.txt?v=admin-local-table-1");
     var jsonText = catalogText.replace(/^\s*window\.DEFAULT_CATALOG\s*=\s*/, "").replace(/;\s*$/, "");
     window.DEFAULT_CATALOG = JSON.parse(jsonText);
     var appScript = document.createElement("script");
-    appScript.src = "./app.js?v=public-admin-1";
+    appScript.src = "./app.js?v=admin-local-table-1";
     document.body.appendChild(appScript);
   } catch (error) {
     console.error("Unable to load hosted catalog", error);
