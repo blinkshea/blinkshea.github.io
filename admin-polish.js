@@ -98,6 +98,9 @@
     if (!card) return;
     card.className = card.className.replace(/\s*is-admin-polished/g, "") + " is-admin-polished";
 
+    if ($("toggleConantButton")) $("toggleConantButton").hidden = true;
+    if ($("toggleTogButton")) $("toggleTogButton").hidden = true;
+
     polishSelect($("adminProviderSelect"), [
       { value: "default", label: "All pricing" },
       { value: "conant", label: "Conant" },
