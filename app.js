@@ -23,7 +23,9 @@
 (async function mountHostedApp() {
   try {
     const appText = await window.loadCompressedText("./data/app-data.b64.gz.txt");
-    new Function(appText)();
+    const appScript = document.createElement("script");
+    appScript.textContent = appText + "\n//# sourceURL=hosted-optical-app.js";
+    document.body.appendChild(appScript);
   } catch (error) {
     console.error("Unable to load hosted app", error);
     const detail = error && error.message ? " " + error.message : "";
