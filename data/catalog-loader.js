@@ -36,11 +36,11 @@ window.loadCompressedText = async function loadCompressedText(path) {
 
 (async function mountHostedCatalog() {
   try {
-    var catalogText = await window.loadCompressedText("./data/catalog-data.b64.gz.txt?v=public-rebuild-1");
+    var catalogText = await window.loadCompressedText("./data/catalog-data.b64.gz.txt?v=public-admin-1");
     var jsonText = catalogText.replace(/^\s*window\.DEFAULT_CATALOG\s*=\s*/, "").replace(/;\s*$/, "");
     window.DEFAULT_CATALOG = JSON.parse(jsonText);
     var appScript = document.createElement("script");
-    appScript.src = "./app.js?v=public-rebuild-1";
+    appScript.src = "./app.js?v=public-admin-1";
     document.body.appendChild(appScript);
   } catch (error) {
     console.error("Unable to load hosted catalog", error);

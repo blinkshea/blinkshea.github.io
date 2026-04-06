@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="./styles.css?v=public-rebuild-1" />
+    <link rel="stylesheet" href="./styles.css?v=public-admin-1" />
   </head>
   <body>
     <div class="page-shell">
@@ -15,105 +15,30 @@
         <div class="hero-copy">
           <p class="eyebrow">Mandalay Optical Labs</p>
           <p class="brand-kicker">Doctor-Facing Price Guide</p>
-          <div class="hero-logo-wordmark" aria-label="Mandalay Optical Lab">
-            <div class="hero-logo-main">MANDALAY</div>
-            <div class="hero-logo-sub">OPTICAL LAB</div>
-          </div>
+          <div class="hero-logo-wordmark" aria-label="Mandalay Optical Lab"><div class="hero-logo-main">MANDALAY</div><div class="hero-logo-sub">OPTICAL LAB</div></div>
           <h1 class="hero-guide-title"><span class="hero-title-sub">lens price guide</span></h1>
           <p class="lede">Disrupting the industry with out of this world pricing designed to preserve Independent Optometric Practice profitability.</p>
           <div class="hero-actions">
             <button id="printBookletButton" class="button" type="button">Print Doctor Booklet</button>
             <button id="clientViewButton" class="button button-ghost" type="button">Client View</button>
-            <details class="admin-menu" id="adminMenu">
-              <summary class="button button-ghost">Admin</summary>
-              <div class="admin-menu-panel">
-                <button id="toggleSkuButton" class="button button-ghost" type="button">Show SKUs</button>
-                <button id="toggleConantButton" class="button button-ghost" type="button">View Conant</button>
-                <button id="toggleTogButton" class="button button-ghost" type="button">View TOG</button>
-                <div class="admin-qr-card">
-                  <p class="admin-qr-label">QR Code</p>
-                  <img class="admin-qr-image" src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&amp;data=https%3A%2F%2Fblinkshea.github.io%2F" alt="QR code for the hosted optical portal" />
-                  <p class="admin-qr-note">Permanent QR: https://blinkshea.github.io/</p>
-                </div>
-              </div>
-            </details>
+            <details class="admin-menu" id="adminMenu"><summary class="button button-ghost">Admin</summary><div class="admin-menu-panel"><button id="toggleSkuButton" class="button button-ghost" type="button">Show SKUs</button><button id="toggleConantButton" class="button button-ghost" type="button">View Conant</button><button id="toggleTogButton" class="button button-ghost" type="button">View TOG</button><div class="admin-qr-card"><p class="admin-qr-label">QR Code</p><img class="admin-qr-image" src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&amp;data=https%3A%2F%2Fblinkshea.github.io%2F" alt="QR code for the hosted optical portal" /><p class="admin-qr-note">Permanent QR: https://blinkshea.github.io/</p></div></div></details>
           </div>
         </div>
       </header>
-
       <main class="layout">
         <section class="panel controls" id="controlsPanel">
-          <div class="family-switcher-wrap" id="catalogListingPanel">
-            <div>
-              <p class="section-label">Catalog Listing</p>
-              <h2 id="activeFamilyTitle">Choose a section</h2>
-            </div>
-            <div id="familySwitcher" class="family-switcher"></div>
-          </div>
-          <div class="family-switcher-wrap subfilter-panel" id="singleVisionFiltersPanel" hidden>
-            <div>
-              <p class="section-label">Lens Category</p>
-              <h2 id="activeTierTitle">Choose a lens category</h2>
-            </div>
-            <div id="singleVisionTypeSwitcher" class="family-switcher"></div>
-          </div>
-          <div class="family-switcher-wrap subfilter-panel" id="progressiveFiltersPanel" hidden>
-            <div>
-              <p class="section-label">Progressive Selection</p>
-              <h2 id="progressiveTitle">Choose Mandalay or IOT</h2>
-            </div>
-            <div id="progressiveProgramSwitcher" class="family-switcher"></div>
-            <div id="progressiveTierSwitcher" class="family-switcher"></div>
-          </div>
-          <div class="family-switcher-wrap subfilter-panel" id="lensFiltersPanel" hidden>
-            <div>
-              <p class="section-label">Lens Filters</p>
-              <h2 id="lensFiltersTitle">Refine the lens list</h2>
-            </div>
-            <div class="filter-grid single-vision-filter-grid">
-              <label>Index of refraction<select id="indexFilter"></select></label>
-              <label>Photochromic / Transition / Polarized<select id="treatmentFilter"></select></label>
-            </div>
-          </div>
-          <div class="search-wrap" id="searchWrap" hidden>
-            <label for="searchInput">Search the catalog</label>
-            <input id="searchInput" type="search" placeholder="Try: polarized, 1.67, Mandalay Plus, anti-fatigue" />
-          </div>
+          <div class="family-switcher-wrap" id="catalogListingPanel"><div><p class="section-label">Catalog Listing</p><h2 id="activeFamilyTitle">Choose a section</h2></div><div id="familySwitcher" class="family-switcher"></div></div>
+          <div class="family-switcher-wrap subfilter-panel" id="singleVisionFiltersPanel" hidden><div><p class="section-label">Lens Category</p><h2 id="activeTierTitle">Choose a lens category</h2></div><div id="singleVisionTypeSwitcher" class="family-switcher"></div></div>
+          <div class="family-switcher-wrap subfilter-panel" id="progressiveFiltersPanel" hidden><div><p class="section-label">Progressive Selection</p><h2 id="progressiveTitle">Choose Mandalay or IOT</h2></div><div id="progressiveProgramSwitcher" class="family-switcher"></div><div id="progressiveTierSwitcher" class="family-switcher"></div></div>
+          <div class="family-switcher-wrap subfilter-panel" id="lensFiltersPanel" hidden><div><p class="section-label">Lens Filters</p><h2 id="lensFiltersTitle">Refine the lens list</h2></div><div class="filter-grid single-vision-filter-grid"><label>Index of refraction<select id="indexFilter"></select></label><label>Photochromic / Transition / Polarized<select id="treatmentFilter"></select></label></div></div>
+          <div class="search-wrap" id="searchWrap" hidden><label for="searchInput">Search the catalog</label><input id="searchInput" type="search" placeholder="Try: polarized, 1.67, Mandalay Plus, anti-fatigue" /></div>
         </section>
-
-        <section class="panel results-panel" id="contentGrid">
-          <div class="section-heading"><div><p class="section-label">Catalog</p></div></div>
-          <div id="columnControls" class="column-controls"></div>
-          <div class="table-wrap">
-            <table>
-              <thead id="resultsHead"></thead>
-              <tbody id="resultsBody"></tbody>
-            </table>
-          </div>
-        </section>
-
-        <div id="secondaryPanelControls" class="column-controls"></div>
-        <section class="secondary-grid">
-          <section class="panel" id="addonsPanel" hidden>
-            <div class="section-heading"><div><p class="section-label">Add-ons</p><h2>Coatings and extras</h2></div></div>
-            <div id="addonsControls" class="column-controls"></div>
-            <div id="addonsList" class="stack-list"></div>
-          </section>
-        </section>
+        <section class="panel results-panel" id="contentGrid"><div class="section-heading"><div><p class="section-label">Catalog</p></div></div><div id="columnControls" class="column-controls"></div><div class="table-wrap"><table><thead id="resultsHead"></thead><tbody id="resultsBody"></tbody></table></div></section>
+        <div id="secondaryPanelControls" class="column-controls"></div><section class="secondary-grid"><section class="panel" id="addonsPanel" hidden><div class="section-heading"><div><p class="section-label">Add-ons</p><h2>Coatings and extras</h2></div></div><div id="addonsControls" class="column-controls"></div><div id="addonsList" class="stack-list"></div></section></section>
       </main>
     </div>
-
-    <dialog id="passwordDialog" class="price-editor-dialog password-dialog">
-      <form id="passwordForm" class="price-editor-form" method="dialog">
-        <div class="price-editor-header"><div><p class="section-label" id="passwordDialogEyebrow">Secure Access</p><h2 id="passwordDialogTitle">Enter password</h2></div><button id="passwordCancelButton" class="button button-ghost" type="button">Cancel</button></div>
-        <p id="passwordDialogMessage" class="password-dialog-copy">Enter your password to continue.</p>
-        <label class="password-dialog-field" for="passwordInput">Password<input id="passwordInput" type="password" autocomplete="current-password" /></label>
-        <p id="passwordError" class="password-error" hidden>Incorrect password. Please try again.</p>
-        <div class="hero-actions price-editor-actions"><button id="passwordSubmitButton" class="button" type="submit">Continue</button></div>
-      </form>
-    </dialog>
-
+    <dialog id="passwordDialog" class="price-editor-dialog password-dialog"><form id="passwordForm" class="price-editor-form" method="dialog"><div class="price-editor-header"><div><p class="section-label" id="passwordDialogEyebrow">Secure Access</p><h2 id="passwordDialogTitle">Enter password</h2></div><button id="passwordCancelButton" class="button button-ghost" type="button">Cancel</button></div><p id="passwordDialogMessage" class="password-dialog-copy">Enter your password to continue.</p><label class="password-dialog-field" for="passwordInput">Password<input id="passwordInput" type="password" autocomplete="current-password" /></label><p id="passwordError" class="password-error" hidden>Incorrect password. Please try again.</p><div class="hero-actions price-editor-actions"><button id="passwordSubmitButton" class="button" type="submit">Continue</button></div></form></dialog>
     <script src="https://cdn.jsdelivr.net/npm/fflate@0.8.2/umd/index.js"></script>
-    <script src="./data/catalog-loader.js?v=public-rebuild-1"></script>
+    <script src="./data/catalog-loader.js?v=public-admin-1"></script>
   </body>
 </html>
