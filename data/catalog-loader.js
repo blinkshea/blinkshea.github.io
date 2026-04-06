@@ -1,37 +1,10 @@
 if (typeof window.structuredClone !== "function") {
-  window.structuredClone = (value) => JSON.parse(JSON.stringify(value));
+  window.structuredClone = function (value) { return JSON.parse(JSON.stringify(value)); };
 }
-
-(function polyfillDialogMethods() {
-  const dialogPrototype = Object.getPrototypeOf(document.createElement("dialog"));
-  if (!dialogPrototype) return;
-
-  if (typeof dialogPrototype.showModal !== "function") {
-    dialogPrototype.showModal = function showModalPolyfill() {
-      this.setAttribute("open", "open");
-      this.style.display = "block";
-    };
-  }
-
-  if (typeof dialogPrototype.show !== "function") {
-    dialogPrototype.show = function showPolyfill() {
-      this.setAttribute("open", "open");
-      this.style.display = "block";
-    };
-  }
-
-  if (typeof dialogPrototype.close !== "function") {
-    dialogPrototype.close = function closePolyfill() {
-      this.removeAttribute("open");
-      this.style.display = "none";
-    };
-  }
-})();
 
 function showHostedCatalogError(message) {
   if (document.querySelector("[data-hosted-error]")) return;
-
-  const notice = document.createElement("div");
+  var notice = document.createElement("div");
   notice.setAttribute("data-hosted-error", "true");
   notice.style.maxWidth = "720px";
   notice.style.margin = "24px auto";
@@ -47,40 +20,31 @@ function showHostedCatalogError(message) {
 }
 
 window.loadCompressedText = async function loadCompressedText(path) {
-  const response = await fetch(path, { cache: "no-store" });
-  if (!response.ok) {
-    throw new Error(`Unable to load ${path}: ${response.status}`);
-  }
-
-  const base64 = (await response.text()).trim();
-  const binary = Uint8Array.from(atob(base64), (character) => character.charCodeAt(0));
-
+  var response = await fetch(path, { cache: "no-store" });
+  if (!response.ok) throw new Error("Unable to load " + path + ": " + response.status);
+  var base64 = (await response.text()).trim();
+  var binary = Uint8Array.from(atob(base64), function (character) { return character.charCodeAt(0); });
   if (typeof DecompressionStream === "function") {
-    const stream = new Blob([binary]).stream().pipeThrough(new DecompressionStream("gzip"));
+    var stream = new Blob([binary]).stream().pipeThrough(new DecompressionStream("gzip"));
     return new Response(stream).text();
   }
-
   if (window.fflate && typeof window.fflate.gunzipSync === "function") {
-    const decompressed = window.fflate.gunzipSync(binary);
-    return new TextDecoder().decode(decompressed);
+    return new TextDecoder().decode(window.fflate.gunzipSync(binary));
   }
-
   throw new Error("This browser does not support gzip decompression.");
 };
 
 (async function mountHostedCatalog() {
   try {
-    const catalogText = await window.loadCompressedText("./data/catalog-data.b64.gz.txt");
-    const catalogScript = document.createElement("script");
-    catalogScript.textContent = catalogText + "\n//# sourceURL=hosted-catalog-data.js";
-    document.body.appendChild(catalogScript);
-
-    const appScript = document.createElement("script");
-    appScript.src = "./app.js";
+    var catalogText = await window.loadCompressedText("./data/catalog-data.b64.gz.txt?v=public-rebuild-1");
+    var jsonText = catalogText.replace(/^\s*window\.DEFAULT_CATALOG\s*=\s*/, "").replace(/;\s*$/, "");
+    window.DEFAULT_CATALOG = JSON.parse(jsonText);
+    var appScript = document.createElement("script");
+    appScript.src = "./app.js?v=public-rebuild-1";
     document.body.appendChild(appScript);
   } catch (error) {
     console.error("Unable to load hosted catalog", error);
-    const detail = error && error.message ? " " + error.message : "";
+    var detail = error && error.message ? " " + error.message : "";
     showHostedCatalogError("The catalog could not be loaded." + detail);
   }
 })();
