@@ -1,6 +1,6 @@
 (function () {
-  var ADMIN_PASSWORD = "Heypeeps";
-  var CLIENT_EXIT_PASSWORD = "Mandalay";
+  var ADMIN_PASSWORD = "Mandalay905";
+  var CLIENT_EXIT_PASSWORD = "Mandalay905";
   var INDEX_ORDER = ["CR-39", "Poly", "1.56", "TriVex", "1.60", "1.67", "1.74"];
   var TREATMENTS = [["all", "All treatments"], ["clear", "Clear"], ["photochromic", "Photochromic"], ["transition", "Transition"], ["polarized", "Polarized"]];
   var catalog = window.DEFAULT_CATALOG || { products: [], addons: [] };
@@ -9,7 +9,7 @@
   function $(id) { return document.getElementById(id); }
   function q(selector) { return document.querySelector(selector); }
   function clean(value) { return String(value === null || value === undefined ? "" : value); }
-  function esc(value) { return clean(value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;"); }
+  function esc(value) { return clean(value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/\"/g, "&quot;").replace(/'/g, "&#39;"); }
   function numberValue(value) { return value === null || value === undefined || value === "" || isNaN(Number(value)) ? null : Number(value); }
   function money(value) { var n = numberValue(value); return n === null ? "-" : "$" + n.toFixed(2); }
   function percent(value) { var n = numberValue(value); return n === null ? "-" : n.toFixed(1) + "%"; }
@@ -35,8 +35,8 @@
   function sortedRows(rows) { return rows.slice().sort(function (a, b) { var ai = INDEX_ORDER.indexOf(materialName(a.material)); var bi = INDEX_ORDER.indexOf(materialName(b.material)); if (ai < 0) ai = 999; if (bi < 0) bi = 999; if (ai !== bi) return ai - bi; return clean(a.usage).localeCompare(clean(b.usage)) || clean(a.feature).localeCompare(clean(b.feature)); }); }
   function filteredProducts() { var term = state.search.toLowerCase(); return sortedRows((catalog.products || []).filter(function (item) { if (!providerMatch(item) || !sectionMatch(item)) return false; if (state.index !== "all" && materialName(item.material) !== state.index) return false; if (state.section !== "coating" && !treatmentMatch(item)) return false; if (term && searchable(item).indexOf(term) < 0) return false; return true; })); }
   function filteredAddons() { var term = state.search.toLowerCase(); return (catalog.addons || []).filter(function (item) { if (state.provider === "conant" && !hasConant(item)) return false; if (state.provider === "tog" && !hasTog(item)) return false; var text = [item.section, item.name, item.notes].join(" ").toLowerCase(); return !term || text.indexOf(term) >= 0; }); }
-  function chip(label, attrs, active) { var html = '<button class="family-chip' + (active ? ' is-active' : '') + '" type="button"'; for (var key in attrs) html += ' ' + key + '="' + esc(attrs[key]) + '"'; return html + '>' + esc(label) + '</button>'; }
-  function fillSelect(select, values, current, allLabel) { if (!select) return; var html = '<option value="all">' + esc(allLabel) + '</option>'; for (var i = 0; i < values.length; i++) html += '<option value="' + esc(values[i]) + '">' + esc(values[i]) + '</option>'; select.innerHTML = html; select.value = current; }
+  function chip(label, attrs, active) { var html = '<button class=\"family-chip' + (active ? ' is-active' : '') + '\" type=\"button\"'; for (var key in attrs) html += ' ' + key + '=\"' + esc(attrs[key]) + '\"'; return html + '>' + esc(label) + '</button>'; }
+  function fillSelect(select, values, current, allLabel) { if (!select) return; var html = '<option value=\"all\">' + esc(allLabel) + '</option>'; for (var i = 0; i < values.length; i++) html += '<option value=\"' + esc(values[i]) + '\">' + esc(values[i]) + '</option>'; select.innerHTML = html; select.value = current; }
   function treatmentLabel(value) { for (var i = 0; i < TREATMENTS.length; i++) if (TREATMENTS[i][0] === value) return TREATMENTS[i][1]; return "All treatments"; }
   function treatmentValue(label) { for (var i = 0; i < TREATMENTS.length; i++) if (TREATMENTS[i][1] === label) return TREATMENTS[i][0]; return "all"; }
 
@@ -68,8 +68,8 @@
   function productColumns() {
     var base = [
       { key: "family", label: "Family", render: function (item) { return esc(familyName(item)); } },
-      { key: "product", label: "Product", render: function (item) { return '<strong>' + esc(materialName(item.material) + ' ' + (item.design || item.category || 'Lens')) + '</strong>' + (state.skuVisible ? '<br><span class="sku-badge">' + esc(sku(item)) + '</span>' : '') + '<br><span class="muted">' + esc(item.category || item.tier || '') + '</span>'; } },
-      { key: "usage", label: "Usage", render: function (item) { return '<span class="pill">' + esc(item.usage || 'Clear') + '</span>' + (item.feature ? '<br><span class="muted">' + esc(item.feature) + '</span>' : ''); } },
+      { key: "product", label: "Product", render: function (item) { return '<strong>' + esc(materialName(item.material) + ' ' + (item.design || item.category || 'Lens')) + '</strong>' + (state.skuVisible ? '<br><span class=\"sku-badge\">' + esc(sku(item)) + '</span>' : '') + '<br><span class=\"muted\">' + esc(item.category || item.tier || '') + '</span>'; } },
+      { key: "usage", label: "Usage", render: function (item) { return '<span class=\"pill\">' + esc(item.usage || 'Clear') + '</span>' + (item.feature ? '<br><span class=\"muted\">' + esc(item.feature) + '</span>' : ''); } },
       { key: "price", label: priceLabel(), className: "price", render: function (item) { return money(displayPrice(item)); } }
     ];
     var admin = [
@@ -78,7 +78,7 @@
       { key: "wholesale-tog", label: "Wholesale TOG", className: "price", render: function (item) { return money(item.togReference); } },
       { key: "margin-tog", label: "Margin TOG", className: "price", render: function (item) { return percent(marginPercent(displayPrice(item), item.togReference)); } }
     ];
-    var skuColumn = { key: "sku", label: "SKU", render: function (item) { return '<span class="sku-text">' + esc(sku(item)) + '</span>'; } };
+    var skuColumn = { key: "sku", label: "SKU", render: function (item) { return '<span class=\"sku-text\">' + esc(sku(item)) + '</span>'; } };
     var columns;
     if (state.clientView || !state.adminUnlocked) {
       columns = base;
@@ -116,8 +116,8 @@
     }
     controls.innerHTML = allProductColumnChoices().map(function (column) {
       var hidden = state.hiddenProductColumns.indexOf(column.key) >= 0 || (column.key === "sku" && !state.skuVisible);
-      return '<button class="column-toggle-chip ' + (hidden ? 'is-hidden triangle-toggle-hidden' : 'triangle-toggle-visible') + '" type="button" data-column-toggle="' + esc(column.key) + '">' + esc(column.label) + '</button>';
-    }).join("") + '<button class="column-reset-button" type="button" data-reset-columns>Show all columns</button>';
+      return '<button class=\"column-toggle-chip ' + (hidden ? 'is-hidden triangle-toggle-hidden' : 'triangle-toggle-visible') + '\" type=\"button\" data-column-toggle=\"' + esc(column.key) + '\">' + esc(column.label) + '</button>';
+    }).join("") + '<button class=\"column-reset-button\" type=\"button\" data-reset-columns>Show all columns</button>';
   }
 
   function renderRows() {
@@ -125,17 +125,17 @@
     if (state.section === "coating") {
       var addons = filteredAddons(); head.innerHTML = ""; body.innerHTML = ""; addonsPanel.hidden = false;
       addonsList.innerHTML = addons.length ? addons.map(function (item) {
-        var adminPricing = state.adminUnlocked && !state.clientView && state.adminColumns !== "client" ? '<p class="muted">Conant wholesale: ' + money(item.mandalayWholesale) + ' | Conant retail: ' + money(conantPrice(item)) + ' | Conant margin: ' + percent(marginPercent(conantPrice(item), item.mandalayWholesale)) + '</p><p class="muted">TOG wholesale: ' + money(item.togReference) + ' | TOG proposal: ' + money(togPrice(item)) + ' | TOG margin: ' + percent(marginPercent(togPrice(item), item.togReference)) + '</p>' : '';
-        return '<div class="stack-item"><strong>' + esc(item.name) + '</strong><p>' + esc(item.section || "Coating") + ' | ' + esc(item.notes || "") + '</p><p class="price">' + money(displayPrice(item)) + '</p>' + adminPricing + '</div>';
-      }).join("") : '<p class="empty-state">No coatings match the current filters.</p>'; return;
+        var adminPricing = state.adminUnlocked && !state.clientView && state.adminColumns !== "client" ? '<p class=\"muted\">Conant wholesale: ' + money(item.mandalayWholesale) + ' | Conant retail: ' + money(conantPrice(item)) + ' | Conant margin: ' + percent(marginPercent(conantPrice(item), item.mandalayWholesale)) + '</p><p class=\"muted\">TOG wholesale: ' + money(item.togReference) + ' | TOG proposal: ' + money(togPrice(item)) + ' | TOG margin: ' + percent(marginPercent(togPrice(item), item.togReference)) + '</p>' : '';
+        return '<div class=\"stack-item\"><strong>' + esc(item.name) + '</strong><p>' + esc(item.section || "Coating") + ' | ' + esc(item.notes || "") + '</p><p class=\"price\">' + money(displayPrice(item)) + '</p>' + adminPricing + '</div>';
+      }).join("") : '<p class=\"empty-state\">No coatings match the current filters.</p>'; return;
     }
     addonsPanel.hidden = true; addonsList.innerHTML = "";
     var rows = filteredProducts(); var columns = productColumns();
     renderColumnControls();
-    var displayColumns = state.adminUnlocked && !state.clientView ? [{ key: "admin-edit", label: "Edit", className: "price", render: function () { return '<button class="button button-ghost row-edit-button" type="button" data-edit-note>Edit</button>'; } }].concat(columns) : columns;
+    var displayColumns = state.adminUnlocked && !state.clientView ? [{ key: "admin-edit", label: "Edit", className: "price", render: function () { return '<button class=\"button button-ghost row-edit-button\" type=\"button\" data-edit-note>Edit</button>'; } }].concat(columns) : columns;
     head.innerHTML = '<tr>' + displayColumns.map(function (column) { return '<th>' + esc(column.label) + '</th>'; }).join("") + '</tr>';
-    if (state.section === "none") { renderColumnControls(); body.innerHTML = '<tr><td colspan="' + displayColumns.length + '" class="muted">Choose Single vision, Bifocal, Progressive, or Coating to view lenses.</td></tr>'; return; }
-    body.innerHTML = rows.length ? rows.map(function (item) { return '<tr>' + displayColumns.map(function (column) { return '<td class="' + esc(column.className || '') + '">' + column.render(item) + '</td>'; }).join("") + '</tr>'; }).join("") : '<tr><td colspan="' + displayColumns.length + '" class="muted">No products match the current filters.</td></tr>';
+    if (state.section === "none") { renderColumnControls(); body.innerHTML = '<tr><td colspan=\"' + displayColumns.length + '\" class=\"muted\">Choose Single vision, Bifocal, Progressive, or Coating to view lenses.</td></tr>'; return; }
+    body.innerHTML = rows.length ? rows.map(function (item) { return '<tr>' + displayColumns.map(function (column) { return '<td class=\"' + esc(column.className || '') + '\">' + column.render(item) + '</td>'; }).join("") + '</tr>'; }).join("") : '<tr><td colspan=\"' + displayColumns.length + '\" class=\"muted\">No products match the current filters.</td></tr>';
   }
 
   function render() { renderFilters(); renderRows(); renderColumnControls(); }
