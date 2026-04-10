@@ -40,7 +40,7 @@ window.loadCompressedText = async function loadCompressedText(path) {
     var jsonText = catalogText.replace(/^\s*window\.DEFAULT_CATALOG\s*=\s*/, "").replace(/;\s*$/, "");
     window.DEFAULT_CATALOG = JSON.parse(jsonText);
     var appScript = document.createElement("script");
-    appScript.src = "./app.js?v=admin-local-table-1";
+    appScript.src = "./app.js?v=password-update-1";
     document.body.appendChild(appScript);
   } catch (error) {
     console.error("Unable to load hosted catalog", error);
