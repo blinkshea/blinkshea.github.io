@@ -470,6 +470,14 @@ select {
   font-size: 0.92rem;
 }
 
+.password-settings-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.password-settings-actions {
+  grid-template-columns: repeat(auto-fit, minmax(220px, max-content));
+}
+
 .panel {
   border-radius: 24px;
   padding: 20px;
@@ -533,6 +541,16 @@ select {
   color: #fff7fb;
 }
 
+.upgrade-chip {
+  cursor: pointer;
+}
+
+.upgrade-chip-limited {
+  border-color: rgba(255, 180, 85, 0.42);
+  color: #ffd8a6;
+  background: rgba(255, 180, 85, 0.1);
+}
+
 .single-vision-filter-grid {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
@@ -558,7 +576,7 @@ select {
 }
 
 .filter-grid select,
-.detail-form input,
+detail-form input,
 .search-wrap input {
   color-scheme: dark;
 }
@@ -634,6 +652,12 @@ select {
   font: inherit;
 }
 
+.column-header-stack {
+  display: grid;
+  gap: 6px;
+  align-items: start;
+}
+
 .column-toggle-chip,
 .column-restore-chip,
 .column-reset-button {
@@ -680,13 +704,13 @@ select {
 .triangle-toggle-visible::after,
 .column-toggle-chip.triangle-toggle-visible::after,
 .column-header-button.triangle-toggle-visible::after {
-  content: "▲";
+  content: "\25B2";
 }
 
 .triangle-toggle-hidden::after,
 .column-toggle-chip.triangle-toggle-hidden::after,
 .column-restore-chip.triangle-toggle-hidden::after {
-  content: "▼";
+  content: "\25BC";
 }
 
 .column-header-button {
@@ -709,6 +733,29 @@ select {
 
 .column-header-button::after {
   opacity: 0.72;
+}
+
+.column-mode-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  min-height: 24px;
+  padding: 0 8px;
+  border-radius: 999px;
+  border: 1px solid rgba(122, 183, 255, 0.22);
+  background: rgba(89, 184, 255, 0.12);
+  color: var(--text);
+  font-size: 0.68rem;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: border-color 140ms ease, color 140ms ease, background 140ms ease;
+}
+
+.column-mode-toggle:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: rgba(89, 184, 255, 0.18);
 }
 
 .table-wrap {
@@ -778,6 +825,16 @@ tbody tr.is-active {
 
 .price {
   font-variant-numeric: tabular-nums;
+}
+
+.upgrade-price {
+  white-space: nowrap;
+}
+
+.upgrade-unavailable {
+  color: var(--muted);
+  font-size: 0.78rem;
+  white-space: nowrap;
 }
 
 .pill {
@@ -968,6 +1025,7 @@ tbody tr.is-active {
 
   .hero-actions,
   .filter-grid,
+  .password-settings-grid,
   .metrics,
   .detail-form-grid,
   .addon-line {
