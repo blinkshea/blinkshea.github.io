@@ -500,6 +500,62 @@ select {
   background: rgba(9, 16, 26, 0.76);
 }
 
+.collapsible-panel {
+  gap: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.compact-panel-toggle {
+  display: flex;
+  width: 100%;
+  min-height: 58px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 10px 18px;
+  border: 0;
+  background: transparent;
+  color: var(--text);
+  text-align: left;
+  cursor: pointer;
+}
+
+.compact-panel-toggle:hover {
+  background: rgba(89, 184, 255, 0.08);
+}
+
+.compact-panel-toggle::after {
+  flex: 0 0 auto;
+  color: var(--accent);
+  font-size: 0.78rem;
+}
+
+.compact-panel-heading {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+
+.compact-panel-heading strong {
+  font-size: 1.02rem;
+  line-height: 1.25;
+}
+
+.compact-panel-summary {
+  min-width: max-content;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.compact-panel-body {
+  padding: 0 18px 18px;
+}
+
+.collapsible-panel.is-collapsed .compact-panel-body {
+  display: none;
+}
+
 .family-switcher {
   display: flex;
   flex-wrap: wrap;
@@ -576,7 +632,7 @@ select {
 }
 
 .filter-grid select,
-detail-form input,
+.detail-form input,
 .search-wrap input {
   color-scheme: dark;
 }
@@ -1034,6 +1090,15 @@ tbody tr.is-active {
 
   .single-vision-filter-grid {
     grid-template-columns: 1fr;
+  }
+
+  .compact-panel-toggle {
+    align-items: flex-start;
+  }
+
+  .compact-panel-summary {
+    min-width: 0;
+    text-align: right;
   }
 
   .hero h1 {
