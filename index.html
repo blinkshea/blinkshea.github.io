@@ -10,7 +10,7 @@
       href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="./styles.css?v=ormando-client-20260504" />
+    <link rel="stylesheet" href="./styles.css?v=ormando-tight-20260504" />
   </head>
   <body>
     <div class="page-shell">
@@ -75,12 +75,22 @@
             </div>
             <div id="familySwitcher" class="family-switcher"></div>
           </div>
-          <div class="family-switcher-wrap subfilter-panel" id="singleVisionFiltersPanel" hidden>
-            <div>
-              <p class="section-label">Lens Category</p>
-              <h2 id="activeTierTitle">Choose a lens category</h2>
+          <div class="family-switcher-wrap subfilter-panel collapsible-panel is-collapsed" id="singleVisionFiltersPanel" hidden>
+            <button
+              class="compact-panel-toggle triangle-toggle-hidden"
+              type="button"
+              data-compact-panel-toggle="singleVisionCategory"
+              aria-expanded="false"
+            >
+              <span class="compact-panel-heading">
+                <span class="section-label">Lens Category</span>
+                <strong id="activeTierTitle">Choose a lens category</strong>
+              </span>
+              <span class="compact-panel-summary" id="singleVisionFiltersSummary">Single vision</span>
+            </button>
+            <div class="compact-panel-body" id="singleVisionFiltersBody" hidden>
+              <div id="singleVisionTypeSwitcher" class="family-switcher"></div>
             </div>
-            <div id="singleVisionTypeSwitcher" class="family-switcher"></div>
           </div>
           <div class="family-switcher-wrap subfilter-panel" id="progressiveFiltersPanel" hidden>
             <div>
@@ -90,12 +100,20 @@
             <div id="progressiveProgramSwitcher" class="family-switcher"></div>
             <div id="progressiveTierSwitcher" class="family-switcher"></div>
           </div>
-          <div class="family-switcher-wrap subfilter-panel" id="lensFiltersPanel" hidden>
-            <div>
-              <p class="section-label">Lens Filters</p>
-              <h2 id="lensFiltersTitle">Refine the lens list</h2>
-            </div>
-            <div class="filter-grid single-vision-filter-grid">
+          <div class="family-switcher-wrap subfilter-panel collapsible-panel is-collapsed" id="lensFiltersPanel" hidden>
+            <button
+              class="compact-panel-toggle triangle-toggle-hidden"
+              type="button"
+              data-compact-panel-toggle="lensFilters"
+              aria-expanded="false"
+            >
+              <span class="compact-panel-heading">
+                <span class="section-label">Lens Filters</span>
+                <strong id="lensFiltersTitle">Refine the lens list</strong>
+              </span>
+              <span class="compact-panel-summary" id="lensFiltersSummary">All indexes / All treatments</span>
+            </button>
+            <div class="filter-grid single-vision-filter-grid compact-panel-body" id="lensFiltersBody" hidden>
               <label>
                 Index of refraction
                 <select id="indexFilter"></select>
@@ -322,6 +340,6 @@
     </dialog>
 
     <script src="https://cdn.jsdelivr.net/npm/fflate@0.8.2/umd/index.js"></script>
-    <script src="./data/catalog-loader.js?v=ormando-client-20260504"></script>
+    <script src="./data/catalog-loader.js?v=ormando-tight-20260504"></script>
   </body>
 </html>
