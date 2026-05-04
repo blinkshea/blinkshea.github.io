@@ -36,10 +36,10 @@ window.loadCompressedText = async function loadCompressedText(path) {
 
 (async function mountHostedCatalog() {
   try {
-    var catalogText = await window.loadCompressedText("./data/catalog-data.b64.gz.txt?v=ormando-order-20260504");
+    var catalogText = await window.loadCompressedText("./data/catalog-data.b64.gz.txt?v=ormando-order-20260504b");
     var jsonText = catalogText.replace(/^\s*window\.DEFAULT_CATALOG\s*=\s*/, "").replace(/;\s*$/, "");
     window.DEFAULT_CATALOG = JSON.parse(jsonText);
-    var appText = await window.loadCompressedText("./data/app-data.b64.gz.txt?v=ormando-order-20260504");
+    var appText = await window.loadCompressedText("./data/app-data.b64.gz.txt?v=ormando-order-20260504b");
     var appScript = document.createElement("script");
     appScript.text = appText + "\n//# sourceURL=app.js";
     document.body.appendChild(appScript);
