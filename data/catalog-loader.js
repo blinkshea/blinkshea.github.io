@@ -19,6 +19,14 @@ function showHostedCatalogError(message) {
   document.body.appendChild(notice);
 }
 
+function installHostedStyleOverrides() {
+  if (document.querySelector("[data-hosted-style-overrides]")) return;
+  var style = document.createElement("style");
+  style.setAttribute("data-hosted-style-overrides", "true");
+  style.textContent = ".upgrade-chip-limited{border-color:var(--line);color:var(--text);background:rgba(12,19,29,.88);}";
+  document.head.appendChild(style);
+}
+
 window.loadCompressedText = async function loadCompressedText(path) {
   var response = await fetch(path, { cache: "no-store" });
   if (!response.ok) throw new Error("Unable to load " + path + ": " + response.status);
@@ -36,6 +44,7 @@ window.loadCompressedText = async function loadCompressedText(path) {
 
 (async function mountHostedCatalog() {
   try {
+    installHostedStyleOverrides();
     var catalogText = await window.loadCompressedText("./data/catalog-data.b64.gz.txt?v=ormando-order-20260504b");
     var jsonText = catalogText.replace(/^\s*window\.DEFAULT_CATALOG\s*=\s*/, "").replace(/;\s*$/, "");
     window.DEFAULT_CATALOG = JSON.parse(jsonText);
