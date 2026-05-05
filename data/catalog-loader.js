@@ -23,7 +23,12 @@ function installHostedStyleOverrides() {
   if (document.querySelector("[data-hosted-style-overrides]")) return;
   var style = document.createElement("style");
   style.setAttribute("data-hosted-style-overrides", "true");
-  style.textContent = ".upgrade-chip-limited{border-color:var(--line);color:var(--text);background:rgba(12,19,29,.88);}";
+  style.textContent = [
+    ".upgrade-chip-limited{border-color:var(--line);color:var(--text);background:rgba(12,19,29,.88);}",
+    ".page-shell{width:min(1380px,calc(100% - 32px))!important;max-width:1380px!important;margin-left:auto!important;margin-right:auto!important;}",
+    ".hero{width:100%!important;max-width:1380px!important;margin-left:auto!important;margin-right:auto!important;}",
+    ".hero-background-image{object-fit:cover!important;object-position:center right!important;}"
+  ].join("");
   document.head.appendChild(style);
 }
 
