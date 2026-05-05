@@ -89,7 +89,25 @@ window.loadCompressedText = async function loadCompressedText(path) {
     var jsonText = catalogText.replace(/^\s*window\.DEFAULT_CATALOG\s*=\s*/, "").replace(/;\s*$/, "");
     window.DEFAULT_CATALOG = JSON.parse(jsonText);
     var appText = await window.loadCompressedText("./data/app-data.b64.gz.txt?v=single-vision-start-20260505");
-    appText = appText.replace(/catalogSection: "progressive"/g, 'catalogSection: "single-vision"');
+    appText = appText
+      .replace(/catalogSection: "progressive"/g, 'catalogSection: "single-vision"')
+      .replace(/clientExit: "Mandalay905"/g, 'clientExit: "Mandalay"')
+      .replace(
+        'if (entry === expectedValue) return true;',
+        'const expectedValues = (Array.isArray(expectedValue) ? expectedValue : [expectedValue]).map((value) => String(value ?? "").trim()).filter(Boolean);\\n    if (expectedValues.includes(String(entry).trim())) return true;'
+      )
+      .replace(
+        "const matches = await confirmPassword(state.passwords.clientExit, {",
+        "const matches = await confirmPassword([state.passwords.clientExit, DEFAULT_PASSWORDS.clientExit], {"
+      )
+      .replace(
+        'const confirmed = window.confirm("Restore the local admin and client-view passwords to Mandalay905?");',
+        'const confirmed = window.confirm("Restore the local admin password to Mandalay905 and the client-view exit password to Mandalay?");'
+      )
+      .replace(
+        'window.alert("Local passwords restored to Mandalay905.");',
+        'window.alert("Local passwords restored. Admin: Mandalay905. Client-view exit: Mandalay.");'
+      );
     var appScript = document.createElement("script");
     appScript.text = appText + "\n//# sourceURL=app.js";
     document.body.appendChild(appScript);
