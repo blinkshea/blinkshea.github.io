@@ -49,6 +49,7 @@ window.loadCompressedText = async function loadCompressedText(path) {
     var jsonText = catalogText.replace(/^\s*window\.DEFAULT_CATALOG\s*=\s*/, "").replace(/;\s*$/, "");
     window.DEFAULT_CATALOG = JSON.parse(jsonText);
     var appText = await window.loadCompressedText("./data/app-data.b64.gz.txt?v=single-vision-start-20260505");
+    appText = appText.replace(/catalogSection: "progressive"/g, 'catalogSection: "single-vision"');
     var appScript = document.createElement("script");
     appScript.text = appText + "\n//# sourceURL=app.js";
     document.body.appendChild(appScript);
