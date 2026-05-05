@@ -27,9 +27,18 @@ function installHostedStyleOverrides() {
     ".upgrade-chip-limited{border-color:var(--line);color:var(--text);background:rgba(12,19,29,.88);}",
     ".page-shell{width:min(1380px,calc(100% - 32px))!important;max-width:1380px!important;margin-left:auto!important;margin-right:auto!important;}",
     ".hero{width:100%!important;max-width:1380px!important;margin-left:auto!important;margin-right:auto!important;}",
-    ".hero-background-image{object-fit:cover!important;object-position:center right!important;}"
+    ".hero-background-image{object-fit:cover!important;object-position:center right!important;filter:url(#hostedHeroSharpen) brightness(1.2) contrast(1.16) saturate(1.08)!important;}",
+    ".hero::after{background:radial-gradient(circle at 18% 22%,rgba(93,186,255,.14),transparent 22%),linear-gradient(90deg,rgba(4,8,16,.76) 0%,rgba(5,10,18,.56) 24%,rgba(6,12,22,.18) 54%,rgba(3,6,12,.04) 100%)!important;}"
   ].join("");
   document.head.appendChild(style);
+  var svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+  svg.setAttribute("data-hosted-hero-filter", "true");
+  svg.setAttribute("width", "0");
+  svg.setAttribute("height", "0");
+  svg.style.position = "absolute";
+  svg.style.pointerEvents = "none";
+  svg.innerHTML = '<filter id="hostedHeroSharpen" color-interpolation-filters="sRGB"><feConvolveMatrix order="3" kernelMatrix="0 -0.2 0 -0.2 1.8 -0.2 0 -0.2 0" divisor="1" bias="0" preserveAlpha="true"/></filter>';
+  document.body.appendChild(svg);
 }
 
 var HOSTED_HERO_IMAGE_CHUNKS = [
