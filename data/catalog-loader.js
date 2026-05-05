@@ -27,6 +27,11 @@ function installHostedStyleOverrides() {
   document.head.appendChild(style);
 }
 
+function refreshHostedHeroImage() {
+  var heroImage = document.querySelector(".hero-background-image");
+  if (heroImage) heroImage.src = "./mandalay_cover_art.jpg?v=match-local-hero-20260505";
+}
+
 window.loadCompressedText = async function loadCompressedText(path) {
   var response = await fetch(path, { cache: "no-store" });
   if (!response.ok) throw new Error("Unable to load " + path + ": " + response.status);
@@ -44,6 +49,7 @@ window.loadCompressedText = async function loadCompressedText(path) {
 
 (async function mountHostedCatalog() {
   try {
+    refreshHostedHeroImage();
     installHostedStyleOverrides();
     var catalogText = await window.loadCompressedText("./data/catalog-data.b64.gz.txt?v=single-vision-start-20260505");
     var jsonText = catalogText.replace(/^\s*window\.DEFAULT_CATALOG\s*=\s*/, "").replace(/;\s*$/, "");
