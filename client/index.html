@@ -131,6 +131,32 @@
       </main>
     </div>
 
+    <script>
+      (function loadMandalayHeroArt() {
+        const heroImage = document.querySelector(".hero-background-image");
+        if (!heroImage) return;
+        const chunkPaths = [
+          "../data/hero-cover-sharp-webp-q35-0.txt?v=client-real-hero-20260513",
+          "../data/hero-cover-sharp-webp-q35-1.txt?v=client-real-hero-20260513",
+          "../data/hero-cover-sharp-webp-q35-2.txt?v=client-real-hero-20260513",
+          "../data/hero-cover-sharp-webp-q35-3.txt?v=client-real-hero-20260513",
+          "../data/hero-cover-sharp-webp-q35-4.txt?v=client-real-hero-20260513",
+          "../data/hero-cover-sharp-webp-q35-5.txt?v=client-real-hero-20260513",
+          "../data/hero-cover-sharp-webp-q35-6.txt?v=client-real-hero-20260513",
+          "../data/hero-cover-sharp-webp-q35-7.txt?v=client-real-hero-20260513",
+        ];
+        Promise.all(chunkPaths.map((path) => fetch(path).then((response) => {
+          if (!response.ok) throw new Error("Missing hero chunk");
+          return response.text();
+        })))
+          .then((parts) => {
+            heroImage.src = "data:image/webp;base64," + parts.join("").replace(/\s/g, "");
+          })
+          .catch(() => {
+            heroImage.src = "../mandalay_cover_art.jpg?v=client-real-hero-fallback-20260513";
+          });
+      })();
+    </script>
     <script src="./data/client-catalog-data.js"></script>
     <script src="./app.js"></script>
   </body>
