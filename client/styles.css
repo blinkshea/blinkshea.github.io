@@ -442,6 +442,15 @@ th.price {
     justify-self: start;
   }
 
+  .chip-row {
+    gap: 8px;
+  }
+
+  .chip {
+    min-height: 40px;
+    padding: 0 12px;
+  }
+
   table {
     min-width: 0;
   }
