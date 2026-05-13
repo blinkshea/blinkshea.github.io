@@ -237,6 +237,7 @@ a {
 }
 
 .chip {
+  flex: 0 0 auto;
   color: var(--text);
 }
 
