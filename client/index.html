@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mandalay Optical Labs Client Lens Book</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="hero">
+        <img
+          class="hero-background-image"
+          src="../mandalay_cover_art.jpg"
+          alt="Mandalay Optical Labs cover art with illuminated lens over Earth"
+        />
+        <div class="hero-copy">
+          <p class="eyebrow">Mandalay Optical Labs</p>
+          <p class="brand-kicker">Client Price Guide</p>
+          <div class="hero-logo-wordmark" aria-label="Mandalay Optical Lab">
+            <div class="hero-logo-main">MANDALAY</div>
+            <div class="hero-logo-sub">OPTICAL LAB</div>
+          </div>
+          <h1 class="hero-guide-title">
+            <span class="hero-title-sub">lens price guide</span>
+          </h1>
+          <p class="lede">
+            Disrupting the industry with out of this world pricing designed to preserve
+            Independent Optometric Practice profitability.
+          </p>
+          <div class="hero-actions">
+            <button id="printViewButton" class="button" type="button">Print Price Guide</button>
+            <a class="button button-ghost" href="./one-page-price-list.html" target="_blank" rel="noopener">One-Page List</a>
+          </div>
+        </div>
+      </header>
+
+      <main class="layout">
+        <section class="panel controls-panel" aria-label="Lens book controls">
+          <div class="control-heading">
+            <div>
+              <p class="section-label">Catalog Listing</p>
+              <h2 id="activeSectionTitle">Single vision</h2>
+            </div>
+            <p id="updatedLabel" class="updated-label">Mandalay Lens Book</p>
+          </div>
+
+          <div id="sectionTabs" class="chip-row" aria-label="Lens categories"></div>
+
+          <div id="singleVisionControls" class="subfilter">
+            <p class="section-label">Lens Category</p>
+            <div id="singleVisionTabs" class="chip-row compact"></div>
+          </div>
+
+          <div id="progressiveControls" class="subfilter" hidden>
+            <div class="progressive-groups">
+              <div>
+                <p class="section-label">Mandalay Series</p>
+                <div id="mandalayDesignTabs" class="chip-row compact"></div>
+              </div>
+              <div>
+                <p class="section-label">IOT Series</p>
+                <div id="iotDesignTabs" class="chip-row compact"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="filter-grid">
+            <label>
+              Index of refraction
+              <select id="indexFilter"></select>
+            </label>
+            <label>
+              Treatment
+              <select id="treatmentFilter"></select>
+            </label>
+            <label class="search-field">
+              Search the catalog
+              <input
+                id="searchInput"
+                type="search"
+                placeholder="Try: polarized, 1.67, Mandalay Plus, anti-fatigue"
+              />
+            </label>
+          </div>
+        </section>
+
+        <section class="panel results-panel">
+          <div class="section-heading">
+            <div>
+              <p class="section-label">Catalog</p>
+              <h2 id="resultsTitle">Client lens prices</h2>
+            </div>
+            <div id="resultCount" class="count-pill">0 items</div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead id="resultsHead"></thead>
+              <tbody id="resultsBody"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="panel share-panel" id="share">
+          <div class="section-heading">
+            <div>
+              <p class="section-label">Client Link</p>
+              <h2>QR and web address</h2>
+            </div>
+          </div>
+          <div class="share-grid">
+            <div>
+              <p id="clientUrl" class="client-url">https://blinkshea.github.io/client/</p>
+              <div class="hero-actions">
+                <button id="copyLinkButton" class="button button-ghost" type="button">Copy Link</button>
+              </div>
+            </div>
+            <img
+              class="qr-code"
+              src="https://api.qrserver.com/v1/create-qr-code/?size=480x480&amp;data=https%3A%2F%2Fblinkshea.github.io%2Fclient%2F"
+              alt="QR code for the Mandalay client lens book"
+            />
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="./data/client-catalog-data.js"></script>
+    <script src="./app.js"></script>
+  </body>
+</html>
