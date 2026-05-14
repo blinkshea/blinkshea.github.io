@@ -306,7 +306,7 @@ function isIotCamberAvailable(item) {
   const feature = String(item.feature || "").trim();
   const isCamberMaterial = ["TriVex", "1.60", "1.67"].includes(material);
   if (!isCamberMaterial || feature) return false;
-  return usage === "clear" || usage === "transitions 8";
+  return usage === "clear" || usage === "transition gen s" || usage === "transition 8" || usage === "transitions 8";
 }
 
 function renderUpgradePrice(item, upgrade) {
