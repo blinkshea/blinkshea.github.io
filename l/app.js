@@ -252,7 +252,7 @@
     };
     el.sectionTabs.innerHTML = Object.entries(sectionLabels)
       .filter(([key]) => available[key])
-      .map(([key, label]) => `<button class="chip ${state.section === key ? "is-active" : ""}" type="button" data-section="${key}">${esc(label)}</button>`)
+      .map(([key, label]) => `<button class="family-chip ${key === "coating" ? "family-chip-coating" : ""} ${state.section === key ? "is-active" : ""}" type="button" data-section="${key}">${esc(label)}</button>`)
       .join("");
 
     el.singleVisionControls.hidden = state.section !== "single-vision";
@@ -264,7 +264,7 @@
         state.singleVisionType = previous;
         return matches;
       }))
-      .map(([key, label]) => `<button class="chip ${state.singleVisionType === key ? "is-active" : ""}" type="button" data-single-vision="${key}">${esc(label)}</button>`)
+      .map(([key, label]) => `<button class="family-chip ${state.singleVisionType === key ? "is-active" : ""}" type="button" data-single-vision="${key}">${esc(label)}</button>`)
       .join("");
 
     el.progressiveControls.hidden = state.section !== "progressive";
@@ -279,8 +279,9 @@
   }
 
   function renderDesignButton(item) {
-    const priceLabel = item.amount ? `+$${item.amount}` : "$0";
-    return `<button class="chip ${state.progressiveDesign === item.key ? "is-active" : ""}" type="button" data-progressive-design="${item.key}">${esc(item.label)} <small>${priceLabel}</small></button>`;
+    const priceLabel = item.amount ? ` +$${item.amount}` : " base";
+    const limitedLabel = item.limited ? " limited" : "";
+    return `<button class="family-chip upgrade-chip ${item.limited ? "upgrade-chip-limited" : ""} ${state.progressiveDesign === item.key ? "is-active" : ""}" type="button" data-progressive-design="${item.key}">${esc(item.label)}${priceLabel}${limitedLabel}</button>`;
   }
 
   function renderFilters() {
