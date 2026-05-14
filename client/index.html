@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mandalay Optical Labs Client Lens Book</title>
+    <title>Mandalay Optical Labs Client Price Guide</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -31,8 +31,8 @@
             <span class="hero-title-sub">lens price guide</span>
           </h1>
           <p class="lede">
-            Disrupting the industry with out of this world pricing designed to preserve
-            Independent Optometric Practice profitability.
+            Disrupting the industry with out of this world pricing designed to preserve Independent
+            Optometric Practice profitability.
           </p>
           <div class="hero-actions">
             <button id="printViewButton" class="button" type="button">Print Price Guide</button>
@@ -42,56 +42,87 @@
       </header>
 
       <main class="layout">
-        <section class="panel controls-panel" aria-label="Lens book controls">
-          <div class="control-heading">
+        <section class="panel controls-panel controls" id="controlsPanel" aria-label="Lens book controls">
+          <div class="family-switcher-wrap" id="catalogListingPanel">
             <div>
               <p class="section-label">Catalog Listing</p>
               <h2 id="activeSectionTitle">Single vision</h2>
             </div>
             <p id="updatedLabel" class="updated-label">Mandalay Lens Book</p>
+            <div id="sectionTabs" class="chip-row family-switcher" aria-label="Lens categories"></div>
           </div>
 
-          <div id="sectionTabs" class="chip-row" aria-label="Lens categories"></div>
-
-          <div id="singleVisionControls" class="subfilter">
-            <p class="section-label">Lens Category</p>
-            <div id="singleVisionTabs" class="chip-row compact"></div>
+          <div class="family-switcher-wrap subfilter-panel collapsible-panel is-collapsed" id="singleVisionControls">
+            <button
+              class="compact-panel-toggle triangle-toggle-hidden"
+              type="button"
+              data-compact-panel-toggle="singleVisionCategory"
+              aria-expanded="false"
+            >
+              <span class="compact-panel-heading">
+                <span class="section-label">Lens Category</span>
+                <strong id="activeTierTitle">Single vision</strong>
+              </span>
+              <span class="compact-panel-summary" id="singleVisionFiltersSummary">Single vision</span>
+            </button>
+            <div class="compact-panel-body" id="singleVisionFiltersBody" hidden>
+              <div id="singleVisionTabs" class="chip-row compact family-switcher"></div>
+            </div>
           </div>
 
-          <div id="progressiveControls" class="subfilter" hidden>
+          <div class="family-switcher-wrap subfilter-panel" id="progressiveControls" hidden>
+            <div>
+              <p class="section-label">Progressive Selection</p>
+              <h2 id="progressiveTitle">Mandalay Series</h2>
+            </div>
             <div class="progressive-groups">
               <div>
-                <p class="section-label">Mandalay Series</p>
-                <div id="mandalayDesignTabs" class="chip-row compact"></div>
+                <p class="section-label subtle-label">Mandalay Series</p>
+                <div id="mandalayDesignTabs" class="chip-row compact family-switcher"></div>
               </div>
               <div>
-                <p class="section-label">IOT Series</p>
-                <div id="iotDesignTabs" class="chip-row compact"></div>
+                <p class="section-label subtle-label">IOT Series</p>
+                <div id="iotDesignTabs" class="chip-row compact family-switcher"></div>
               </div>
             </div>
           </div>
 
-          <div class="filter-grid">
-            <label>
-              Index of refraction
-              <select id="indexFilter"></select>
-            </label>
-            <label>
-              Treatment
-              <select id="treatmentFilter"></select>
-            </label>
-            <label class="search-field">
-              Search the catalog
-              <input
-                id="searchInput"
-                type="search"
-                placeholder="Try: polarized, 1.67, Mandalay Plus, anti-fatigue"
-              />
-            </label>
+          <div class="family-switcher-wrap subfilter-panel collapsible-panel is-collapsed" id="lensFiltersPanel">
+            <button
+              class="compact-panel-toggle triangle-toggle-hidden"
+              type="button"
+              data-compact-panel-toggle="lensFilters"
+              aria-expanded="false"
+            >
+              <span class="compact-panel-heading">
+                <span class="section-label">Lens Filters</span>
+                <strong id="lensFiltersTitle">Refine the selected lens category</strong>
+              </span>
+              <span class="compact-panel-summary" id="lensFiltersSummary">All indexes / All treatments</span>
+            </button>
+            <div class="filter-grid single-vision-filter-grid compact-panel-body" id="lensFiltersBody" hidden>
+              <label>
+                Index of refraction
+                <select id="indexFilter"></select>
+              </label>
+              <label>
+                Photochromic / Transition / Polarized
+                <select id="treatmentFilter"></select>
+              </label>
+            </div>
+          </div>
+
+          <div class="search-wrap" id="searchWrap">
+            <label for="searchInput">Search the catalog</label>
+            <input
+              id="searchInput"
+              type="search"
+              placeholder="Try: polarized, 1.67, Mandalay Plus, anti-fatigue"
+            />
           </div>
         </section>
 
-        <section class="panel results-panel">
+        <section class="panel results-panel" id="contentGrid">
           <div class="section-heading">
             <div>
               <p class="section-label">Catalog</p>
@@ -107,26 +138,9 @@
           </div>
         </section>
 
-        <section class="panel share-panel" id="share">
-          <div class="section-heading">
-            <div>
-              <p class="section-label">Client Link</p>
-              <h2>QR and web address</h2>
-            </div>
-          </div>
-          <div class="share-grid">
-            <div>
-              <p id="clientUrl" class="client-url">https://blinkshea.github.io/client/</p>
-              <div class="hero-actions">
-                <button id="copyLinkButton" class="button button-ghost" type="button">Copy Link</button>
-              </div>
-            </div>
-            <img
-              class="qr-code"
-              src="https://api.qrserver.com/v1/create-qr-code/?size=480x480&amp;data=https%3A%2F%2Fblinkshea.github.io%2Fclient%2F"
-              alt="QR code for the Mandalay client lens book"
-            />
-          </div>
+        <section class="panel share-panel" id="share" hidden>
+          <p id="clientUrl" class="client-url">https://blinkshea.github.io/client/</p>
+          <button id="copyLinkButton" class="button button-ghost" type="button">Copy Link</button>
         </section>
       </main>
     </div>
@@ -135,16 +149,9 @@
       (function loadMandalayHeroArt() {
         const heroImage = document.querySelector(".hero-background-image");
         if (!heroImage) return;
-        const chunkPaths = [
-          "../data/hero-cover-sharp-webp-q35-0.txt?v=client-real-hero-20260513",
-          "../data/hero-cover-sharp-webp-q35-1.txt?v=client-real-hero-20260513",
-          "../data/hero-cover-sharp-webp-q35-2.txt?v=client-real-hero-20260513",
-          "../data/hero-cover-sharp-webp-q35-3.txt?v=client-real-hero-20260513",
-          "../data/hero-cover-sharp-webp-q35-4.txt?v=client-real-hero-20260513",
-          "../data/hero-cover-sharp-webp-q35-5.txt?v=client-real-hero-20260513",
-          "../data/hero-cover-sharp-webp-q35-6.txt?v=client-real-hero-20260513",
-          "../data/hero-cover-sharp-webp-q35-7.txt?v=client-real-hero-20260513",
-        ];
+        const chunkPaths = [0, 1, 2, 3, 4, 5, 6, 7].map(
+          (index) => `../data/hero-cover-sharp-webp-q35-${index}.txt?v=client-real-hero-20260513`
+        );
         Promise.all(chunkPaths.map((path) => fetch(path).then((response) => {
           if (!response.ok) throw new Error("Missing hero chunk");
           return response.text();
@@ -159,5 +166,75 @@
     </script>
     <script src="./data/client-catalog-data.js"></script>
     <script src="./app.js"></script>
+    <script>
+      (function polishClientOnlyView() {
+        const panelMap = {
+          singleVisionCategory: "singleVisionFiltersBody",
+          lensFilters: "lensFiltersBody",
+        };
+
+        document.addEventListener("click", (event) => {
+          const toggle = event.target.closest("[data-compact-panel-toggle]");
+          if (!toggle) return;
+          const key = toggle.getAttribute("data-compact-panel-toggle");
+          const body = document.getElementById(panelMap[key]);
+          const panel = toggle.closest(".collapsible-panel");
+          if (!body || !panel) return;
+          const isOpen = toggle.getAttribute("aria-expanded") === "true";
+          toggle.setAttribute("aria-expanded", String(!isOpen));
+          panel.classList.toggle("is-collapsed", isOpen);
+          body.hidden = isOpen;
+        });
+
+        const singleVisionSummary = document.getElementById("singleVisionFiltersSummary");
+        const activeTierTitle = document.getElementById("activeTierTitle");
+        const lensFiltersSummary = document.getElementById("lensFiltersSummary");
+        const resultsHead = document.getElementById("resultsHead");
+        const resultsBody = document.getElementById("resultsBody");
+        const indexFilter = document.getElementById("indexFilter");
+        const treatmentFilter = document.getElementById("treatmentFilter");
+
+        function selectedText(select, fallback) {
+          if (!select || select.disabled) return fallback;
+          return select.options[select.selectedIndex]?.textContent || fallback;
+        }
+
+        function updateSummaries() {
+          const activeSingle = document.querySelector("#singleVisionTabs .is-active");
+          const singleLabel = activeSingle?.textContent?.trim() || "Single vision";
+          singleVisionSummary.textContent = singleLabel;
+          activeTierTitle.textContent = singleLabel;
+          lensFiltersSummary.textContent = `${selectedText(indexFilter, "All indexes")} / ${selectedText(treatmentFilter, "All treatments")}`;
+        }
+
+        function polishTable() {
+          document.body.classList.remove("has-hidden-feature-column");
+          document.querySelectorAll(".client-hide-column").forEach((node) => node.classList.remove("client-hide-column"));
+          const headers = Array.from(resultsHead.querySelectorAll("th"));
+          headers.forEach((header, index) => {
+            const text = header.textContent.trim();
+            if (text === "Lens") header.textContent = "Product";
+            if (text === "Feature") {
+              header.classList.add("client-hide-column");
+              document.body.classList.add("has-hidden-feature-column");
+              resultsBody.querySelectorAll("tr").forEach((row) => {
+                row.children[index]?.classList.add("client-hide-column");
+              });
+            }
+          });
+        }
+
+        const observer = new MutationObserver(() => {
+          updateSummaries();
+          polishTable();
+        });
+        observer.observe(document.body, { childList: true, subtree: true });
+        [indexFilter, treatmentFilter].forEach((select) => select?.addEventListener("change", updateSummaries));
+        window.setTimeout(() => {
+          updateSummaries();
+          polishTable();
+        }, 0);
+      })();
+    </script>
   </body>
 </html>
