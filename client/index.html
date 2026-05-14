@@ -173,6 +173,10 @@
           lensFilters: "lensFiltersBody",
         };
 
+        function setText(node, text) {
+          if (node && node.textContent !== text) node.textContent = text;
+        }
+
         document.addEventListener("click", (event) => {
           const toggle = event.target.closest("[data-compact-panel-toggle]");
           if (!toggle) return;
@@ -191,6 +195,7 @@
         const lensFiltersSummary = document.getElementById("lensFiltersSummary");
         const resultsHead = document.getElementById("resultsHead");
         const resultsBody = document.getElementById("resultsBody");
+        const singleVisionTabs = document.getElementById("singleVisionTabs");
         const indexFilter = document.getElementById("indexFilter");
         const treatmentFilter = document.getElementById("treatmentFilter");
 
@@ -202,21 +207,22 @@
         function updateSummaries() {
           const activeSingle = document.querySelector("#singleVisionTabs .is-active");
           const singleLabel = activeSingle?.textContent?.trim() || "Single vision";
-          singleVisionSummary.textContent = singleLabel;
-          activeTierTitle.textContent = singleLabel;
-          lensFiltersSummary.textContent = `${selectedText(indexFilter, "All indexes")} / ${selectedText(treatmentFilter, "All treatments")}`;
+          setText(singleVisionSummary, singleLabel);
+          setText(activeTierTitle, singleLabel);
+          setText(
+            lensFiltersSummary,
+            `${selectedText(indexFilter, "All indexes")} / ${selectedText(treatmentFilter, "All treatments")}`
+          );
         }
 
         function polishTable() {
-          document.body.classList.remove("has-hidden-feature-column");
           document.querySelectorAll(".client-hide-column").forEach((node) => node.classList.remove("client-hide-column"));
           const headers = Array.from(resultsHead.querySelectorAll("th"));
           headers.forEach((header, index) => {
             const text = header.textContent.trim();
-            if (text === "Lens") header.textContent = "Product";
+            if (text === "Lens") setText(header, "Product");
             if (text === "Feature") {
               header.classList.add("client-hide-column");
-              document.body.classList.add("has-hidden-feature-column");
               resultsBody.querySelectorAll("tr").forEach((row) => {
                 row.children[index]?.classList.add("client-hide-column");
               });
@@ -224,16 +230,23 @@
           });
         }
 
-        const observer = new MutationObserver(() => {
-          updateSummaries();
-          polishTable();
+        let scheduled = false;
+        function schedulePolish() {
+          if (scheduled) return;
+          scheduled = true;
+          window.requestAnimationFrame(() => {
+            scheduled = false;
+            updateSummaries();
+            polishTable();
+          });
+        }
+
+        const observer = new MutationObserver(schedulePolish);
+        [resultsHead, resultsBody, singleVisionTabs].forEach((target) => {
+          if (target) observer.observe(target, { childList: true, subtree: true });
         });
-        observer.observe(document.body, { childList: true, subtree: true });
         [indexFilter, treatmentFilter].forEach((select) => select?.addEventListener("change", updateSummaries));
-        window.setTimeout(() => {
-          updateSummaries();
-          polishTable();
-        }, 0);
+        schedulePolish();
       })();
     </script>
   </body>
