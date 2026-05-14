@@ -324,7 +324,7 @@
         ? [
             {
               label: "Lens",
-              render: (item) => `<span class="lens-title"><strong>${esc(lensName(item))}</strong><span class="muted">${esc(item.category)}</span></span>`,
+              render: (item) => `<span class="lens-title"><strong>${esc(lensName(item))}</strong><span class="muted lens-category">${esc(item.category)}</span></span>`,
             },
             { label: "Usage", render: (item) => `<span class="pill">${esc(item.usage || "General")}</span>` },
             { label: "Feature", render: (item) => esc(item.feature || "") },
@@ -341,7 +341,7 @@
             { label: "Family", render: (item) => esc(displayFamilyName(item)) },
             {
               label: "Lens",
-              render: (item) => `<span class="lens-title"><strong>${esc(lensName(item))}</strong><span class="muted">${esc(item.category)}</span></span>`,
+              render: (item) => `<span class="lens-title"><strong>${esc(lensName(item))}</strong><span class="muted lens-category">${esc(item.category)}</span></span>`,
             },
             { label: "Usage", render: (item) => `<span class="pill">${esc(item.usage || "General")}</span>` },
             { label: "Feature", render: (item) => esc(item.feature || "") },

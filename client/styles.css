@@ -1070,6 +1070,25 @@ tbody tr.is-active {
   color: var(--muted);
 }
 
+.lens-title {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.42em;
+  flex-wrap: wrap;
+  min-width: 0;
+}
+
+.lens-title strong {
+  line-height: 1.2;
+}
+
+.lens-category {
+  font-size: 0.86em;
+  font-weight: 500;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
 @media (max-width: 1080px) {
   .hero,
   .content-grid,

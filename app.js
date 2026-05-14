@@ -576,7 +576,7 @@ const PRODUCT_COLUMNS = [
     key: "product",
     label: "Product",
     render: (item) =>
-      `<strong>${esc([displayMaterialName(item.material), item.design].filter(Boolean).join(" · "))}</strong>${state.skuVisible ? `<br /><span class="sku-badge">${esc(lensSku(item))}</span>` : ""}<br /><span class="muted">${esc(item.category)}</span>`,
+      `<strong>${esc([displayMaterialName(item.material), item.design].filter(Boolean).join(" · "))}</strong>${state.skuVisible ? `<br /><span class="sku-badge">${esc(lensSku(item))}</span>` : ""}<br /><span class="muted lens-category">${esc(item.category)}</span>`,
   },
   { key: "usage", label: "Usage", render: (item) => `<span class="pill">${esc(item.usage || "General")}</span>` },
   { key: "price", label: "Price", className: "price", render: (item) => currency(activeDisplayPrice(item)) },
@@ -621,7 +621,7 @@ function progressivePriceColumns() {
       key: "product",
       label: "Lens",
       render: (item) =>
-        `<strong>${esc([displayMaterialName(item.material), item.design].filter(Boolean).join(" / "))}</strong><br /><span class="muted">${esc(item.category)}</span>`,
+        `<strong>${esc([displayMaterialName(item.material), item.design].filter(Boolean).join(" / "))}</strong><br /><span class="muted lens-category">${esc(item.category)}</span>`,
     },
     { key: "usage", label: "Usage", render: (item) => `<span class="pill">${esc(item.usage || "General")}</span>` },
     { key: "feature", label: "Feature", render: (item) => esc(item.feature || "") },
