@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-14T15:30:00-04:00",
+  "generatedAt": "2026-05-14T15:57:28-04:00",
   "sourceWorkbook": "C:\\Users\\BRIAN\\Desktop\\dr.ormando pricing mandalay\\Ormando re pricing sheet.xlsx",
   "products": [
     {
@@ -36,11 +36,11 @@
       "togReference": null,
       "mandalayRetail": 32.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 35,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 32.97,
-      "grossMarginPercent": 45.4
+      "targetSellingPrice": 35,
+      "grossMarginPercent": 48.6
     },
     {
       "id": "mandalay-essential-2",
@@ -376,11 +376,11 @@
       "togReference": null,
       "mandalayRetail": 78.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 80,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 78.97,
-      "grossMarginPercent": 43
+      "targetSellingPrice": 80,
+      "grossMarginPercent": 43.8
     },
     {
       "id": "mandalay-essential-19",
@@ -436,11 +436,11 @@
       "togReference": null,
       "mandalayRetail": 93.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 95,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 93.97,
-      "grossMarginPercent": 27.6
+      "targetSellingPrice": 95,
+      "grossMarginPercent": 28.4
     },
     {
       "id": "mandalay-essential-22",
@@ -476,11 +476,11 @@
       "togReference": null,
       "mandalayRetail": 88.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 90,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 88.97,
-      "grossMarginPercent": 43.8
+      "targetSellingPrice": 90,
+      "grossMarginPercent": 44.4
     },
     {
       "id": "mandalay-essential-24",
@@ -516,11 +516,11 @@
       "togReference": null,
       "mandalayRetail": 103.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 105,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 103.97,
-      "grossMarginPercent": 27.9
+      "targetSellingPrice": 105,
+      "grossMarginPercent": 28.6
     },
     {
       "id": "mandalay-essential-26",
@@ -536,11 +536,11 @@
       "togReference": null,
       "mandalayRetail": 93.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 95,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 93.97,
-      "grossMarginPercent": 35.1
+      "targetSellingPrice": 95,
+      "grossMarginPercent": 35.8
     },
     {
       "id": "mandalay-essential-27",
@@ -576,11 +576,11 @@
       "togReference": null,
       "mandalayRetail": 103.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 105,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 103.97,
-      "grossMarginPercent": 34.6
+      "targetSellingPrice": 105,
+      "grossMarginPercent": 35.2
     },
     {
       "id": "mandalay-essential-29",
@@ -616,11 +616,11 @@
       "togReference": 17.86,
       "mandalayRetail": 27.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 30,
       "benchmarkRetail": 68.55,
       "pivotalRetail": null,
-      "targetSellingPrice": 27.97,
-      "grossMarginPercent": 7
+      "targetSellingPrice": 30,
+      "grossMarginPercent": 13.3
     },
     {
       "id": "mandalay-essential-31",
@@ -636,11 +636,11 @@
       "togReference": null,
       "mandalayRetail": 32.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 35,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 32.97,
-      "grossMarginPercent": 21.1
+      "targetSellingPrice": 35,
+      "grossMarginPercent": 25.7
     },
     {
       "id": "mandalay-essential-32",
@@ -656,11 +656,11 @@
       "togReference": 23.9,
       "mandalayRetail": 68.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 70,
       "benchmarkRetail": 78.52,
       "pivotalRetail": null,
-      "targetSellingPrice": 68.97,
-      "grossMarginPercent": 30.4
+      "targetSellingPrice": 70,
+      "grossMarginPercent": 31.4
     },
     {
       "id": "mandalay-essential-33",
@@ -676,11 +676,11 @@
       "togReference": 17.86,
       "mandalayRetail": 29.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 30,
       "benchmarkRetail": 74.22,
       "pivotalRetail": null,
-      "targetSellingPrice": 29.97,
-      "grossMarginPercent": 6.6
+      "targetSellingPrice": 30,
+      "grossMarginPercent": 6.7
     },
     {
       "id": "mandalay-essential-34",
@@ -696,11 +696,11 @@
       "togReference": 23.9,
       "mandalayRetail": 38.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 40,
       "benchmarkRetail": 77.77,
       "pivotalRetail": null,
-      "targetSellingPrice": 38.97,
-      "grossMarginPercent": 12.8
+      "targetSellingPrice": 40,
+      "grossMarginPercent": 15.0
     },
     {
       "id": "mandalay-essential-35",
@@ -716,10 +716,10 @@
       "togReference": 29.9,
       "mandalayRetail": 54.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 55,
       "benchmarkRetail": 97.33,
       "pivotalRetail": null,
-      "targetSellingPrice": 54.97,
+      "targetSellingPrice": 55,
       "grossMarginPercent": 30.9
     },
     {
@@ -736,11 +736,11 @@
       "togReference": 42.9,
       "mandalayRetail": 107.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 110,
       "benchmarkRetail": 115.85,
       "pivotalRetail": null,
-      "targetSellingPrice": 107.97,
-      "grossMarginPercent": 16.6
+      "targetSellingPrice": 110,
+      "grossMarginPercent": 18.2
     },
     {
       "id": "mandalay-essential-37",
@@ -756,11 +756,11 @@
       "togReference": 19,
       "mandalayRetail": 38.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 40,
       "benchmarkRetail": 106.63,
       "pivotalRetail": null,
-      "targetSellingPrice": 38.97,
-      "grossMarginPercent": 7.6
+      "targetSellingPrice": 40,
+      "grossMarginPercent": 10.0
     },
     {
       "id": "mandalay-essential-38",
@@ -776,10 +776,10 @@
       "togReference": 45.4,
       "mandalayRetail": 88.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 90,
       "benchmarkRetail": 116.6,
       "pivotalRetail": null,
-      "targetSellingPrice": 88.97,
+      "targetSellingPrice": 90,
       "grossMarginPercent": null
     },
     {
@@ -796,11 +796,11 @@
       "togReference": 30.18,
       "mandalayRetail": 68.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 70,
       "benchmarkRetail": 112.3,
       "pivotalRetail": null,
-      "targetSellingPrice": 68.97,
-      "grossMarginPercent": 15.9
+      "targetSellingPrice": 70,
+      "grossMarginPercent": 17.1
     },
     {
       "id": "mandalay-essential-40",
@@ -816,11 +816,11 @@
       "togReference": 43.76,
       "mandalayRetail": 78.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 80,
       "benchmarkRetail": 115.85,
       "pivotalRetail": null,
-      "targetSellingPrice": 78.97,
-      "grossMarginPercent": 8.8
+      "targetSellingPrice": 80,
+      "grossMarginPercent": 10.0
     },
     {
       "id": "mandalay-essential-41",
@@ -836,11 +836,11 @@
       "togReference": 52.76,
       "mandalayRetail": 98.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 100,
       "benchmarkRetail": 135.41,
       "pivotalRetail": null,
-      "targetSellingPrice": 98.97,
-      "grossMarginPercent": 14.1
+      "targetSellingPrice": 100,
+      "grossMarginPercent": 15.0
     },
     {
       "id": "mandalay-essential-42",
@@ -856,11 +856,11 @@
       "togReference": 23.3,
       "mandalayRetail": 34.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 35,
       "benchmarkRetail": 111.21,
       "pivotalRetail": null,
-      "targetSellingPrice": 34.97,
-      "grossMarginPercent": -0.1
+      "targetSellingPrice": 35,
+      "grossMarginPercent": 0.0
     },
     {
       "id": "mandalay-essential-43",
@@ -876,11 +876,11 @@
       "togReference": null,
       "mandalayRetail": 37.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 40,
       "benchmarkRetail": 121.18,
       "pivotalRetail": null,
-      "targetSellingPrice": 37.97,
-      "grossMarginPercent": 7.8
+      "targetSellingPrice": 40,
+      "grossMarginPercent": 12.5
     },
     {
       "id": "mandalay-essential-44",
@@ -896,11 +896,11 @@
       "togReference": 37.8,
       "mandalayRetail": 48.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 50,
       "benchmarkRetail": 116.88,
       "pivotalRetail": null,
-      "targetSellingPrice": 48.97,
-      "grossMarginPercent": 8.1
+      "targetSellingPrice": 50,
+      "grossMarginPercent": 10.0
     },
     {
       "id": "mandalay-essential-45",
@@ -916,10 +916,10 @@
       "togReference": 28,
       "mandalayRetail": 54.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 55,
       "benchmarkRetail": 120.43,
       "pivotalRetail": null,
-      "targetSellingPrice": 54.97,
+      "targetSellingPrice": 55,
       "grossMarginPercent": 23.6
     },
     {
@@ -936,11 +936,11 @@
       "togReference": 34.7,
       "mandalayRetail": 68.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 70,
       "benchmarkRetail": 139.99,
       "pivotalRetail": null,
-      "targetSellingPrice": 68.97,
-      "grossMarginPercent": 24.6
+      "targetSellingPrice": 70,
+      "grossMarginPercent": 25.7
     },
     {
       "id": "mandalay-essential-47",
@@ -956,11 +956,11 @@
       "togReference": null,
       "mandalayRetail": 78.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 80,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 78.97,
-      "grossMarginPercent": 25.3
+      "targetSellingPrice": 80,
+      "grossMarginPercent": 26.2
     },
     {
       "id": "mandalay-essential-48",
@@ -996,11 +996,11 @@
       "togReference": 45.68,
       "mandalayRetail": 83.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 85,
       "benchmarkRetail": 111.21,
       "pivotalRetail": null,
-      "targetSellingPrice": 83.97,
-      "grossMarginPercent": 20.2
+      "targetSellingPrice": 85,
+      "grossMarginPercent": 21.2
     },
     {
       "id": "mandalay-essential-50",
@@ -1016,11 +1016,11 @@
       "togReference": null,
       "mandalayRetail": 93.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 95,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 93.97,
-      "grossMarginPercent": 19.1
+      "targetSellingPrice": 95,
+      "grossMarginPercent": 20.0
     },
     {
       "id": "mandalay-essential-51",
@@ -1036,11 +1036,11 @@
       "togReference": null,
       "mandalayRetail": 88.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 90,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 88.97,
-      "grossMarginPercent": 37.1
+      "targetSellingPrice": 90,
+      "grossMarginPercent": 37.8
     },
     {
       "id": "mandalay-essential-52",
@@ -1076,11 +1076,11 @@
       "togReference": 50.68,
       "mandalayRetail": 93.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 95,
       "benchmarkRetail": 116.88,
       "pivotalRetail": null,
-      "targetSellingPrice": 93.97,
-      "grossMarginPercent": 14.9
+      "targetSellingPrice": 95,
+      "grossMarginPercent": 15.8
     },
     {
       "id": "mandalay-essential-54",
@@ -1096,11 +1096,11 @@
       "togReference": null,
       "mandalayRetail": 103.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 105,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 103.97,
-      "grossMarginPercent": 20.2
+      "targetSellingPrice": 105,
+      "grossMarginPercent": 21.0
     },
     {
       "id": "mandalay-essential-55",
@@ -1116,11 +1116,11 @@
       "togReference": null,
       "mandalayRetail": 93.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 95,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 93.97,
-      "grossMarginPercent": 31.9
+      "targetSellingPrice": 95,
+      "grossMarginPercent": 32.6
     },
     {
       "id": "mandalay-essential-56",
@@ -1136,11 +1136,11 @@
       "togReference": null,
       "mandalayRetail": 103.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 105,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 103.97,
-      "grossMarginPercent": 22.1
+      "targetSellingPrice": 105,
+      "grossMarginPercent": 22.9
     },
     {
       "id": "mandalay-essential-57",
@@ -1176,11 +1176,11 @@
       "togReference": 16.04,
       "mandalayRetail": 38.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 40,
       "benchmarkRetail": null,
       "pivotalRetail": 66.16,
-      "targetSellingPrice": 38.97,
-      "grossMarginPercent": 53.8
+      "targetSellingPrice": 40,
+      "grossMarginPercent": 55.0
     },
     {
       "id": "mandalay-plus-1",
@@ -1196,11 +1196,11 @@
       "togReference": null,
       "mandalayRetail": 42.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 45,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 42.97,
-      "grossMarginPercent": 58.1
+      "targetSellingPrice": 45,
+      "grossMarginPercent": 60.0
     },
     {
       "id": "mandalay-plus-2",
@@ -1216,11 +1216,11 @@
       "togReference": 22.08,
       "mandalayRetail": 78.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 80,
       "benchmarkRetail": null,
       "pivotalRetail": 77.2,
-      "targetSellingPrice": 78.97,
-      "grossMarginPercent": 49.3
+      "targetSellingPrice": 80,
+      "grossMarginPercent": 50.0
     },
     {
       "id": "mandalay-plus-3",
@@ -1236,11 +1236,11 @@
       "togReference": 16.04,
       "mandalayRetail": 39.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 40,
       "benchmarkRetail": null,
       "pivotalRetail": 72.08,
-      "targetSellingPrice": 39.97,
-      "grossMarginPercent": 38
+      "targetSellingPrice": 40,
+      "grossMarginPercent": 38.0
     },
     {
       "id": "mandalay-plus-4",
@@ -1256,11 +1256,11 @@
       "togReference": 22.08,
       "mandalayRetail": 48.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 50,
       "benchmarkRetail": null,
       "pivotalRetail": 77.2,
-      "targetSellingPrice": 48.97,
-      "grossMarginPercent": 46.9
+      "targetSellingPrice": 50,
+      "grossMarginPercent": 48.0
     },
     {
       "id": "mandalay-plus-5",
@@ -1276,10 +1276,10 @@
       "togReference": 28.08,
       "mandalayRetail": 64.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 65,
       "benchmarkRetail": null,
       "pivotalRetail": 88.16,
-      "targetSellingPrice": 64.97,
+      "targetSellingPrice": 65,
       "grossMarginPercent": 40.3
     },
     {
@@ -1296,11 +1296,11 @@
       "togReference": 41.08,
       "mandalayRetail": 117.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 120,
       "benchmarkRetail": null,
       "pivotalRetail": 125.52,
-      "targetSellingPrice": 117.97,
-      "grossMarginPercent": 30.5
+      "targetSellingPrice": 120,
+      "grossMarginPercent": 31.7
     },
     {
       "id": "mandalay-plus-7",
@@ -1316,11 +1316,11 @@
       "togReference": 17.18,
       "mandalayRetail": 48.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 50,
       "benchmarkRetail": null,
       "pivotalRetail": 89.04,
-      "targetSellingPrice": 48.97,
-      "grossMarginPercent": 42.8
+      "targetSellingPrice": 50,
+      "grossMarginPercent": 44.0
     },
     {
       "id": "mandalay-plus-8",
@@ -1336,11 +1336,11 @@
       "togReference": 28.36,
       "mandalayRetail": 78.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 80,
       "benchmarkRetail": null,
       "pivotalRetail": 106,
-      "targetSellingPrice": 78.97,
-      "grossMarginPercent": 25.5
+      "targetSellingPrice": 80,
+      "grossMarginPercent": 26.5
     },
     {
       "id": "mandalay-plus-9",
@@ -1356,11 +1356,11 @@
       "togReference": 41.94,
       "mandalayRetail": 88.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 90,
       "benchmarkRetail": null,
       "pivotalRetail": 128.08,
-      "targetSellingPrice": 88.97,
-      "grossMarginPercent": 25.8
+      "targetSellingPrice": 90,
+      "grossMarginPercent": 26.7
     },
     {
       "id": "mandalay-plus-10",
@@ -1376,11 +1376,11 @@
       "togReference": 50.94,
       "mandalayRetail": 108.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 110,
       "benchmarkRetail": null,
       "pivotalRetail": 150.08,
-      "targetSellingPrice": 108.97,
-      "grossMarginPercent": 29.3
+      "targetSellingPrice": 110,
+      "grossMarginPercent": 30.0
     },
     {
       "id": "mandalay-plus-11",
@@ -1396,11 +1396,11 @@
       "togReference": 20.5,
       "mandalayRetail": 43.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 45,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 43.97,
-      "grossMarginPercent": 45.4
+      "targetSellingPrice": 45,
+      "grossMarginPercent": 46.7
     },
     {
       "id": "mandalay-plus-12",
@@ -1416,11 +1416,11 @@
       "togReference": null,
       "mandalayRetail": 47.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 50,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 47.97,
-      "grossMarginPercent": 43.7
+      "targetSellingPrice": 50,
+      "grossMarginPercent": 46.0
     },
     {
       "id": "mandalay-plus-13",
@@ -1436,11 +1436,11 @@
       "togReference": 36,
       "mandalayRetail": 58.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 60,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 58.97,
-      "grossMarginPercent": 22.3
+      "targetSellingPrice": 60,
+      "grossMarginPercent": 23.7
     },
     {
       "id": "mandalay-plus-14",
@@ -1456,11 +1456,11 @@
       "togReference": 26.2,
       "mandalayRetail": 78.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 80,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 78.97,
-      "grossMarginPercent": 56.9
+      "targetSellingPrice": 80,
+      "grossMarginPercent": 57.5
     },
     {
       "id": "mandalay-plus-15",
@@ -1476,11 +1476,11 @@
       "togReference": 32.9,
       "mandalayRetail": 98.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 100,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 98.97,
-      "grossMarginPercent": 59.6
+      "targetSellingPrice": 100,
+      "grossMarginPercent": 60.0
     },
     {
       "id": "mandalay-plus-16",
@@ -1496,11 +1496,11 @@
       "togReference": null,
       "mandalayRetail": 88.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 90,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 88.97,
-      "grossMarginPercent": 42.7
+      "targetSellingPrice": 90,
+      "grossMarginPercent": 43.3
     },
     {
       "id": "mandalay-plus-17",
@@ -1516,10 +1516,10 @@
       "togReference": 47.84,
       "mandalayRetail": null,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 125,
       "benchmarkRetail": null,
       "pivotalRetail": 121.28,
-      "targetSellingPrice": 121.28,
+      "targetSellingPrice": 125,
       "grossMarginPercent": null
     },
     {
@@ -1536,11 +1536,11 @@
       "togReference": null,
       "mandalayRetail": 103.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 105,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 103.97,
-      "grossMarginPercent": 34.6
+      "targetSellingPrice": 105,
+      "grossMarginPercent": 35.2
     },
     {
       "id": "mandalay-plus-19",
@@ -1556,11 +1556,11 @@
       "togReference": null,
       "mandalayRetail": 98.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 100,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 98.97,
-      "grossMarginPercent": 53.5
+      "targetSellingPrice": 100,
+      "grossMarginPercent": 54.0
     },
     {
       "id": "mandalay-plus-20",
@@ -1576,11 +1576,11 @@
       "togReference": 55.24,
       "mandalayRetail": null,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 135,
       "benchmarkRetail": null,
       "pivotalRetail": 132.32,
-      "targetSellingPrice": 132.32,
-      "grossMarginPercent": 54.8
+      "targetSellingPrice": 135,
+      "grossMarginPercent": 55.7
     },
     {
       "id": "mandalay-plus-21",
@@ -1596,11 +1596,11 @@
       "togReference": null,
       "mandalayRetail": 113.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 115,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 113.97,
-      "grossMarginPercent": 34.2
+      "targetSellingPrice": 115,
+      "grossMarginPercent": 34.8
     },
     {
       "id": "mandalay-plus-22",
@@ -1616,11 +1616,11 @@
       "togReference": null,
       "mandalayRetail": 103.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 105,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 103.97,
-      "grossMarginPercent": 46.1
+      "targetSellingPrice": 105,
+      "grossMarginPercent": 46.7
     },
     {
       "id": "mandalay-plus-23",
@@ -1636,11 +1636,11 @@
       "togReference": 58.06,
       "mandalayRetail": null,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 140,
       "benchmarkRetail": null,
       "pivotalRetail": 137.44,
-      "targetSellingPrice": 137.44,
-      "grossMarginPercent": 49.2
+      "targetSellingPrice": 140,
+      "grossMarginPercent": 50.1
     },
     {
       "id": "mandalay-plus-24",
@@ -1656,11 +1656,11 @@
       "togReference": null,
       "mandalayRetail": 128.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 130,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 128.97,
-      "grossMarginPercent": 47.3
+      "targetSellingPrice": 130,
+      "grossMarginPercent": 47.7
     },
     {
       "id": "mandalay-plus-25",
@@ -1676,11 +1676,11 @@
       "togReference": 64.82,
       "mandalayRetail": null,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 150,
       "benchmarkRetail": null,
       "pivotalRetail": 148.4,
-      "targetSellingPrice": 148.4,
-      "grossMarginPercent": 42.7
+      "targetSellingPrice": 150,
+      "grossMarginPercent": 43.3
     },
     {
       "id": "mandalay-plus-26",
@@ -1696,11 +1696,11 @@
       "togReference": null,
       "mandalayRetail": 57.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 60,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 57.97,
-      "grossMarginPercent": 55.1
+      "targetSellingPrice": 60,
+      "grossMarginPercent": 56.7
     },
     {
       "id": "mandalay-plus-27",
@@ -1716,11 +1716,11 @@
       "togReference": null,
       "mandalayRetail": 62.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 65,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 62.97,
-      "grossMarginPercent": 58.7
+      "targetSellingPrice": 65,
+      "grossMarginPercent": 60.0
     },
     {
       "id": "mandalay-plus-28",
@@ -1736,11 +1736,11 @@
       "togReference": 25.9,
       "mandalayRetail": 98.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 100,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 98.97,
-      "grossMarginPercent": 51.5
+      "targetSellingPrice": 100,
+      "grossMarginPercent": 52.0
     },
     {
       "id": "mandalay-plus-29",
@@ -1756,10 +1756,10 @@
       "togReference": 19.86,
       "mandalayRetail": 59.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 60,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 59.97,
+      "targetSellingPrice": 60,
       "grossMarginPercent": 53.3
     },
     {
@@ -1776,11 +1776,11 @@
       "togReference": 26.9,
       "mandalayRetail": 68.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 70,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 68.97,
-      "grossMarginPercent": 50.7
+      "targetSellingPrice": 70,
+      "grossMarginPercent": 51.4
     },
     {
       "id": "mandalay-plus-31",
@@ -1796,10 +1796,10 @@
       "togReference": 31.9,
       "mandalayRetail": 84.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 85,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 84.97,
+      "targetSellingPrice": 85,
       "grossMarginPercent": 55.3
     },
     {
@@ -1816,11 +1816,11 @@
       "togReference": 44.9,
       "mandalayRetail": 132.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 135,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 132.97,
-      "grossMarginPercent": 32.3
+      "targetSellingPrice": 135,
+      "grossMarginPercent": 33.3
     },
     {
       "id": "mandalay-plus-33",
@@ -1836,11 +1836,11 @@
       "togReference": 21,
       "mandalayRetail": 68.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 70,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 68.97,
-      "grossMarginPercent": 47.8
+      "targetSellingPrice": 70,
+      "grossMarginPercent": 48.6
     },
     {
       "id": "mandalay-plus-34",
@@ -1856,11 +1856,11 @@
       "togReference": 32.18,
       "mandalayRetail": 93.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 95,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 93.97,
-      "grossMarginPercent": 38.3
+      "targetSellingPrice": 95,
+      "grossMarginPercent": 38.9
     },
     {
       "id": "mandalay-plus-35",
@@ -1876,11 +1876,11 @@
       "togReference": 45.76,
       "mandalayRetail": 108.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 110,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 108.97,
-      "grossMarginPercent": 33.9
+      "targetSellingPrice": 110,
+      "grossMarginPercent": 34.5
     },
     {
       "id": "mandalay-plus-36",
@@ -1896,11 +1896,11 @@
       "togReference": 54.76,
       "mandalayRetail": 118.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 120,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 118.97,
-      "grossMarginPercent": 28.6
+      "targetSellingPrice": 120,
+      "grossMarginPercent": 29.2
     },
     {
       "id": "mandalay-plus-37",
@@ -1916,11 +1916,11 @@
       "togReference": 25.3,
       "mandalayRetail": 63.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 65,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 63.97,
-      "grossMarginPercent": 45.3
+      "targetSellingPrice": 65,
+      "grossMarginPercent": 46.2
     },
     {
       "id": "mandalay-plus-38",
@@ -1936,11 +1936,11 @@
       "togReference": null,
       "mandalayRetail": 67.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 70,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 67.97,
-      "grossMarginPercent": 48.5
+      "targetSellingPrice": 70,
+      "grossMarginPercent": 50.0
     },
     {
       "id": "mandalay-plus-39",
@@ -1956,11 +1956,11 @@
       "togReference": 39.8,
       "mandalayRetail": 77.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 80,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 77.97,
-      "grossMarginPercent": 42.3
+      "targetSellingPrice": 80,
+      "grossMarginPercent": 43.8
     },
     {
       "id": "mandalay-plus-40",
@@ -1976,11 +1976,11 @@
       "togReference": 30,
       "mandalayRetail": 113.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 115,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 113.97,
-      "grossMarginPercent": 63.1
+      "targetSellingPrice": 115,
+      "grossMarginPercent": 63.5
     },
     {
       "id": "mandalay-plus-41",
@@ -1996,11 +1996,11 @@
       "togReference": 36.7,
       "mandalayRetail": 133.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 135,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 133.97,
-      "grossMarginPercent": 61.2
+      "targetSellingPrice": 135,
+      "grossMarginPercent": 61.5
     },
     {
       "id": "mandalay-plus-42",
@@ -2016,11 +2016,11 @@
       "togReference": null,
       "mandalayRetail": 108.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 110,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 108.97,
-      "grossMarginPercent": 45.9
+      "targetSellingPrice": 110,
+      "grossMarginPercent": 46.4
     },
     {
       "id": "mandalay-plus-43",
@@ -2056,11 +2056,11 @@
       "togReference": 47.68,
       "mandalayRetail": 113.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 115,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 113.97,
-      "grossMarginPercent": 41.2
+      "targetSellingPrice": 115,
+      "grossMarginPercent": 41.7
     },
     {
       "id": "mandalay-plus-45",
@@ -2076,11 +2076,11 @@
       "togReference": null,
       "mandalayRetail": 123.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 125,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 123.97,
-      "grossMarginPercent": 38.7
+      "targetSellingPrice": 125,
+      "grossMarginPercent": 39.2
     },
     {
       "id": "mandalay-plus-46",
@@ -2096,11 +2096,11 @@
       "togReference": null,
       "mandalayRetail": 118.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 120,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 118.97,
-      "grossMarginPercent": 52.9
+      "targetSellingPrice": 120,
+      "grossMarginPercent": 53.3
     },
     {
       "id": "mandalay-plus-47",
@@ -2136,11 +2136,11 @@
       "togReference": 52.68,
       "mandalayRetail": 123.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 125,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 123.97,
-      "grossMarginPercent": 35.5
+      "targetSellingPrice": 125,
+      "grossMarginPercent": 36.0
     },
     {
       "id": "mandalay-plus-49",
@@ -2156,11 +2156,11 @@
       "togReference": null,
       "mandalayRetail": 133.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 135,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 133.97,
-      "grossMarginPercent": 38
+      "targetSellingPrice": 135,
+      "grossMarginPercent": 38.5
     },
     {
       "id": "mandalay-plus-50",
@@ -2176,11 +2176,11 @@
       "togReference": null,
       "mandalayRetail": 133.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 135,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 133.97,
-      "grossMarginPercent": 52.2
+      "targetSellingPrice": 135,
+      "grossMarginPercent": 52.6
     },
     {
       "id": "mandalay-plus-51",
@@ -2196,11 +2196,11 @@
       "togReference": null,
       "mandalayRetail": 143.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 145,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 143.97,
-      "grossMarginPercent": 47.2
+      "targetSellingPrice": 145,
+      "grossMarginPercent": 47.6
     },
     {
       "id": "mandalay-plus-52",
@@ -2236,11 +2236,11 @@
       "togReference": 19.86,
       "mandalayRetail": 57.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 60,
       "benchmarkRetail": null,
       "pivotalRetail": 77.2,
-      "targetSellingPrice": 57.97,
-      "grossMarginPercent": 55.1
+      "targetSellingPrice": 60,
+      "grossMarginPercent": 56.7
     },
     {
       "id": "horizon-camber-1",
@@ -2256,11 +2256,11 @@
       "togReference": null,
       "mandalayRetail": 62.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 65,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 62.97,
-      "grossMarginPercent": 58.7
+      "targetSellingPrice": 65,
+      "grossMarginPercent": 60.0
     },
     {
       "id": "horizon-camber-2",
@@ -2276,11 +2276,11 @@
       "togReference": 25.9,
       "mandalayRetail": 98.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 100,
       "benchmarkRetail": null,
       "pivotalRetail": 88.16,
-      "targetSellingPrice": 98.97,
-      "grossMarginPercent": 51.5
+      "targetSellingPrice": 100,
+      "grossMarginPercent": 52.0
     },
     {
       "id": "horizon-camber-3",
@@ -2296,10 +2296,10 @@
       "togReference": 19.86,
       "mandalayRetail": 59.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 60,
       "benchmarkRetail": null,
       "pivotalRetail": 83.12,
-      "targetSellingPrice": 59.97,
+      "targetSellingPrice": 60,
       "grossMarginPercent": 53.3
     },
     {
@@ -2316,11 +2316,11 @@
       "togReference": 26.9,
       "mandalayRetail": 68.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 70,
       "benchmarkRetail": null,
       "pivotalRetail": 88.16,
-      "targetSellingPrice": 68.97,
-      "grossMarginPercent": 50.7
+      "targetSellingPrice": 70,
+      "grossMarginPercent": 51.4
     },
     {
       "id": "horizon-camber-5",
@@ -2336,10 +2336,10 @@
       "togReference": 31.9,
       "mandalayRetail": 84.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 85,
       "benchmarkRetail": null,
       "pivotalRetail": 99.2,
-      "targetSellingPrice": 84.97,
+      "targetSellingPrice": 85,
       "grossMarginPercent": 55.3
     },
     {
@@ -2356,11 +2356,11 @@
       "togReference": 44.9,
       "mandalayRetail": 132.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 135,
       "benchmarkRetail": null,
       "pivotalRetail": 136.56,
-      "targetSellingPrice": 132.97,
-      "grossMarginPercent": 32.3
+      "targetSellingPrice": 135,
+      "grossMarginPercent": 33.3
     },
     {
       "id": "horizon-camber-7",
@@ -2376,11 +2376,11 @@
       "togReference": 21,
       "mandalayRetail": 68.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 70,
       "benchmarkRetail": null,
       "pivotalRetail": 100.08,
-      "targetSellingPrice": 68.97,
-      "grossMarginPercent": 47.8
+      "targetSellingPrice": 70,
+      "grossMarginPercent": 48.6
     },
     {
       "id": "horizon-camber-8",
@@ -2396,11 +2396,11 @@
       "togReference": 32.18,
       "mandalayRetail": 93.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 95,
       "benchmarkRetail": null,
       "pivotalRetail": 117.04,
-      "targetSellingPrice": 93.97,
-      "grossMarginPercent": 38.3
+      "targetSellingPrice": 95,
+      "grossMarginPercent": 38.9
     },
     {
       "id": "horizon-camber-9",
@@ -2416,11 +2416,11 @@
       "togReference": 45.76,
       "mandalayRetail": 108.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 110,
       "benchmarkRetail": null,
       "pivotalRetail": 139.04,
-      "targetSellingPrice": 108.97,
-      "grossMarginPercent": 33.9
+      "targetSellingPrice": 110,
+      "grossMarginPercent": 34.5
     },
     {
       "id": "horizon-camber-10",
@@ -2436,11 +2436,11 @@
       "togReference": 54.76,
       "mandalayRetail": 118.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 120,
       "benchmarkRetail": null,
       "pivotalRetail": 161.12,
-      "targetSellingPrice": 118.97,
-      "grossMarginPercent": 28.6
+      "targetSellingPrice": 120,
+      "grossMarginPercent": 29.2
     },
     {
       "id": "horizon-camber-11",
@@ -2456,11 +2456,11 @@
       "togReference": 25.3,
       "mandalayRetail": 63.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 65,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 63.97,
-      "grossMarginPercent": 45.3
+      "targetSellingPrice": 65,
+      "grossMarginPercent": 46.2
     },
     {
       "id": "horizon-camber-12",
@@ -2476,11 +2476,11 @@
       "togReference": null,
       "mandalayRetail": 67.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 70,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 67.97,
-      "grossMarginPercent": 48.5
+      "targetSellingPrice": 70,
+      "grossMarginPercent": 50.0
     },
     {
       "id": "horizon-camber-13",
@@ -2496,11 +2496,11 @@
       "togReference": 39.8,
       "mandalayRetail": 77.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 80,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 77.97,
-      "grossMarginPercent": 42.3
+      "targetSellingPrice": 80,
+      "grossMarginPercent": 43.8
     },
     {
       "id": "horizon-camber-14",
@@ -2516,11 +2516,11 @@
       "togReference": 30,
       "mandalayRetail": 113.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 115,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 113.97,
-      "grossMarginPercent": 63.1
+      "targetSellingPrice": 115,
+      "grossMarginPercent": 63.5
     },
     {
       "id": "horizon-camber-15",
@@ -2536,11 +2536,11 @@
       "togReference": 36.7,
       "mandalayRetail": 133.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 135,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 133.97,
-      "grossMarginPercent": 61.2
+      "targetSellingPrice": 135,
+      "grossMarginPercent": 61.5
     },
     {
       "id": "horizon-camber-16",
@@ -2556,10 +2556,10 @@
       "togReference": 66.3,
       "mandalayRetail": 133.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 135,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 133.97,
+      "targetSellingPrice": 135,
       "grossMarginPercent": null
     },
     {
@@ -2576,11 +2576,11 @@
       "togReference": null,
       "mandalayRetail": 108.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 110,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 108.97,
-      "grossMarginPercent": 45.9
+      "targetSellingPrice": 110,
+      "grossMarginPercent": 46.4
     },
     {
       "id": "horizon-camber-18",
@@ -2596,11 +2596,11 @@
       "togReference": 51.66,
       "mandalayRetail": null,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 135,
       "benchmarkRetail": null,
       "pivotalRetail": 132.32,
-      "targetSellingPrice": 132.32,
-      "grossMarginPercent": 51.6
+      "targetSellingPrice": 135,
+      "grossMarginPercent": 52.6
     },
     {
       "id": "horizon-camber-19",
@@ -2616,11 +2616,11 @@
       "togReference": 47.68,
       "mandalayRetail": 113.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 115,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 113.97,
-      "grossMarginPercent": 41.2
+      "targetSellingPrice": 115,
+      "grossMarginPercent": 41.7
     },
     {
       "id": "horizon-camber-20",
@@ -2636,11 +2636,11 @@
       "togReference": null,
       "mandalayRetail": 123.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 125,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 123.97,
-      "grossMarginPercent": 38.7
+      "targetSellingPrice": 125,
+      "grossMarginPercent": 39.2
     },
     {
       "id": "horizon-camber-21",
@@ -2656,11 +2656,11 @@
       "togReference": null,
       "mandalayRetail": 118.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 120,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 118.97,
-      "grossMarginPercent": 52.9
+      "targetSellingPrice": 120,
+      "grossMarginPercent": 53.3
     },
     {
       "id": "horizon-camber-22",
@@ -2676,11 +2676,11 @@
       "togReference": 59.06,
       "mandalayRetail": null,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 145,
       "benchmarkRetail": null,
       "pivotalRetail": 143.36,
-      "targetSellingPrice": 143.36,
-      "grossMarginPercent": 57.4
+      "targetSellingPrice": 145,
+      "grossMarginPercent": 57.9
     },
     {
       "id": "horizon-camber-23",
@@ -2696,11 +2696,11 @@
       "togReference": 52.68,
       "mandalayRetail": 123.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 125,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 123.97,
-      "grossMarginPercent": 35.5
+      "targetSellingPrice": 125,
+      "grossMarginPercent": 36.0
     },
     {
       "id": "horizon-camber-24",
@@ -2716,11 +2716,11 @@
       "togReference": null,
       "mandalayRetail": 133.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 135,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 133.97,
-      "grossMarginPercent": 38
+      "targetSellingPrice": 135,
+      "grossMarginPercent": 38.5
     },
     {
       "id": "horizon-camber-25",
@@ -2736,11 +2736,11 @@
       "togReference": null,
       "mandalayRetail": 133.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 135,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 133.97,
-      "grossMarginPercent": 52.2
+      "targetSellingPrice": 135,
+      "grossMarginPercent": 52.6
     },
     {
       "id": "horizon-camber-26",
@@ -2756,10 +2756,10 @@
       "togReference": 60.16,
       "mandalayRetail": null,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 150,
       "benchmarkRetail": null,
       "pivotalRetail": 148.4,
-      "targetSellingPrice": 148.4,
+      "targetSellingPrice": 150,
       "grossMarginPercent": null
     },
     {
@@ -2776,10 +2776,10 @@
       "togReference": 56.42,
       "mandalayRetail": null,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 160,
       "benchmarkRetail": null,
       "pivotalRetail": 159.44,
-      "targetSellingPrice": 159.44,
+      "targetSellingPrice": 160,
       "grossMarginPercent": null
     },
     {
@@ -2796,11 +2796,11 @@
       "togReference": null,
       "mandalayRetail": 143.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 145,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 143.97,
-      "grossMarginPercent": 47.2
+      "targetSellingPrice": 145,
+      "grossMarginPercent": 47.6
     },
     {
       "id": "horizon-camber-29",
@@ -2816,11 +2816,11 @@
       "togReference": 68.64,
       "mandalayRetail": null,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 160,
       "benchmarkRetail": null,
       "pivotalRetail": 159.44,
-      "targetSellingPrice": 159.44,
-      "grossMarginPercent": 49.2
+      "targetSellingPrice": 160,
+      "grossMarginPercent": 49.4
     },
     {
       "id": "horizon-camber-30",
@@ -2836,10 +2836,10 @@
       "togReference": 91.3,
       "mandalayRetail": null,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 245,
       "benchmarkRetail": null,
       "pivotalRetail": 241.68,
-      "targetSellingPrice": 241.68,
+      "targetSellingPrice": 245,
       "grossMarginPercent": null
     },
     {
@@ -2876,10 +2876,10 @@
       "togReference": 21,
       "mandalayRetail": null,
       "basePrice": null,
-      "proposedPrice": 47.97,
+      "proposedPrice": 50,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 47.97,
+      "targetSellingPrice": 50,
       "grossMarginPercent": null
     },
     {
@@ -3096,10 +3096,10 @@
       "togReference": 30,
       "mandalayRetail": null,
       "basePrice": null,
-      "proposedPrice": 52.97,
+      "proposedPrice": 55,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 52.97,
+      "targetSellingPrice": 55,
       "grossMarginPercent": null
     },
     {
@@ -3196,10 +3196,10 @@
       "togReference": 62,
       "mandalayRetail": null,
       "basePrice": null,
-      "proposedPrice": 93.97,
+      "proposedPrice": 95,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 93.97,
+      "targetSellingPrice": 95,
       "grossMarginPercent": null
     },
     {
@@ -3296,10 +3296,10 @@
       "togReference": 51,
       "mandalayRetail": null,
       "basePrice": null,
-      "proposedPrice": 103.97,
+      "proposedPrice": 105,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 103.97,
+      "targetSellingPrice": 105,
       "grossMarginPercent": null
     },
     {
@@ -3416,10 +3416,10 @@
       "togReference": 71,
       "mandalayRetail": null,
       "basePrice": null,
-      "proposedPrice": 128.97,
+      "proposedPrice": 130,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 128.97,
+      "targetSellingPrice": 130,
       "grossMarginPercent": null
     },
     {
@@ -3496,10 +3496,10 @@
       "togReference": 21,
       "mandalayRetail": null,
       "basePrice": null,
-      "proposedPrice": 47.97,
+      "proposedPrice": 50,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 47.97,
+      "targetSellingPrice": 50,
       "grossMarginPercent": null
     },
     {
@@ -3736,10 +3736,10 @@
       "togReference": 30,
       "mandalayRetail": null,
       "basePrice": null,
-      "proposedPrice": 52.97,
+      "proposedPrice": 55,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 52.97,
+      "targetSellingPrice": 55,
       "grossMarginPercent": null
     },
     {
@@ -3836,10 +3836,10 @@
       "togReference": 62,
       "mandalayRetail": null,
       "basePrice": null,
-      "proposedPrice": 93.97,
+      "proposedPrice": 95,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 93.97,
+      "targetSellingPrice": 95,
       "grossMarginPercent": null
     },
     {
@@ -3916,10 +3916,10 @@
       "togReference": 51,
       "mandalayRetail": null,
       "basePrice": null,
-      "proposedPrice": 103.97,
+      "proposedPrice": 105,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 103.97,
+      "targetSellingPrice": 105,
       "grossMarginPercent": null
     },
     {
@@ -3976,10 +3976,10 @@
       "togReference": 59,
       "mandalayRetail": null,
       "basePrice": null,
-      "proposedPrice": 118.97,
+      "proposedPrice": 120,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 118.97,
+      "targetSellingPrice": 120,
       "grossMarginPercent": null
     },
     {
@@ -4036,10 +4036,10 @@
       "togReference": 71,
       "mandalayRetail": null,
       "basePrice": null,
-      "proposedPrice": 128.97,
+      "proposedPrice": 130,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 128.97,
+      "targetSellingPrice": 130,
       "grossMarginPercent": null
     },
     {
@@ -4116,11 +4116,11 @@
       "togReference": null,
       "mandalayRetail": 18.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 20,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 18.97,
-      "grossMarginPercent": 52.6
+      "targetSellingPrice": 20,
+      "grossMarginPercent": 55.0
     },
     {
       "id": "conventional-sv-2",
@@ -4136,11 +4136,11 @@
       "togReference": null,
       "mandalayRetail": 12.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 15,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 12.97,
-      "grossMarginPercent": 49.9
+      "targetSellingPrice": 15,
+      "grossMarginPercent": 56.7
     },
     {
       "id": "conventional-sv-3",
@@ -4376,11 +4376,11 @@
       "togReference": null,
       "mandalayRetail": 48.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 50,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 48.97,
-      "grossMarginPercent": 67.3
+      "targetSellingPrice": 50,
+      "grossMarginPercent": 68.0
     },
     {
       "id": "conventional-sv-15",
@@ -4456,11 +4456,11 @@
       "togReference": null,
       "mandalayRetail": 68.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 70,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 68.97,
-      "grossMarginPercent": 44.6
+      "targetSellingPrice": 70,
+      "grossMarginPercent": 45.4
     },
     {
       "id": "conventional-sv-19",
@@ -4496,11 +4496,11 @@
       "togReference": null,
       "mandalayRetail": 78.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 80,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 78.97,
-      "grossMarginPercent": 43.8
+      "targetSellingPrice": 80,
+      "grossMarginPercent": 44.5
     },
     {
       "id": "conventional-sv-21",
@@ -4556,11 +4556,11 @@
       "togReference": null,
       "mandalayRetail": 108.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 110,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 108.97,
-      "grossMarginPercent": 35.8
+      "targetSellingPrice": 110,
+      "grossMarginPercent": 36.4
     },
     {
       "id": "conventional-sv-24",
@@ -4576,11 +4576,11 @@
       "togReference": null,
       "mandalayRetail": 98.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 100,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 98.97,
-      "grossMarginPercent": 37
+      "targetSellingPrice": 100,
+      "grossMarginPercent": 37.6
     },
     {
       "id": "conventional-sv-25",
@@ -4616,11 +4616,11 @@
       "togReference": null,
       "mandalayRetail": 108.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 110,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 108.97,
-      "grossMarginPercent": 35
+      "targetSellingPrice": 110,
+      "grossMarginPercent": 35.6
     },
     {
       "id": "conventional-sv-27",
@@ -4696,11 +4696,11 @@
       "togReference": null,
       "mandalayRetail": 38.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 40,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 38.97,
-      "grossMarginPercent": 61.5
+      "targetSellingPrice": 40,
+      "grossMarginPercent": 62.5
     },
     {
       "id": "conventional-multifocal-2",
@@ -4736,11 +4736,11 @@
       "togReference": null,
       "mandalayRetail": 15.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 20,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 15.97,
-      "grossMarginPercent": 38.6
+      "targetSellingPrice": 20,
+      "grossMarginPercent": 51.0
     },
     {
       "id": "conventional-multifocal-4",
@@ -4756,10 +4756,10 @@
       "togReference": null,
       "mandalayRetail": 39.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 40,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 39.97,
+      "targetSellingPrice": 40,
       "grossMarginPercent": 59.5
     },
     {
@@ -4776,11 +4776,11 @@
       "togReference": null,
       "mandalayRetail": 78.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 80,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 78.97,
-      "grossMarginPercent": 33.6
+      "targetSellingPrice": 80,
+      "grossMarginPercent": 34.5
     },
     {
       "id": "conventional-multifocal-6",
@@ -4796,11 +4796,11 @@
       "togReference": null,
       "mandalayRetail": 17.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 20,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 17.97,
-      "grossMarginPercent": 66.6
+      "targetSellingPrice": 20,
+      "grossMarginPercent": 70.0
     },
     {
       "id": "conventional-multifocal-7",
@@ -4816,11 +4816,11 @@
       "togReference": null,
       "mandalayRetail": 24.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 25,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 24.97,
-      "grossMarginPercent": 60
+      "targetSellingPrice": 25,
+      "grossMarginPercent": 60.0
     },
     {
       "id": "conventional-multifocal-8",
@@ -4836,11 +4836,11 @@
       "togReference": null,
       "mandalayRetail": 28.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 30,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 28.97,
-      "grossMarginPercent": 59.3
+      "targetSellingPrice": 30,
+      "grossMarginPercent": 60.7
     },
     {
       "id": "conventional-multifocal-9",
@@ -4856,11 +4856,11 @@
       "togReference": null,
       "mandalayRetail": 58.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 60,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 58.97,
-      "grossMarginPercent": 55.9
+      "targetSellingPrice": 60,
+      "grossMarginPercent": 56.7
     },
     {
       "id": "conventional-multifocal-10",
@@ -4876,11 +4876,11 @@
       "togReference": null,
       "mandalayRetail": 32.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 35,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 32.97,
-      "grossMarginPercent": 60.6
+      "targetSellingPrice": 35,
+      "grossMarginPercent": 62.9
     },
     {
       "id": "conventional-multifocal-11",
@@ -4896,11 +4896,11 @@
       "togReference": null,
       "mandalayRetail": 28.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 30,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 28.97,
-      "grossMarginPercent": 65.5
+      "targetSellingPrice": 30,
+      "grossMarginPercent": 66.7
     },
     {
       "id": "conventional-multifocal-12",
@@ -4916,11 +4916,11 @@
       "togReference": null,
       "mandalayRetail": 28.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 30,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 28.97,
-      "grossMarginPercent": 75.8
+      "targetSellingPrice": 30,
+      "grossMarginPercent": 76.7
     },
     {
       "id": "conventional-multifocal-13",
@@ -4936,11 +4936,11 @@
       "togReference": null,
       "mandalayRetail": 58.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 60,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 58.97,
-      "grossMarginPercent": 26.1
+      "targetSellingPrice": 60,
+      "grossMarginPercent": 27.3
     },
     {
       "id": "conventional-multifocal-14",
@@ -4956,11 +4956,11 @@
       "togReference": null,
       "mandalayRetail": 21.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 25,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 21.97,
-      "grossMarginPercent": 40.8
+      "targetSellingPrice": 25,
+      "grossMarginPercent": 48.0
     },
     {
       "id": "conventional-multifocal-15",
@@ -4976,11 +4976,11 @@
       "togReference": null,
       "mandalayRetail": 68.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 70,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 68.97,
-      "grossMarginPercent": 43.5
+      "targetSellingPrice": 70,
+      "grossMarginPercent": 44.3
     },
     {
       "id": "conventional-multifocal-16",
@@ -4996,11 +4996,11 @@
       "togReference": null,
       "mandalayRetail": 49.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 50,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 49.97,
-      "grossMarginPercent": 22
+      "targetSellingPrice": 50,
+      "grossMarginPercent": 22.0
     },
     {
       "id": "conventional-multifocal-17",
@@ -5016,11 +5016,11 @@
       "togReference": null,
       "mandalayRetail": 78.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 80,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 78.97,
-      "grossMarginPercent": 33.6
+      "targetSellingPrice": 80,
+      "grossMarginPercent": 34.5
     },
     {
       "id": "conventional-multifocal-18",
@@ -5036,11 +5036,11 @@
       "togReference": null,
       "mandalayRetail": 32.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 35,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 32.97,
-      "grossMarginPercent": 36.3
+      "targetSellingPrice": 35,
+      "grossMarginPercent": 40.0
     },
     {
       "id": "conventional-multifocal-19",
@@ -5076,11 +5076,11 @@
       "togReference": null,
       "mandalayRetail": 63.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 65,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 63.97,
-      "grossMarginPercent": 25
+      "targetSellingPrice": 65,
+      "grossMarginPercent": 26.2
     },
     {
       "id": "conventional-multifocal-21",
@@ -5096,11 +5096,11 @@
       "togReference": null,
       "mandalayRetail": 38.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 40,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 38.97,
-      "grossMarginPercent": 46.1
+      "targetSellingPrice": 40,
+      "grossMarginPercent": 47.5
     },
     {
       "id": "conventional-multifocal-22",
@@ -5116,11 +5116,11 @@
       "togReference": null,
       "mandalayRetail": 48.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 50,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 48.97,
-      "grossMarginPercent": 57.1
+      "targetSellingPrice": 50,
+      "grossMarginPercent": 58.0
     },
     {
       "id": "conventional-multifocal-23",
@@ -5136,11 +5136,11 @@
       "togReference": null,
       "mandalayRetail": 78.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 80,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 78.97,
-      "grossMarginPercent": 53.1
+      "targetSellingPrice": 80,
+      "grossMarginPercent": 53.8
     },
     {
       "id": "conventional-multifocal-24",
@@ -5156,11 +5156,11 @@
       "togReference": null,
       "mandalayRetail": 58.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 60,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 58.97,
-      "grossMarginPercent": 62.7
+      "targetSellingPrice": 60,
+      "grossMarginPercent": 63.3
     },
     {
       "id": "conventional-multifocal-25",
@@ -5176,11 +5176,11 @@
       "togReference": null,
       "mandalayRetail": 78.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 80,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 78.97,
-      "grossMarginPercent": 56.9
+      "targetSellingPrice": 80,
+      "grossMarginPercent": 57.5
     },
     {
       "id": "conventional-multifocal-26",
@@ -5196,11 +5196,11 @@
       "togReference": null,
       "mandalayRetail": 53.97,
       "basePrice": null,
-      "proposedPrice": null,
+      "proposedPrice": 55,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 53.97,
-      "grossMarginPercent": 29.6
+      "targetSellingPrice": 55,
+      "grossMarginPercent": 30.9
     },
     {
       "id": "conventional-multifocal-27",
@@ -5518,5 +5518,5 @@
     }
   ],
   "costOfGoodsSourceWorkbook": "C:\\Users\\BRIAN\\Desktop\\Conant final pricing kinda\\Mandalay FINAL New Pricing Jan-Mar with corrections.xlsx",
-  "notes": "Client-facing prices are from the Ormando repricing workbook. Conant COG/wholesale values were applied where matched."
+  "notes": "Client-facing prices are from the Ormando repricing workbook. Conant COG/wholesale values were applied where matched. Decimal fallback prices were rounded up to the next $5 for Ormando/default selling prices on 2026-05-14."
 }
