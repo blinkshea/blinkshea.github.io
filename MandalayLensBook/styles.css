@@ -1071,22 +1071,22 @@ tbody tr.is-active {
 }
 
 .lens-title {
-  display: inline-flex;
-  align-items: baseline;
-  gap: 0.42em;
-  flex-wrap: wrap;
+  display: inline-block;
   min-width: 0;
 }
 
 .lens-title strong {
-  line-height: 1.2;
+  display: block;
+  line-height: 1.18;
 }
 
 .lens-category {
-  font-size: 0.86em;
+  display: block;
+  margin-top: 2px;
+  font-size: 0.76em;
   font-weight: 500;
-  line-height: 1.2;
-  white-space: nowrap;
+  line-height: 1.15;
+  white-space: normal;
 }
 
 @media (max-width: 1080px) {
