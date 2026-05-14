@@ -161,6 +161,13 @@
 
   function sortProducts(rows) {
     return [...rows].sort((left, right) => {
+      const design = selectedProgressiveDesign();
+      if (state.section === "progressive" && design.limited) {
+        const leftAvailabilityRank = isCamberAvailable(left) ? 0 : 1;
+        const rightAvailabilityRank = isCamberAvailable(right) ? 0 : 1;
+        if (leftAvailabilityRank !== rightAvailabilityRank) return leftAvailabilityRank - rightAvailabilityRank;
+      }
+
       const materialA = indexOrder.indexOf(displayMaterialName(left.material));
       const materialB = indexOrder.indexOf(displayMaterialName(right.material));
       const rankA = materialA === -1 ? indexOrder.length : materialA;
@@ -180,8 +187,10 @@
     return sortProducts(
       (catalog.products || []).filter((item) => {
         if (!matchesSection(item)) return false;
-        if (state.index !== "all" && displayMaterialName(item.material) !== state.index) return false;
-        if (!matchesTreatment(item)) return false;
+        if (state.section === "single-vision" || state.section === "progressive") {
+          if (state.index !== "all" && displayMaterialName(item.material) !== state.index) return false;
+          if (!matchesTreatment(item)) return false;
+        }
         if (search && !searchableText(item).includes(search)) return false;
         return true;
       })
@@ -276,10 +285,14 @@
 
   function renderFilters() {
     const indexes = availableIndexes();
+    if (state.section === "multifocal") {
+      state.index = "all";
+      state.treatment = "all";
+    }
     if (!indexes.includes(state.index)) state.index = "all";
     fillSelect(el.indexFilter, indexes, state.index, "All indexes");
     fillSelect(el.treatmentFilter, treatmentOptions.slice(1).map((item) => item[1]), treatmentLabel(state.treatment), "All treatments");
-    el.indexFilter.disabled = state.section === "coating";
+    el.indexFilter.disabled = state.section === "coating" || state.section === "multifocal";
     el.treatmentFilter.disabled = state.section === "coating" || state.section === "multifocal";
   }
 

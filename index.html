@@ -10,30 +10,14 @@
       href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="./styles.css?v=hero-tight-20260505" />
-    <style>
-      html,
-      body {
-        overflow-x: hidden;
-      }
-
-      .layout > *,
-      .content-grid > *,
-      .secondary-grid > * {
-        min-width: 0;
-      }
-
-      .table-wrap {
-        max-width: 100%;
-      }
-    </style>
+    <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
     <div class="page-shell">
       <header class="hero">
         <img
           class="hero-background-image"
-          src="./mandalay_cover_art.jpg?v=hero-tight-20260505"
+          src="./mandalay_cover_art.png"
           alt="Mandalay Optical Labs cover art with illuminated lens over Earth"
         />
         <div class="hero-copy">
@@ -52,6 +36,7 @@
           </p>
           <div class="hero-actions">
             <button id="printBookletButton" class="button">Print Client Price Guide</button>
+            <a class="button" href="./one-page-price-list.html" target="_blank" rel="noopener">Print One-Page Price List</a>
             <button id="clientViewButton" class="button button-ghost" type="button">Client View</button>
             <details class="admin-menu">
               <summary class="button button-ghost">Admin</summary>
@@ -327,15 +312,23 @@
           <button id="passwordSettingsCancelButton" class="button button-ghost" type="button">Close</button>
         </div>
         <p class="password-dialog-copy">
-          These passwords are saved only in this browser on this computer. The website password will not change.
+          The master password unlocks owner controls and can override the staff admin and client-view passwords. Leave a section blank to keep its current password.
         </p>
         <div class="filter-grid price-editor-grid password-settings-grid">
           <label>
-            New admin password
+            New master password
+            <input id="passwordSettingsMaster" type="password" autocomplete="new-password" />
+          </label>
+          <label>
+            Confirm master password
+            <input id="passwordSettingsMasterConfirm" type="password" autocomplete="new-password" />
+          </label>
+          <label>
+            New staff admin password
             <input id="passwordSettingsAdmin" type="password" autocomplete="new-password" />
           </label>
           <label>
-            Confirm admin password
+            Confirm staff admin password
             <input id="passwordSettingsAdminConfirm" type="password" autocomplete="new-password" />
           </label>
           <label>
@@ -349,13 +342,13 @@
         </div>
         <p id="passwordSettingsError" class="password-error" hidden></p>
         <div class="hero-actions price-editor-actions password-settings-actions">
-          <button id="passwordSettingsResetButton" class="button button-ghost" type="button">Reset to Mandalay905</button>
+          <button id="passwordSettingsResetButton" class="button button-ghost" type="button">Reset staff passwords</button>
           <button id="passwordSettingsSaveButton" class="button" type="submit">Save passwords</button>
         </div>
       </form>
     </dialog>
 
-    <script src="https://cdn.jsdelivr.net/npm/fflate@0.8.2/umd/index.js"></script>
-    <script src="./data/catalog-loader.js?v=hero-crisp-20260505"></script>
+    <script src="./data/catalog-data.js"></script>
+    <script src="./app.js"></script>
   </body>
 </html>

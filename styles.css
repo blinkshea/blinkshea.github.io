@@ -14,8 +14,27 @@
   --shadow: 0 28px 80px rgba(0, 0, 0, 0.45);
 }
 
+/* Local PC theme: blood red so it is visually distinct from the blue hosted website. */
+:root {
+  --bg: #080305;
+  --bg-strong: #19070b;
+  --panel: rgba(20, 7, 11, 0.88);
+  --panel-strong: rgba(28, 8, 13, 0.96);
+  --line: rgba(202, 22, 42, 0.28);
+  --muted: #c59ca4;
+  --accent: #c90f25;
+  --accent-soft: rgba(201, 15, 37, 0.2);
+  --accent-hot: #ff2d45;
+  --shadow: 0 28px 80px rgba(0, 0, 0, 0.5);
+}
+
 * {
   box-sizing: border-box;
+}
+
+html {
+  overflow-x: hidden;
+  background: #070305;
 }
 
 [hidden] {
@@ -24,6 +43,8 @@
 
 body {
   margin: 0;
+  min-height: 100vh;
+  overflow-x: hidden;
   font-family: "Manrope", sans-serif;
   color: var(--text);
   background:
@@ -54,6 +75,12 @@ select {
 .metrics {
   display: grid;
   gap: 16px;
+}
+
+.layout > *,
+.content-grid > *,
+.secondary-grid > * {
+  min-width: 0;
 }
 
 .hero {
@@ -601,12 +628,6 @@ select {
   cursor: pointer;
 }
 
-.upgrade-chip-limited {
-  border-color: rgba(255, 180, 85, 0.42);
-  color: #ffd8a6;
-  background: rgba(255, 180, 85, 0.1);
-}
-
 .single-vision-filter-grid {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
@@ -816,6 +837,7 @@ select {
 
 .table-wrap {
   overflow: auto;
+  max-width: 100%;
   border-radius: 18px;
   border: 1px solid var(--line);
   background: rgba(7, 12, 19, 0.82);
@@ -1109,8 +1131,439 @@ tbody tr.is-active {
     min-height: 560px;
   }
 
-  .hero-copy {
+.hero-copy {
     margin: 18px;
     padding: 22px;
+  }
+}
+
+/* Local PC theme: final overrides keep the computer copy visibly blood red. */
+body {
+  background:
+    radial-gradient(circle at 18% 22%, rgba(178, 8, 28, 0.3), transparent 18%),
+    radial-gradient(circle at 62% 16%, rgba(128, 0, 18, 0.18), transparent 20%),
+    radial-gradient(circle at 84% 72%, rgba(92, 0, 12, 0.24), transparent 20%),
+    linear-gradient(180deg, #070305 0%, #120609 42%, #1a080c 100%);
+}
+
+.hero {
+  border-color: rgba(202, 22, 42, 0.34);
+  background:
+    linear-gradient(90deg, rgba(17, 3, 8, 0.9) 0%, rgba(16, 4, 8, 0.76) 34%, rgba(18, 5, 9, 0.3) 64%, rgba(10, 2, 4, 0.18) 100%);
+}
+
+.hero::after {
+  background:
+    radial-gradient(circle at 18% 22%, rgba(220, 28, 52, 0.22), transparent 22%),
+    linear-gradient(90deg, rgba(15, 3, 7, 0.88) 0%, rgba(18, 4, 8, 0.7) 24%, rgba(22, 6, 11, 0.28) 54%, rgba(8, 2, 5, 0.08) 100%);
+}
+
+.button,
+.family-chip.is-active {
+  background: linear-gradient(135deg, #8b000f, #d1122a);
+  color: #fff7f8;
+}
+
+.button-ghost {
+  background: rgba(20, 5, 9, 0.18);
+  color: var(--text);
+  border-color: rgba(202, 22, 42, 0.34);
+}
+
+.compact-panel-toggle:hover,
+.column-reset-button:hover,
+.stock-badge,
+.admin-qr-card,
+.tag,
+.note-pill,
+.material-tag {
+  background-color: rgba(201, 15, 37, 0.12);
+}
+
+.material-tag,
+.price-note,
+.stack-item small,
+.lens-feature {
+  color: #ffd0d6;
+}
+
+@media (max-width: 980px) {
+  .page-shell {
+    width: min(100% - 24px, 100%);
+    padding-top: 14px;
+  }
+
+  .hero {
+    min-height: 620px;
+  }
+
+  .hero-copy {
+    max-width: 620px;
+    margin: 22px;
+    padding: 24px;
+  }
+
+  .hero-logo-main {
+    font-size: 4.2rem;
+    letter-spacing: 0;
+  }
+
+  .hero-logo-sub {
+    margin-left: 0;
+    font-size: 1.65rem;
+    letter-spacing: 0;
+  }
+
+  .hero-title-sub {
+    font-size: 2.6rem;
+    letter-spacing: 0;
+  }
+
+  .panel {
+    padding: 18px;
+  }
+
+  .admin-menu-panel {
+    left: auto;
+    right: 0;
+  }
+}
+
+@media (max-width: 760px) {
+  .page-shell {
+    width: 100%;
+    padding: 0 0 24px;
+  }
+
+  .hero {
+    min-height: 500px;
+    margin-bottom: 12px;
+    border-width: 0 0 1px;
+    border-radius: 0 0 22px 22px;
+  }
+
+  .hero-background-image,
+  .hero::after {
+    border-radius: 0 0 22px 22px;
+  }
+
+  .hero-background-image {
+    object-position: 62% center;
+  }
+
+  .hero::after {
+    background:
+      linear-gradient(180deg, rgba(15, 3, 7, 0.86) 0%, rgba(18, 4, 8, 0.74) 56%, rgba(8, 2, 5, 0.32) 100%);
+  }
+
+  .hero-copy {
+    width: 100%;
+    min-width: 0;
+    max-width: 100vw;
+    margin: 0;
+    padding: 18px 16px 22px;
+    align-self: end;
+  }
+
+  .hero h1,
+  .section-heading h2 {
+    letter-spacing: 0;
+  }
+
+  .eyebrow,
+  .section-label,
+  .brand-kicker {
+    letter-spacing: 0;
+  }
+
+  .brand-kicker {
+    margin-top: 8px;
+    font-size: 0.78rem;
+  }
+
+  .hero-logo-wordmark {
+    margin-top: 14px;
+  }
+
+  .hero-logo-main {
+    font-size: 3.1rem;
+    letter-spacing: 0;
+    line-height: 1;
+    overflow-wrap: anywhere;
+  }
+
+  .hero-logo-sub {
+    margin-left: 0;
+    font-size: 1.28rem;
+    letter-spacing: 0;
+  }
+
+  .hero-guide-title {
+    margin-top: 18px;
+  }
+
+  .hero-title-sub {
+    font-size: 2rem;
+    letter-spacing: 0;
+  }
+
+  .lede {
+    max-width: min(34ch, calc(100vw - 32px));
+    margin: 12px 0 0;
+    font-size: 0.95rem;
+    line-height: 1.55;
+    overflow-wrap: anywhere;
+  }
+
+  .layout {
+    gap: 12px;
+    padding: 0 10px;
+  }
+
+  .panel {
+    border-radius: 18px;
+    padding: 14px;
+  }
+
+  .hero-actions,
+  .filter-grid,
+  .price-editor-grid,
+  .password-settings-grid,
+  .metrics,
+  .detail-form-grid,
+  .addon-line {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-actions {
+    gap: 10px;
+    margin-top: 16px;
+  }
+
+  .button,
+  .file-button {
+    width: 100%;
+    min-width: 0;
+    min-height: 46px;
+    white-space: normal;
+    text-align: center;
+    line-height: 1.2;
+  }
+
+  .admin-menu {
+    width: 100%;
+  }
+
+  .admin-menu summary {
+    width: 100%;
+  }
+
+  .admin-menu-panel {
+    position: static;
+    width: 100%;
+    min-width: 0;
+    margin-top: 10px;
+    border-radius: 18px;
+  }
+
+  .family-switcher {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 8px;
+    margin-inline: -14px;
+    padding: 0 14px 4px;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+  }
+
+  .family-chip {
+    flex: 0 0 auto;
+    max-width: 84vw;
+    white-space: nowrap;
+  }
+
+  .compact-panel-toggle {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(92px, 42%);
+    min-height: 54px;
+    padding: 10px 12px;
+    align-items: flex-start;
+  }
+
+  .compact-panel-summary {
+    min-width: 0;
+    text-align: right;
+    overflow-wrap: anywhere;
+    white-space: normal;
+    word-break: break-word;
+  }
+
+  .compact-panel-body {
+    padding: 0 12px 14px;
+  }
+
+  .section-heading {
+    display: grid;
+    gap: 10px;
+  }
+
+  .section-heading h2 {
+    font-size: 1.7rem;
+  }
+
+  .column-controls {
+    flex-wrap: nowrap;
+    margin-inline: -14px;
+    padding: 0 14px 6px;
+    overflow-x: auto;
+  }
+
+  .column-toggle-chip,
+  .column-restore-chip,
+  .column-reset-button {
+    flex: 0 0 auto;
+    white-space: nowrap;
+  }
+
+  .table-wrap {
+    overflow: visible;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+  }
+
+  .table-wrap table,
+  .table-wrap thead,
+  .table-wrap tbody,
+  .table-wrap tr,
+  .table-wrap td {
+    display: block;
+    width: 100%;
+  }
+
+  .table-wrap table {
+    min-width: 0;
+    border-collapse: separate;
+  }
+
+  .table-wrap thead {
+    display: none;
+  }
+
+  .table-wrap tbody {
+    display: grid;
+    gap: 10px;
+  }
+
+  .table-wrap tr {
+    padding: 12px;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    background: rgba(9, 15, 24, 0.88);
+    box-shadow: 0 16px 34px rgba(0, 0, 0, 0.22);
+  }
+
+  .table-wrap td {
+    display: grid;
+    grid-template-columns: minmax(92px, 38%) minmax(0, 1fr);
+    gap: 10px;
+    align-items: center;
+    padding: 9px 0;
+    border-bottom: 1px solid rgba(202, 22, 42, 0.18);
+    overflow-wrap: anywhere;
+  }
+
+  .table-wrap td:last-child {
+    border-bottom: 0;
+  }
+
+  .table-wrap td::before {
+    content: attr(data-label);
+    color: var(--muted);
+    font: 700 0.72rem/1.2 "Barlow Condensed", sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0;
+  }
+
+  .table-wrap td:not([data-label]) {
+    display: block;
+  }
+
+  .table-wrap td:not([data-label])::before {
+    content: none;
+  }
+
+  .table-wrap td[data-label="Product"],
+  .table-wrap td[data-label="Lens"],
+  .table-wrap td[data-label="Add-On"] {
+    display: grid;
+    align-items: start;
+  }
+
+  .price,
+  .upgrade-price {
+    font-size: 1.05rem;
+    font-weight: 800;
+  }
+
+  .sku-text,
+  .sku-badge,
+  .upgrade-price,
+  .upgrade-unavailable {
+    white-space: normal;
+  }
+
+  .pill {
+    width: fit-content;
+    max-width: 100%;
+  }
+
+  .price-editor-dialog {
+    width: 100%;
+    max-width: none;
+    max-height: 100dvh;
+    margin: 0;
+    border-radius: 20px 20px 0 0;
+  }
+
+  .price-editor-form {
+    max-height: 100dvh;
+    overflow: auto;
+    padding: 18px 14px;
+  }
+
+  .price-editor-header {
+    display: grid;
+  }
+
+  .price-editor-header h2 {
+    font-size: 1.75rem;
+  }
+
+  #removeItemDialog .price-editor-grid select {
+    min-height: 260px;
+  }
+}
+
+@media (max-width: 420px) {
+  .hero {
+    min-height: 460px;
+  }
+
+  .hero-logo-main {
+    font-size: 2.55rem;
+  }
+
+  .hero-logo-sub {
+    font-size: 1.05rem;
+  }
+
+  .hero-title-sub {
+    font-size: 1.72rem;
+  }
+
+  .table-wrap td {
+    grid-template-columns: 1fr;
+    gap: 4px;
   }
 }
