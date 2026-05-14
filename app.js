@@ -454,7 +454,7 @@ const SKU_SEGMENT_DEFINITIONS = [
   ["S2", "Family / series or add-on section", "Lens family such as Mandalay, IOT, Horizon; or coating section such as Coatings/Oversize"],
   ["S3", "Tier / program or add-on name", "Lens tier such as Conventional, Essential, Endless, Camber; or the specific coating/add-on name"],
   ["S4", "Lens category", "Single vision, lifestyle/digital SV, multifocal, digital progressive, or add-on"],
-  ["S5", "Material / index", "CR-39, Poly, 1.56, TriVex, 1.60, 1.67, 1.74"],
+  ["S5", "Material", "CR-39, Poly, 1.56, TriVex, 1.60, 1.67, 1.74"],
   ["S6", "Lens design", "Single vision, progressive, bifocal/trifocal design, lenticular, lifestyle lens"],
   ["S7", "Usage / treatment", "Clear, sun, photo, transition, transition generation"],
   ["S8", "Feature / coating flag", "Standard, polarized, Vantage, XTRActive, or coating feature"],
@@ -492,7 +492,7 @@ function skuSegments(item) {
     { position: "S2", label: "Family / series", code: skuCode("family", displayFamilyName(item)), value: displayFamilyName(item) || "Lens" },
     { position: "S3", label: "Tier / program", code: skuCode("tier", item.tier || "Base"), value: item.tier || "Base" },
     { position: "S4", label: "Lens category", code: skuCode("category", item.category), value: item.category || "Lens" },
-    { position: "S5", label: "Material / index", code: skuCode("material", displayMaterialName(item.material) || "None"), value: displayMaterialName(item.material) || "None" },
+    { position: "S5", label: "Material", code: skuCode("material", displayMaterialName(item.material) || "None"), value: displayMaterialName(item.material) || "None" },
     { position: "S6", label: "Lens design", code: skuCode("design", item.design || "None"), value: item.design || "None" },
     { position: "S7", label: "Usage / treatment", code: skuCode("usage", item.usage || "Clear"), value: item.usage || "Clear" },
     { position: "S8", label: "Feature / coating", code: skuCode("feature", item.feature || "Standard"), value: item.feature || "Standard" },
@@ -509,7 +509,7 @@ function addonSkuSegments(item) {
     { position: "S2", label: "Add-on section", code: skuCode("addonSection", item.section || "Coatings"), value: item.section || "Coatings" },
     { position: "S3", label: "Add-on name", code: skuCode("addonName", item.name || "Add-On"), value: item.name || "Add-On" },
     { position: "S4", label: "Lens category", code: skuCode("category", "Add-On"), value: "Add-On" },
-    { position: "S5", label: "Material / index", code: skuCode("material", "None"), value: "None" },
+    { position: "S5", label: "Material", code: skuCode("material", "None"), value: "None" },
     { position: "S6", label: "Lens design", code: skuCode("design", "None"), value: "None" },
     { position: "S7", label: "Usage / treatment", code: skuCode("usage", "None"), value: "None" },
     { position: "S8", label: "Feature / coating", code: skuCode("feature", "Standard"), value: item.notes || "Standard" },
@@ -962,7 +962,7 @@ function renderLensFilters() {
       ? "Refine the selected progressive lenses"
       : "Refine the selected lens category";
 
-  const selectedIndexLabel = state.filters.singleVisionIndex === "all" ? "All indexes" : state.filters.singleVisionIndex;
+  const selectedIndexLabel = state.filters.singleVisionIndex === "all" ? "All materials" : state.filters.singleVisionIndex;
   const selectedTreatmentLabel =
     TREATMENT_OPTIONS.find((item) => item.value === state.filters.singleVisionTreatment)?.label || TREATMENT_OPTIONS[0].label;
   renderCompactPanel(
@@ -973,7 +973,7 @@ function renderLensFilters() {
     `${selectedIndexLabel} / ${selectedTreatmentLabel}`
   );
 
-  fillSelect(el.indexFilter, indexes, state.filters.singleVisionIndex, "All indexes");
+  fillSelect(el.indexFilter, indexes, state.filters.singleVisionIndex, "All materials");
   fillSelect(
     el.treatmentFilter,
     TREATMENT_OPTIONS.slice(1).map((item) => item.label),

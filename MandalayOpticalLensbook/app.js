@@ -290,7 +290,7 @@
       state.treatment = "all";
     }
     if (!indexes.includes(state.index)) state.index = "all";
-    fillSelect(el.indexFilter, indexes, state.index, "All indexes");
+    fillSelect(el.indexFilter, indexes, state.index, "All materials");
     fillSelect(el.treatmentFilter, treatmentOptions.slice(1).map((item) => item[1]), treatmentLabel(state.treatment), "All treatments");
     el.indexFilter.disabled = state.section === "coating" || state.section === "multifocal";
     el.treatmentFilter.disabled = state.section === "coating" || state.section === "multifocal";
