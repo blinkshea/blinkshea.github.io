@@ -27,6 +27,12 @@
     { key: "iot-endless", label: "IOT Endless", amount: 35, group: "iot" },
     { key: "iot-camber", label: "IOT Camber", amount: 60, group: "iot", limited: true },
   ];
+  const antiglareOptions = [
+    { key: "none", label: "No anti-glare", shortLabel: "No AG", aliases: [], fallback: 0 },
+    { key: "standard", label: "Standard Antiglare", shortLabel: "Standard AG", aliases: ["Standard AR", "Standard Antiglare"], fallback: 20 },
+    { key: "premium", label: "Premium Antiglare", shortLabel: "Premium AG", aliases: ["Premium AR", "Premium Antiglare"], fallback: 25 },
+    { key: "elite", label: "Elite Antiglare", shortLabel: "Elite AG", aliases: ["Elite AR", "Elite Antiglare", "Super AR"], fallback: 45 },
+  ];
 
   const state = {
     section: "single-vision",
@@ -35,6 +41,7 @@
     treatment: "all",
     search: "",
     progressiveDesign: "mandalay",
+    antiglare: "none",
   };
 
   const el = {
@@ -51,6 +58,8 @@
     searchInput: document.querySelector("#searchInput"),
     resultsTitle: document.querySelector("#resultsTitle"),
     resultCount: document.querySelector("#resultCount"),
+    antiglareControl: document.querySelector("#antiglareControl"),
+    antiglareSelect: document.querySelector("#antiglareSelect"),
     resultsHead: document.querySelector("#resultsHead"),
     resultsBody: document.querySelector("#resultsBody"),
     printViewButton: document.querySelector("#printViewButton"),
@@ -76,8 +85,57 @@
       maximumFractionDigits: 2,
     }).format(amount);
   };
+  const compactMoney = (value) => {
+    const amount = Number(value);
+    if (!Number.isFinite(amount)) return "-";
+    return Number.isInteger(amount) ? `$${amount}` : money(amount);
+  };
 
   const normalize = (value) => String(value || "").toUpperCase().replace(/[^A-Z0-9]+/g, "");
+  const normalizeAddonLookup = (value) => String(value || "").toLowerCase().replace(/[^a-z0-9]+/g, "");
+
+  function numericAddonPrice(value) {
+    const direct = Number(value);
+    if (Number.isFinite(direct)) return direct;
+    const match = String(value || "").match(/-?\d+(?:\.\d+)?/);
+    return match ? Number(match[0]) : null;
+  }
+
+  function catalogAntiglareOptions() {
+    const addons = catalog.addons || [];
+    return antiglareOptions.map((option) => {
+      if (option.key === "none") return { ...option, amount: 0 };
+      const aliases = option.aliases.map(normalizeAddonLookup);
+      const addon = addons.find((item) => aliases.includes(normalizeAddonLookup(item.name))) ||
+        addons.find((item) => aliases.some((alias) => normalizeAddonLookup(item.name).includes(alias)));
+      const amount = numericAddonPrice(addon?.price);
+      return { ...option, amount: amount ?? option.fallback };
+    });
+  }
+
+  function selectedAntiglareOption() {
+    return catalogAntiglareOptions().find((option) => option.key === state.antiglare) || catalogAntiglareOptions()[0];
+  }
+
+  function priceWithAntiglare(basePrice) {
+    const base = Number(basePrice);
+    if (!Number.isFinite(base) || base <= 1) return null;
+    const option = selectedAntiglareOption();
+    return Number((base + option.amount).toFixed(2));
+  }
+
+  function renderPriceWithAntiglare(basePrice) {
+    const option = selectedAntiglareOption();
+    if (option.key === "none") return money(basePrice);
+    const total = priceWithAntiglare(basePrice);
+    if (total === null) return money(basePrice);
+    return `<span class="price-stack"><span class="price-main">${money(total)}</span><span class="price-addon-note">Includes ${esc(option.label)} (+${compactMoney(option.amount)})</span></span>`;
+  }
+
+  function priceHeaderLabel(baseLabel) {
+    const option = selectedAntiglareOption();
+    return option.key === "none" ? baseLabel : `${baseLabel} + ${option.shortLabel}`;
+  }
 
   function displayMaterialName(value) {
     const normalized = String(value || "").trim().toUpperCase();
@@ -297,6 +355,20 @@
     el.treatmentFilter.disabled = state.section === "coating" || state.section === "multifocal";
   }
 
+  function renderAntiglareControl() {
+    if (!el.antiglareControl || !el.antiglareSelect) return;
+    const visible = state.section !== "coating";
+    el.antiglareControl.hidden = !visible;
+    const options = catalogAntiglareOptions();
+    if (!options.some((option) => option.key === state.antiglare)) state.antiglare = "none";
+    el.antiglareSelect.innerHTML = options
+      .map((option) => {
+        const suffix = option.key === "none" ? "" : ` +${compactMoney(option.amount)}`;
+        return `<option value="${esc(option.key)}" ${option.key === state.antiglare ? "selected" : ""}>${esc(option.label)}${suffix}</option>`;
+      })
+      .join("");
+  }
+
   function treatmentLabel(value) {
     return treatmentOptions.find((item) => item[0] === value)?.[1] || "All treatments";
   }
@@ -329,11 +401,11 @@
             { label: "Usage", render: (item) => `<span class="pill">${esc(item.usage || "General")}</span>` },
             { label: "Feature", render: (item) => esc(item.feature || "") },
             {
-              label: `${design.label} Price`,
+              label: priceHeaderLabel(`${design.label} Price`),
               className: "price",
               render: (item) => {
                 const price = progressivePrice(item);
-                return price === null ? '<span class="unavailable">Not available</span>' : money(price);
+                return price === null ? '<span class="unavailable">Not available</span>' : renderPriceWithAntiglare(price);
               },
             },
           ]
@@ -345,7 +417,7 @@
             },
             { label: "Usage", render: (item) => `<span class="pill">${esc(item.usage || "General")}</span>` },
             { label: "Feature", render: (item) => esc(item.feature || "") },
-            { label: "Price", className: "price", render: (item) => money(item.price) },
+            { label: priceHeaderLabel("Price"), className: "price", render: (item) => renderPriceWithAntiglare(item.price) },
           ];
 
     renderHeader(columns);
@@ -386,6 +458,7 @@
     renderUpdatedLabel();
     renderTabs();
     renderFilters();
+    renderAntiglareControl();
     renderResults();
   }
 
@@ -394,13 +467,15 @@
     const title = state.section === "coating" ? "Coatings and Add-Ons" : `${sectionLabels[state.section]} Price Guide`;
     const heading =
       state.section === "progressive" ? `${selectedProgressiveDesign().label} Progressive Prices` : title;
+    const antiglare = selectedAntiglareOption();
     const bodyRows = rows
       .map((item) => {
         if (state.section === "coating") {
           return `<tr><td>${esc(item.section || "Extras")}</td><td>${esc(item.name)}</td><td>${money(item.price)}</td></tr>`;
         }
         const price = state.section === "progressive" ? progressivePrice(item) : item.price;
-        return `<tr><td>${esc(displayFamilyName(item))}</td><td>${esc(lensName(item))}</td><td>${esc([item.usage, item.feature].filter(Boolean).join(" / "))}</td><td>${price === null ? "Not available" : money(price)}</td></tr>`;
+        const displayPrice = antiglare.key === "none" || price === null ? money(price) : `${money(priceWithAntiglare(price))} including ${antiglare.label}`;
+        return `<tr><td>${esc(displayFamilyName(item))}</td><td>${esc(lensName(item))}</td><td>${esc([item.usage, item.feature].filter(Boolean).join(" / "))}</td><td>${price === null ? "Not available" : esc(displayPrice)}</td></tr>`;
       })
       .join("");
     const popup = window.open("", "mandalay-client-print", "width=1100,height=900");
@@ -442,6 +517,11 @@
   el.treatmentFilter.addEventListener("change", () => {
     state.treatment = treatmentValue(el.treatmentFilter.value);
     renderResults();
+  });
+
+  el.antiglareSelect.addEventListener("change", () => {
+    state.antiglare = el.antiglareSelect.value;
+    render();
   });
 
   el.searchInput.addEventListener("input", () => {

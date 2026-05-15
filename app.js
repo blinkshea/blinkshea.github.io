@@ -55,6 +55,12 @@ const IOT_UPGRADES = [
   { key: "iot-camber", label: "IOT Camber", amount: 60, limited: true },
 ];
 const PROGRESSIVE_DESIGNS = [...HOUSE_BRAND_UPGRADES, ...IOT_UPGRADES];
+const ANTIGLARE_OPTIONS = [
+  { key: "none", label: "No anti-glare", shortLabel: "No AG", aliases: [], fallback: 0 },
+  { key: "standard", label: "Standard Antiglare", shortLabel: "Standard AG", aliases: ["Standard AR", "Standard Antiglare"], fallback: 20 },
+  { key: "premium", label: "Premium Antiglare", shortLabel: "Premium AG", aliases: ["Premium AR", "Premium Antiglare"], fallback: 25 },
+  { key: "elite", label: "Elite Antiglare", shortLabel: "Elite AG", aliases: ["Elite AR", "Elite Antiglare", "Super AR"], fallback: 45 },
+];
 
 const state = {
   catalog: normalizeCatalogSpelling(window.DEFAULT_CATALOG || DEFAULT_CATALOG),
@@ -77,6 +83,7 @@ const state = {
   editingProductId: null,
   addingItemType: "product",
   clientView: true,
+  antiglare: "none",
   filters: {
     search: "",
     catalogSection: "single-vision",
@@ -132,6 +139,8 @@ const el = {
   addonsControls: document.querySelector("#addonsControls"),
   addonsList: document.querySelector("#addonsList"),
   addonsPanel: document.querySelector("#addonsPanel"),
+  antiglareControl: document.querySelector("#antiglareControl"),
+  antiglareSelect: document.querySelector("#antiglareSelect"),
   secondaryPanelControls: document.querySelector("#secondaryPanelControls"),
   printBookletButton: document.querySelector("#printBookletButton"),
   exportDataButton: document.querySelector("#exportDataButton"),
@@ -243,6 +252,13 @@ const clientUpgradePrice = (item, amount) => {
   const base = clientBasePrice(item);
   return base === null || base === undefined ? null : Number((Number(base) + amount).toFixed(2));
 };
+const compactCurrency = (value) => {
+  const amount = Number(value);
+  if (!Number.isFinite(amount)) return "-";
+  return Number.isInteger(amount)
+    ? `$${amount}`
+    : new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 2 }).format(amount);
+};
 const hasConantOption = (item) =>
   (item.mandalayWholesale !== null && item.mandalayWholesale !== undefined) ||
   (item.mandalayRetail !== null && item.mandalayRetail !== undefined);
@@ -260,6 +276,53 @@ const displayMaterialName = (value) => {
   if (normalized === "1.6" || normalized === "1.60") return "1.60";
   return String(value || "").trim();
 };
+
+function normalizeAddonLookup(value) {
+  return String(value || "").toLowerCase().replace(/[^a-z0-9]+/g, "");
+}
+
+function numericAddonPrice(value) {
+  const direct = Number(value);
+  if (Number.isFinite(direct)) return direct;
+  const match = String(value || "").match(/-?\d+(?:\.\d+)?/);
+  return match ? Number(match[0]) : null;
+}
+
+function catalogAntiglareOptions() {
+  const addons = state.catalog.addons || [];
+  return ANTIGLARE_OPTIONS.map((option) => {
+    if (option.key === "none") return { ...option, amount: 0 };
+    const aliases = option.aliases.map(normalizeAddonLookup);
+    const addon = addons.find((item) => aliases.includes(normalizeAddonLookup(item.name))) ||
+      addons.find((item) => aliases.some((alias) => normalizeAddonLookup(item.name).includes(alias)));
+    const amount = numericAddonPrice(addon?.price);
+    return { ...option, amount: amount ?? option.fallback };
+  });
+}
+
+function selectedAntiglareOption() {
+  return catalogAntiglareOptions().find((option) => option.key === state.antiglare) || catalogAntiglareOptions()[0];
+}
+
+function priceWithAntiglare(basePrice) {
+  const base = Number(basePrice);
+  if (!Number.isFinite(base)) return null;
+  const option = selectedAntiglareOption();
+  return Number((base + option.amount).toFixed(2));
+}
+
+function renderPriceWithAntiglare(basePrice) {
+  const option = selectedAntiglareOption();
+  if (option.key === "none") return currency(basePrice);
+  const total = priceWithAntiglare(basePrice);
+  if (total === null) return currency(basePrice);
+  return `<span class="price-stack"><span class="price-main">${currency(total)}</span><span class="price-addon-note">Includes ${esc(option.label)} (+${compactCurrency(option.amount)})</span></span>`;
+}
+
+function priceHeaderLabel(baseLabel) {
+  const option = selectedAntiglareOption();
+  return option.key === "none" ? baseLabel : `${baseLabel} + ${option.shortLabel}`;
+}
 
 const compareText = (left, right) =>
   String(left || "").localeCompare(String(right || ""), undefined, { numeric: true });
@@ -313,7 +376,7 @@ function renderUpgradePrice(item, upgrade) {
   if (upgrade.limited && !isIotCamberAvailable(item)) {
     return '<span class="upgrade-unavailable">Not available</span>';
   }
-  return currency(clientUpgradePrice(item, upgrade.amount));
+  return renderPriceWithAntiglare(clientUpgradePrice(item, upgrade.amount));
 }
 
 function selectedProgressiveDesign() {
@@ -526,10 +589,9 @@ function activeDisplayPrice(item) {
   return mainPrice(item);
 }
 
-function activePriceLabel() {
-  if (state.providerMode === "conant") return "Conant Price";
-  if (state.providerMode === "tog") return "TOG Proposal";
-  return "Price";
+function activePriceLabel(includeAntiglare = true) {
+  const label = state.providerMode === "conant" ? "Conant Price" : state.providerMode === "tog" ? "TOG Proposal" : "Price";
+  return includeAntiglare ? priceHeaderLabel(label) : label;
 }
 
 function providerSellPrice(item, provider) {
@@ -562,8 +624,13 @@ function renderProfitValue(sellPrice, wholesale, provider) {
 }
 
 function syncDynamicColumnLabels() {
-  [...PRODUCT_COLUMNS, ...COATING_COLUMNS].forEach((column) => {
-    if (column.key === "price") column.label = activePriceLabel();
+  PRODUCT_COLUMNS.forEach((column) => {
+    if (column.key === "price") column.label = activePriceLabel(true);
+    if (column.key === "margin") column.label = profitColumnLabel("conant");
+    if (column.key === "margin-tog") column.label = profitColumnLabel("tog");
+  });
+  COATING_COLUMNS.forEach((column) => {
+    if (column.key === "price") column.label = activePriceLabel(false);
     if (column.key === "margin") column.label = profitColumnLabel("conant");
     if (column.key === "margin-tog") column.label = profitColumnLabel("tog");
   });
@@ -579,7 +646,7 @@ const PRODUCT_COLUMNS = [
       `<strong>${esc([displayMaterialName(item.material), item.design].filter(Boolean).join(" · "))}</strong>${state.skuVisible ? `<br /><span class="sku-badge">${esc(lensSku(item))}</span>` : ""}<br /><span class="muted lens-category">${esc(item.category)}</span>`,
   },
   { key: "usage", label: "Usage", render: (item) => `<span class="pill">${esc(item.usage || "General")}</span>` },
-  { key: "price", label: "Price", className: "price", render: (item) => currency(activeDisplayPrice(item)) },
+  { key: "price", label: "Price", className: "price", render: (item) => renderPriceWithAntiglare(activeDisplayPrice(item)) },
   { key: "wholesale-conant", label: "Wholesale Conant", className: "price", render: (item) => currency(item.mandalayWholesale) },
   {
     key: "margin",
@@ -627,7 +694,7 @@ function progressivePriceColumns() {
     { key: "feature", label: "Feature", render: (item) => esc(item.feature || "") },
     {
       key: "selected-price",
-      label: `${design.label} Price`,
+      label: priceHeaderLabel(`${design.label} Price`),
       className: "price upgrade-price",
       render: (item) => renderUpgradePrice(item, design),
     },
@@ -1044,6 +1111,20 @@ function renderColumnControls() {
   `;
 }
 
+function renderAntiglareControl() {
+  if (!el.antiglareControl || !el.antiglareSelect) return;
+  const visible = !["none", "coating"].includes(state.filters.catalogSection);
+  el.antiglareControl.hidden = !visible;
+  const options = catalogAntiglareOptions();
+  if (!options.some((option) => option.key === state.antiglare)) state.antiglare = "none";
+  el.antiglareSelect.innerHTML = options
+    .map((option) => {
+      const suffix = option.key === "none" ? "" : ` +${compactCurrency(option.amount)}`;
+      return `<option value="${esc(option.key)}" ${option.key === state.antiglare ? "selected" : ""}>${esc(option.label)}${suffix}</option>`;
+    })
+    .join("");
+}
+
 function renderSecondaryPanels() {
   if (state.filters.catalogSection !== "coating") {
     SECONDARY_PANELS.forEach((panel) => {
@@ -1193,9 +1274,14 @@ function openPrintBooklet() {
     title: `${selectedProgressiveDesign().label} Progressive Prices`,
     rows: sortBookletRows(rows),
   });
+  const antiglare = selectedAntiglareOption();
+  const bookletPrice = (price) =>
+    antiglare.key === "none" || price === null || price === undefined
+      ? currency(price)
+      : `${currency(priceWithAntiglare(price))} including ${antiglare.label}`;
   const renderStandardBookletSection = (section) =>
     `<section class="booklet-section"><p class="eyebrow">${esc(section.eyebrow)}</p><h2>${esc(section.title)}</h2><table class="booklet-table"><thead><tr><th>Lens</th><th>Usage</th><th>Feature</th><th>Pricing</th></tr></thead><tbody>${section.rows
-      .map((item) => `<tr><td>${esc([displayMaterialName(item.material), item.design].filter(Boolean).join(" / "))}</td><td>${esc(item.usage || "")}</td><td>${esc(item.feature || "")}</td><td>${currency(mainPrice(item))}</td></tr>`)
+      .map((item) => `<tr><td>${esc([displayMaterialName(item.material), item.design].filter(Boolean).join(" / "))}</td><td>${esc(item.usage || "")}</td><td>${esc(item.feature || "")}</td><td>${esc(bookletPrice(mainPrice(item)))}</td></tr>`)
       .join("")}</tbody></table></section>`;
   const renderProgressiveBookletSection = (section) =>
     `<section class="booklet-section progressive-booklet-section"><p class="eyebrow">${esc(section.eyebrow)}</p><h2>${esc(section.title)}</h2><table class="booklet-table progressive-booklet-table"><thead><tr><th>Lens</th><th>Usage</th><th>${esc(selectedProgressiveDesign().label)} Pricing</th></tr></thead><tbody>${section.rows
@@ -1624,6 +1710,7 @@ function render() {
   renderSingleVisionFilters();
   renderProgressiveFilters();
   renderLensFilters();
+  renderAntiglareControl();
   const rows = state.filters.catalogSection === "coating" ? getVisibleCoatings() : getFilteredProducts();
   renderResults(rows);
   renderAddons();
@@ -1918,6 +2005,10 @@ function attachEvents() {
   });
   el.treatmentFilter.addEventListener("change", (event) => {
     state.filters.singleVisionTreatment = TREATMENT_OPTIONS.find((item) => item.label === event.target.value)?.value || "all";
+    render();
+  });
+  el.antiglareSelect.addEventListener("change", (event) => {
+    state.antiglare = event.target.value;
     render();
   });
   document.addEventListener("click", (event) => {
