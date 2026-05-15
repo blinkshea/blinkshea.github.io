@@ -518,7 +518,7 @@ const SKU_SEGMENT_DEFINITIONS = [
   ["S3", "Tier / program or add-on name", "Lens tier such as Conventional, Essential, Endless, Camber; or the specific coating/add-on name"],
   ["S4", "Lens category", "Single vision, lifestyle/digital SV, multifocal, digital progressive, or add-on"],
   ["S5", "Material", "CR-39, Poly, 1.56, TriVex, 1.60, 1.67, 1.74"],
-  ["S6", "Lens design", "Single vision, progressive, bifocal/trifocal design, lenticular, lifestyle lens"],
+  ["S6", "Lens design", "Single vision, progressive, bifocal/trifocal design, or lifestyle lens"],
   ["S7", "Usage / treatment", "Clear, sun, photo, transition, transition generation"],
   ["S8", "Feature / coating flag", "Standard, polarized, Vantage, XTRActive, or coating feature"],
 ];

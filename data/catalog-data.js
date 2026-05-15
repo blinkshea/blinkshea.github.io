@@ -1,5 +1,5 @@
 window.DEFAULT_CATALOG = {
-  "generatedAt": "2026-05-14T16:03:54-04:00",
+  "generatedAt": "2026-05-15T10:20:00-04:00",
   "sourceWorkbook": "C:\\Users\\BRIAN\\Desktop\\dr.ormando pricing mandalay\\Ormando re pricing sheet.xlsx",
   "products": [
     {
@@ -500,7 +500,7 @@ window.DEFAULT_CATALOG = {
       "benchmarkRetail": 90,
       "pivotalRetail": null,
       "targetSellingPrice": 110,
-      "grossMarginPercent": 40.0
+      "grossMarginPercent": 40
     },
     {
       "id": "mandalay-essential-29",
@@ -620,7 +620,7 @@ window.DEFAULT_CATALOG = {
       "benchmarkRetail": 77.77,
       "pivotalRetail": null,
       "targetSellingPrice": 40,
-      "grossMarginPercent": 15.0
+      "grossMarginPercent": 15
     },
     {
       "id": "mandalay-essential-35",
@@ -680,7 +680,7 @@ window.DEFAULT_CATALOG = {
       "benchmarkRetail": 106.63,
       "pivotalRetail": null,
       "targetSellingPrice": 40,
-      "grossMarginPercent": 10.0
+      "grossMarginPercent": 10
     },
     {
       "id": "mandalay-essential-38",
@@ -740,7 +740,7 @@ window.DEFAULT_CATALOG = {
       "benchmarkRetail": 115.85,
       "pivotalRetail": null,
       "targetSellingPrice": 80,
-      "grossMarginPercent": 10.0
+      "grossMarginPercent": 10
     },
     {
       "id": "mandalay-essential-41",
@@ -760,7 +760,7 @@ window.DEFAULT_CATALOG = {
       "benchmarkRetail": 135.41,
       "pivotalRetail": null,
       "targetSellingPrice": 100,
-      "grossMarginPercent": 15.0
+      "grossMarginPercent": 15
     },
     {
       "id": "mandalay-essential-42",
@@ -780,7 +780,7 @@ window.DEFAULT_CATALOG = {
       "benchmarkRetail": 111.21,
       "pivotalRetail": null,
       "targetSellingPrice": 35,
-      "grossMarginPercent": 0.0
+      "grossMarginPercent": 0
     },
     {
       "id": "mandalay-essential-43",
@@ -820,7 +820,7 @@ window.DEFAULT_CATALOG = {
       "benchmarkRetail": 116.88,
       "pivotalRetail": null,
       "targetSellingPrice": 50,
-      "grossMarginPercent": 10.0
+      "grossMarginPercent": 10
     },
     {
       "id": "mandalay-essential-45",
@@ -880,7 +880,7 @@ window.DEFAULT_CATALOG = {
       "benchmarkRetail": 111.21,
       "pivotalRetail": null,
       "targetSellingPrice": 80,
-      "grossMarginPercent": 20.0
+      "grossMarginPercent": 20
     },
     {
       "id": "mandalay-essential-49",
@@ -920,7 +920,7 @@ window.DEFAULT_CATALOG = {
       "benchmarkRetail": null,
       "pivotalRetail": null,
       "targetSellingPrice": 95,
-      "grossMarginPercent": 20.0
+      "grossMarginPercent": 20
     },
     {
       "id": "mandalay-essential-52",
@@ -980,7 +980,7 @@ window.DEFAULT_CATALOG = {
       "benchmarkRetail": null,
       "pivotalRetail": null,
       "targetSellingPrice": 105,
-      "grossMarginPercent": 21.0
+      "grossMarginPercent": 21
     },
     {
       "id": "mandalay-essential-55",
@@ -1040,7 +1040,7 @@ window.DEFAULT_CATALOG = {
       "benchmarkRetail": null,
       "pivotalRetail": 66.16,
       "targetSellingPrice": 40,
-      "grossMarginPercent": 55.0
+      "grossMarginPercent": 55
     },
     {
       "id": "mandalay-plus-1",
@@ -1060,7 +1060,7 @@ window.DEFAULT_CATALOG = {
       "benchmarkRetail": null,
       "pivotalRetail": null,
       "targetSellingPrice": 45,
-      "grossMarginPercent": 60.0
+      "grossMarginPercent": 60
     },
     {
       "id": "mandalay-plus-2",
@@ -1080,7 +1080,7 @@ window.DEFAULT_CATALOG = {
       "benchmarkRetail": null,
       "pivotalRetail": 77.2,
       "targetSellingPrice": 80,
-      "grossMarginPercent": 50.0
+      "grossMarginPercent": 50
     },
     {
       "id": "mandalay-plus-3",
@@ -1100,7 +1100,7 @@ window.DEFAULT_CATALOG = {
       "benchmarkRetail": null,
       "pivotalRetail": 72.08,
       "targetSellingPrice": 40,
-      "grossMarginPercent": 38.0
+      "grossMarginPercent": 38
     },
     {
       "id": "mandalay-plus-4",
@@ -1120,7 +1120,7 @@ window.DEFAULT_CATALOG = {
       "benchmarkRetail": null,
       "pivotalRetail": 77.2,
       "targetSellingPrice": 50,
-      "grossMarginPercent": 48.0
+      "grossMarginPercent": 48
     },
     {
       "id": "mandalay-plus-5",
@@ -1180,7 +1180,7 @@ window.DEFAULT_CATALOG = {
       "benchmarkRetail": null,
       "pivotalRetail": 89.04,
       "targetSellingPrice": 50,
-      "grossMarginPercent": 44.0
+      "grossMarginPercent": 44
     },
     {
       "id": "mandalay-plus-8",
@@ -1240,7 +1240,7 @@ window.DEFAULT_CATALOG = {
       "benchmarkRetail": null,
       "pivotalRetail": 150.08,
       "targetSellingPrice": 110,
-      "grossMarginPercent": 30.0
+      "grossMarginPercent": 30
     },
     {
       "id": "mandalay-plus-11",
@@ -1280,7 +1280,7 @@ window.DEFAULT_CATALOG = {
       "benchmarkRetail": null,
       "pivotalRetail": null,
       "targetSellingPrice": 50,
-      "grossMarginPercent": 46.0
+      "grossMarginPercent": 46
     },
     {
       "id": "mandalay-plus-13",
@@ -1340,7 +1340,7 @@ window.DEFAULT_CATALOG = {
       "benchmarkRetail": null,
       "pivotalRetail": null,
       "targetSellingPrice": 100,
-      "grossMarginPercent": 60.0
+      "grossMarginPercent": 60
     },
     {
       "id": "mandalay-plus-17",
@@ -1500,7 +1500,7 @@ window.DEFAULT_CATALOG = {
       "benchmarkRetail": null,
       "pivotalRetail": null,
       "targetSellingPrice": 65,
-      "grossMarginPercent": 60.0
+      "grossMarginPercent": 60
     },
     {
       "id": "mandalay-plus-28",
@@ -1520,7 +1520,7 @@ window.DEFAULT_CATALOG = {
       "benchmarkRetail": null,
       "pivotalRetail": null,
       "targetSellingPrice": 100,
-      "grossMarginPercent": 52.0
+      "grossMarginPercent": 52
     },
     {
       "id": "mandalay-plus-29",
@@ -1720,7 +1720,7 @@ window.DEFAULT_CATALOG = {
       "benchmarkRetail": null,
       "pivotalRetail": null,
       "targetSellingPrice": 70,
-      "grossMarginPercent": 50.0
+      "grossMarginPercent": 50
     },
     {
       "id": "mandalay-plus-39",
@@ -1880,7 +1880,7 @@ window.DEFAULT_CATALOG = {
       "benchmarkRetail": null,
       "pivotalRetail": null,
       "targetSellingPrice": 125,
-      "grossMarginPercent": 36.0
+      "grossMarginPercent": 36
     },
     {
       "id": "mandalay-plus-49",
@@ -2000,7 +2000,7 @@ window.DEFAULT_CATALOG = {
       "benchmarkRetail": null,
       "pivotalRetail": null,
       "targetSellingPrice": 65,
-      "grossMarginPercent": 60.0
+      "grossMarginPercent": 60
     },
     {
       "id": "horizon-camber-2",
@@ -2020,7 +2020,7 @@ window.DEFAULT_CATALOG = {
       "benchmarkRetail": null,
       "pivotalRetail": 88.16,
       "targetSellingPrice": 100,
-      "grossMarginPercent": 52.0
+      "grossMarginPercent": 52
     },
     {
       "id": "horizon-camber-3",
@@ -2220,7 +2220,7 @@ window.DEFAULT_CATALOG = {
       "benchmarkRetail": null,
       "pivotalRetail": null,
       "targetSellingPrice": 70,
-      "grossMarginPercent": 50.0
+      "grossMarginPercent": 50
     },
     {
       "id": "horizon-camber-13",
@@ -2400,7 +2400,7 @@ window.DEFAULT_CATALOG = {
       "benchmarkRetail": null,
       "pivotalRetail": null,
       "targetSellingPrice": 125,
-      "grossMarginPercent": 36.0
+      "grossMarginPercent": 36
     },
     {
       "id": "horizon-camber-24",
@@ -3603,26 +3603,6 @@ window.DEFAULT_CATALOG = {
       "grossMarginPercent": 70
     },
     {
-      "id": "conventional-sv-1",
-      "family": "Mandalay",
-      "tier": "Conventional",
-      "category": "Single Vision",
-      "sourceSheet": "CONVENTIONAL SV",
-      "material": "CR-39",
-      "design": "Lenticular Lens",
-      "usage": "Clear",
-      "feature": "",
-      "mandalayWholesale": 9,
-      "togReference": null,
-      "mandalayRetail": 18.97,
-      "basePrice": null,
-      "proposedPrice": 20,
-      "benchmarkRetail": null,
-      "pivotalRetail": null,
-      "targetSellingPrice": 20,
-      "grossMarginPercent": 55.0
-    },
-    {
       "id": "conventional-sv-2",
       "family": "Mandalay",
       "tier": "Conventional",
@@ -3880,7 +3860,7 @@ window.DEFAULT_CATALOG = {
       "benchmarkRetail": null,
       "pivotalRetail": null,
       "targetSellingPrice": 50,
-      "grossMarginPercent": 68.0
+      "grossMarginPercent": 68
     },
     {
       "id": "conventional-sv-15",
@@ -4160,7 +4140,7 @@ window.DEFAULT_CATALOG = {
       "benchmarkRetail": null,
       "pivotalRetail": null,
       "targetSellingPrice": 20,
-      "grossMarginPercent": 51.0
+      "grossMarginPercent": 51
     },
     {
       "id": "conventional-multifocal-4",
@@ -4220,7 +4200,7 @@ window.DEFAULT_CATALOG = {
       "benchmarkRetail": null,
       "pivotalRetail": null,
       "targetSellingPrice": 20,
-      "grossMarginPercent": 70.0
+      "grossMarginPercent": 70
     },
     {
       "id": "conventional-multifocal-7",
@@ -4240,7 +4220,7 @@ window.DEFAULT_CATALOG = {
       "benchmarkRetail": null,
       "pivotalRetail": null,
       "targetSellingPrice": 25,
-      "grossMarginPercent": 60.0
+      "grossMarginPercent": 60
     },
     {
       "id": "conventional-multifocal-8",
@@ -4380,7 +4360,7 @@ window.DEFAULT_CATALOG = {
       "benchmarkRetail": null,
       "pivotalRetail": null,
       "targetSellingPrice": 25,
-      "grossMarginPercent": 48.0
+      "grossMarginPercent": 48
     },
     {
       "id": "conventional-multifocal-15",
@@ -4420,7 +4400,7 @@ window.DEFAULT_CATALOG = {
       "benchmarkRetail": null,
       "pivotalRetail": null,
       "targetSellingPrice": 50,
-      "grossMarginPercent": 22.0
+      "grossMarginPercent": 22
     },
     {
       "id": "conventional-multifocal-17",
@@ -4460,7 +4440,7 @@ window.DEFAULT_CATALOG = {
       "benchmarkRetail": null,
       "pivotalRetail": null,
       "targetSellingPrice": 35,
-      "grossMarginPercent": 40.0
+      "grossMarginPercent": 40
     },
     {
       "id": "conventional-multifocal-19",
@@ -4540,7 +4520,7 @@ window.DEFAULT_CATALOG = {
       "benchmarkRetail": null,
       "pivotalRetail": null,
       "targetSellingPrice": 50,
-      "grossMarginPercent": 58.0
+      "grossMarginPercent": 58
     },
     {
       "id": "conventional-multifocal-23",
@@ -4938,5 +4918,5 @@ window.DEFAULT_CATALOG = {
     }
   ],
   "costOfGoodsSourceWorkbook": "C:\\Users\\BRIAN\\Desktop\\Conant final pricing kinda\\Mandalay FINAL New Pricing Jan-Mar with corrections.xlsx",
-  "notes": "Client-facing prices are from the Ormando repricing workbook. Conant COG/wholesale values were applied where matched. Decimal fallback prices were rounded up to the next $5 for Ormando/default selling prices on 2026-05-14. Legacy transition product labels were normalized to Transition Gen S and duplicate rows were merged on 2026-05-14."
+  "notes": "Client-facing prices are from the Ormando repricing workbook. Conant COG/wholesale values were applied where matched. Decimal fallback prices were rounded up to the next $5 for Ormando/default selling prices on 2026-05-14. Legacy transition product labels were normalized to Transition Gen S and duplicate rows were merged on 2026-05-14. A duplicate specialty CR-39 single-vision row was removed from the price book on 2026-05-15 because it uses standard single-vision pricing when needed."
 }
