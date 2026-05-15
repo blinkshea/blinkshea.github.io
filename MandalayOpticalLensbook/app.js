@@ -129,7 +129,7 @@
     if (option.key === "none") return money(basePrice);
     const total = priceWithAntiglare(basePrice);
     if (total === null) return money(basePrice);
-    return `<span class="price-stack"><span class="price-main">${money(total)}</span><span class="price-addon-note">Includes ${esc(option.label)} (+${compactMoney(option.amount)})</span></span>`;
+    return `<span class="price-stack"><span class="price-main">${money(total)}</span><span class="price-addon-note">Includes ${esc(option.label)}</span></span>`;
   }
 
   function priceHeaderLabel(baseLabel) {

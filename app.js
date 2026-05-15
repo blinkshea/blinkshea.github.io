@@ -316,7 +316,7 @@ function renderPriceWithAntiglare(basePrice) {
   if (option.key === "none") return currency(basePrice);
   const total = priceWithAntiglare(basePrice);
   if (total === null) return currency(basePrice);
-  return `<span class="price-stack"><span class="price-main">${currency(total)}</span><span class="price-addon-note">Includes ${esc(option.label)} (+${compactCurrency(option.amount)})</span></span>`;
+  return `<span class="price-stack"><span class="price-main">${currency(total)}</span><span class="price-addon-note">Includes ${esc(option.label)}</span></span>`;
 }
 
 function priceHeaderLabel(baseLabel) {
