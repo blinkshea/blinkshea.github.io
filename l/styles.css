@@ -1055,6 +1055,34 @@ tbody tr.is-active {
   white-space: normal;
 }
 
+.addon-name-cell {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.addon-marketing-button {
+  display: inline-flex;
+  align-items: center;
+  min-height: 22px;
+  padding: 0 8px;
+  border: 1px solid rgba(122, 183, 255, 0.48);
+  border-radius: 999px;
+  background: rgba(89, 184, 255, 0.16);
+  color: #bfe5ff;
+  font-size: 0.68rem;
+  font-weight: 900;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.addon-marketing-button:hover {
+  border-color: rgba(122, 183, 255, 0.9);
+  background: rgba(89, 184, 255, 0.28);
+  color: #ffffff;
+}
+
 .upgrade-price {
   white-space: nowrap;
 }

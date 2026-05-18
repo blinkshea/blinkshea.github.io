@@ -1,5 +1,5 @@
 (function () {
-  const catalog = window.MANDALAY_CLIENT_CATALOG || { products: [], addons: [] };
+  const catalog = normalizeClientCatalog(window.MANDALAY_CLIENT_CATALOG || { products: [], addons: [] });
   const sectionLabels = {
     "single-vision": "Single vision",
     multifocal: "Bifocal",
@@ -33,6 +33,26 @@
     { key: "premium", label: "Premium Antiglare", shortLabel: "Premium AG", aliases: ["Premium AR", "Premium Antiglare"], fallback: 25 },
     { key: "elite", label: "Elite Antiglare", shortLabel: "Elite AG", aliases: ["Elite AR", "Elite Antiglare", "Super AR"], fallback: 45 },
   ];
+  const addonDisplayOrder = [
+    "Standard AR",
+    "Premium AR",
+    "Elite AR",
+    "Bluelight Filter",
+    "Solid Tint",
+    "Gradient Tint",
+    "Double Tint",
+    "Mirror",
+    "Edging",
+    "80mm",
+    "85mm",
+    "Wrap",
+  ];
+  const addonMarketingLinks = {
+    "Elite AR": {
+      label: "Info",
+      href: "./elite-ar-marketing.html",
+    },
+  };
 
   const state = {
     section: "single-vision",
@@ -93,6 +113,49 @@
 
   const normalize = (value) => String(value || "").toUpperCase().replace(/[^A-Z0-9]+/g, "");
   const normalizeAddonLookup = (value) => String(value || "").toLowerCase().replace(/[^a-z0-9]+/g, "");
+
+  function normalizeAddonDisplayName(value) {
+    const name = String(value || "").trim();
+    return /^super\s*ar$/i.test(name) ? "Elite AR" : name;
+  }
+
+  function normalizeClientCatalog(source) {
+    return {
+      ...source,
+      addons: (source.addons || []).map((item) => ({
+        ...item,
+        name: normalizeAddonDisplayName(item.name),
+      })),
+    };
+  }
+
+  function addonDisplayName(item) {
+    return normalizeAddonDisplayName(typeof item === "string" ? item : item?.name);
+  }
+
+  function addonSortRank(item) {
+    const name = addonDisplayName(item);
+    const rank = addonDisplayOrder.findIndex((label) => label.toLowerCase() === name.toLowerCase());
+    return rank === -1 ? addonDisplayOrder.length : rank;
+  }
+
+  function compareAddons(left, right) {
+    return (
+      String(left.section || "").localeCompare(String(right.section || ""), undefined, { numeric: true }) ||
+      addonSortRank(left) - addonSortRank(right) ||
+      addonDisplayName(left).localeCompare(addonDisplayName(right), undefined, { numeric: true })
+    );
+  }
+
+  function renderAddonNameCell(item) {
+    const name = addonDisplayName(item);
+    const marketing = addonMarketingLinks[name];
+    return `<span class="addon-name-cell"><strong>${esc(name)}</strong>${
+      marketing
+        ? `<a class="addon-marketing-button" href="${esc(marketing.href)}" target="_blank" rel="noopener">${esc(marketing.label)}</a>`
+        : ""
+    }</span>`;
+  }
 
   function numericAddonPrice(value) {
     const direct = Number(value);
@@ -213,6 +276,7 @@
       item.design,
       item.usage,
       item.feature,
+      addonDisplayName(item),
       item.name,
       item.section,
     ]
@@ -266,10 +330,7 @@
         if (search && !searchableText(item).includes(search)) return false;
         return true;
       })
-      .sort((left, right) =>
-        String(left.section || "").localeCompare(right.section || "") ||
-        String(left.name || "").localeCompare(right.name || "", undefined, { numeric: true })
-      );
+      .sort(compareAddons);
   }
 
   function sourceProductsForFilters() {
@@ -462,7 +523,7 @@
   function renderAddonRows(rows) {
     const columns = [
       { label: "Section", render: (item) => esc(item.section || "Extras") },
-      { label: "Add-On", render: (item) => `<strong>${esc(item.name)}</strong>` },
+      { label: "Add-On", render: renderAddonNameCell },
       { label: "Price", className: "price", render: (item) => money(item.price) },
     ];
     renderHeader(columns);
@@ -504,7 +565,7 @@
     const bodyRows = rows
       .map((item) => {
         if (state.section === "coating") {
-          return `<tr><td>${esc(item.section || "Extras")}</td><td>${esc(item.name)}</td><td>${money(item.price)}</td></tr>`;
+          return `<tr><td>${esc(item.section || "Extras")}</td><td>${esc(addonDisplayName(item))}</td><td>${money(item.price)}</td></tr>`;
         }
         const price = state.section === "progressive" ? progressivePrice(item) : item.price;
         const displayPrice = antiglare.key === "none" || price === null ? money(price) : `${money(priceWithAntiglare(price))} including ${antiglare.label}`;

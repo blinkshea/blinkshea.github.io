@@ -4653,7 +4653,7 @@ window.DEFAULT_CATALOG = {
     {
       "id": "addon-2",
       "section": "Coatings",
-      "name": "Super AR",
+      "name": "Elite AR",
       "mandalayWholesale": 4,
       "togReference": null,
       "mandalayRetail": 25,

@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Elite AR | Mandalay Optical Labs</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        color-scheme: dark;
+        --bg: #050a12;
+        --panel: rgba(8, 16, 28, 0.9);
+        --line: rgba(119, 193, 255, 0.22);
+        --text: #f4f8ff;
+        --muted: #9eb1ca;
+        --accent: #5ec9ff;
+        --accent-strong: #2d7dff;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+        font-family: "Manrope", Arial, sans-serif;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      .page {
+        min-height: 100vh;
+        padding: clamp(18px, 3vw, 42px);
+        background:
+          radial-gradient(circle at 70% 10%, rgba(93, 188, 255, 0.2), transparent 34%),
+          linear-gradient(180deg, #07101d 0%, #04080f 100%);
+      }
+
+      .hero {
+        position: relative;
+        min-height: 520px;
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: 28px;
+        background: #06101c;
+      }
+
+      .hero img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 0.58;
+      }
+
+      .hero::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          linear-gradient(90deg, rgba(3, 8, 15, 0.98), rgba(3, 8, 15, 0.76) 48%, rgba(3, 8, 15, 0.2)),
+          linear-gradient(0deg, rgba(3, 8, 15, 0.78), transparent 45%);
+      }
+
+      .hero-inner {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        align-content: space-between;
+        min-height: 520px;
+        padding: clamp(24px, 5vw, 72px);
+      }
+
+      .topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px;
+        color: var(--muted);
+        font-size: 0.82rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+      .back-link {
+        display: inline-flex;
+        align-items: center;
+        min-height: 36px;
+        padding: 0 14px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: rgba(5, 13, 24, 0.76);
+        text-decoration: none;
+        text-transform: none;
+        letter-spacing: 0;
+      }
+
+      .copy {
+        max-width: 720px;
+      }
+
+      .eyebrow {
+        margin: 0 0 14px;
+        color: var(--accent);
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 1.1rem;
+        font-weight: 700;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: clamp(4.2rem, 12vw, 9.4rem);
+        line-height: 0.86;
+        font-weight: 500;
+        letter-spacing: 0;
+      }
+
+      .subhead {
+        max-width: 610px;
+        margin: 24px 0 0;
+        color: #dbe8fb;
+        font-size: clamp(1.1rem, 2.2vw, 1.65rem);
+        line-height: 1.45;
+      }
+
+      main {
+        display: grid;
+        gap: 22px;
+        margin-top: 22px;
+      }
+
+      .feature-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .feature {
+        min-height: 150px;
+        padding: 20px;
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        background: var(--panel);
+      }
+
+      .feature h2 {
+        margin: 0 0 8px;
+        color: var(--text);
+        font-size: 1.08rem;
+      }
+
+      .feature p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.55;
+      }
+
+      .fit-strip {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px;
+        padding: 22px;
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        background: linear-gradient(135deg, rgba(89, 184, 255, 0.14), rgba(45, 125, 255, 0.06));
+      }
+
+      .fit-strip strong {
+        display: block;
+        margin-bottom: 6px;
+        font-size: 1.1rem;
+      }
+
+      .fit-strip span {
+        color: var(--muted);
+      }
+
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 44px;
+        padding: 0 18px;
+        border-radius: 999px;
+        background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+        color: #031222;
+        font-weight: 900;
+        text-decoration: none;
+        white-space: nowrap;
+      }
+
+      @media (max-width: 900px) {
+        .feature-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+
+      @media (max-width: 640px) {
+        .page {
+          padding: 12px;
+        }
+
+        .hero,
+        .hero-inner {
+          min-height: 560px;
+        }
+
+        .topbar,
+        .fit-strip {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+
+        .feature-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <header class="hero">
+        <img src="./mandalay-cover-art.svg" alt="Mandalay Optical Labs illuminated lens over Earth" />
+        <div class="hero-inner">
+          <div class="topbar">
+            <span>Mandalay Optical Labs</span>
+            <a class="back-link" href="./index.html#catalogListingPanel">Back to Lens Book</a>
+          </div>
+          <div class="copy">
+            <p class="eyebrow">Premium coating option</p>
+            <h1>Elite AR</h1>
+            <p class="subhead">
+              A premium anti-reflective upgrade for patients who want a cleaner lens appearance,
+              stronger everyday comfort, and a more polished lens presentation.
+            </p>
+          </div>
+        </div>
+      </header>
+
+      <main>
+        <section class="feature-grid" aria-label="Elite AR benefits">
+          <article class="feature">
+            <h2>Cleaner Lens Look</h2>
+            <p>Helps reduce distracting surface reflections so the lens looks clearer in everyday conversation.</p>
+          </article>
+          <article class="feature">
+            <h2>Premium Presentation</h2>
+            <p>A strong upgrade story for patients choosing better lens performance and a refined appearance.</p>
+          </article>
+          <article class="feature">
+            <h2>Daily Comfort</h2>
+            <p>Designed for patients who spend long hours around screens, bright office lighting, or night driving.</p>
+          </article>
+          <article class="feature">
+            <h2>Easy Recommendation</h2>
+            <p>Best offered when a patient wants your cleanest anti-reflective option in the Mandalay book.</p>
+          </article>
+        </section>
+
+        <section class="fit-strip">
+          <div>
+            <strong>Best fit</strong>
+            <span>Premium progressives, high-use computer patients, night drivers, and anyone who wants the cleanest lens finish.</span>
+          </div>
+          <a class="button" href="./index.html#catalogListingPanel">View Pricing</a>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>

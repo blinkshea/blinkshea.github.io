@@ -61,6 +61,26 @@ const ANTIGLARE_OPTIONS = [
   { key: "premium", label: "Premium Antiglare", shortLabel: "Premium AG", aliases: ["Premium AR", "Premium Antiglare"], fallback: 25 },
   { key: "elite", label: "Elite Antiglare", shortLabel: "Elite AG", aliases: ["Elite AR", "Elite Antiglare", "Super AR"], fallback: 45 },
 ];
+const ADDON_DISPLAY_ORDER = [
+  "Standard AR",
+  "Premium AR",
+  "Elite AR",
+  "Bluelight Filter",
+  "Solid Tint",
+  "Gradient Tint",
+  "Double Tint",
+  "Mirror",
+  "Edging",
+  "80mm",
+  "85mm",
+  "Wrap",
+];
+const ADDON_MARKETING_LINKS = {
+  "Elite AR": {
+    label: "Info",
+    href: "./elite-ar-marketing.html",
+  },
+};
 
 const state = {
   catalog: normalizeCatalogSpelling(window.DEFAULT_CATALOG || DEFAULT_CATALOG),
@@ -391,6 +411,39 @@ function normalizeMandalayText(value) {
     .replace(/MandalayPlus/gi, "Mandalay Plus");
 }
 
+function normalizeAddonDisplayName(value) {
+  const name = String(value || "").trim();
+  return /^super\s*ar$/i.test(name) ? "Elite AR" : name;
+}
+
+function addonDisplayName(item) {
+  return normalizeAddonDisplayName(typeof item === "string" ? item : item?.name);
+}
+
+function addonSortRank(item) {
+  const name = addonDisplayName(item);
+  const rank = ADDON_DISPLAY_ORDER.findIndex((label) => label.toLowerCase() === name.toLowerCase());
+  return rank === -1 ? ADDON_DISPLAY_ORDER.length : rank;
+}
+
+function compareAddons(left, right) {
+  return (
+    String(left.section || "").localeCompare(String(right.section || ""), undefined, { numeric: true }) ||
+    addonSortRank(left) - addonSortRank(right) ||
+    addonDisplayName(left).localeCompare(addonDisplayName(right), undefined, { numeric: true })
+  );
+}
+
+function renderAddonNameCell(item) {
+  const name = addonDisplayName(item);
+  const marketing = ADDON_MARKETING_LINKS[name];
+  return `<span class="addon-name-cell"><strong>${esc(name)}</strong>${
+    marketing
+      ? `<a class="addon-marketing-button" href="${esc(marketing.href)}" target="_blank" rel="noopener">${esc(marketing.label)}</a>`
+      : ""
+  }</span>`;
+}
+
 function normalizeCatalogSpelling(catalog) {
   const normalized = deepClone(catalog || DEFAULT_CATALOG);
 
@@ -404,6 +457,11 @@ function normalizeCatalogSpelling(catalog) {
     ...item,
     vendor: normalizeMandalayText(item.vendor),
     method: normalizeMandalayText(item.method),
+  }));
+
+  normalized.addons = (normalized.addons || []).map((item) => ({
+    ...item,
+    name: normalizeAddonDisplayName(item.name),
   }));
 
   normalized.generatedAt = catalog?.generatedAt;
@@ -567,10 +625,11 @@ function lensSku(item) {
 }
 
 function addonSkuSegments(item) {
+  const name = addonDisplayName(item) || "Add-On";
   return [
     { position: "S1", label: "Item type", code: skuCode("itemType", "Coating/Add-On"), value: "Coating/Add-On" },
     { position: "S2", label: "Add-on section", code: skuCode("addonSection", item.section || "Coatings"), value: item.section || "Coatings" },
-    { position: "S3", label: "Add-on name", code: skuCode("addonName", item.name || "Add-On"), value: item.name || "Add-On" },
+    { position: "S3", label: "Add-on name", code: skuCode("addonName", name), value: name },
     { position: "S4", label: "Lens category", code: skuCode("category", "Add-On"), value: "Add-On" },
     { position: "S5", label: "Material", code: skuCode("material", "None"), value: "None" },
     { position: "S6", label: "Lens design", code: skuCode("design", "None"), value: "None" },
@@ -664,7 +723,7 @@ const PRODUCT_COLUMNS = [
 ];
 const COATING_COLUMNS = [
   { key: "section", label: "Section", render: (item) => esc(item.section) },
-  { key: "add-on", label: "Add-On", render: (item) => `<strong>${esc(item.name)}</strong>` },
+  { key: "add-on", label: "Add-On", render: renderAddonNameCell },
   { key: "price", label: "Price", className: "price", render: (item) => currency(activeDisplayPrice(item)) },
   { key: "wholesale-conant", label: "Wholesale Conant", className: "price", render: (item) => currency(item.mandalayWholesale) },
   {
@@ -780,7 +839,7 @@ function searchableText(item) {
 }
 
 function searchableAddonText(item) {
-  return [item.section, item.name, item.notes, addonSku(item)].filter(Boolean).join(" ").toLowerCase();
+  return [item.section, addonDisplayName(item), item.name, item.notes, addonSku(item)].filter(Boolean).join(" ").toLowerCase();
 }
 
 function removeLensLabel(item) {
@@ -991,7 +1050,7 @@ function getVisibleCoatings() {
     if (!matchesProviderMode(item)) return false;
     if (state.filters.search && !searchableAddonText(item).includes(state.filters.search.toLowerCase())) return false;
     return true;
-  });
+  }).sort(compareAddons);
 }
 
 function renderCatalogSwitcher() {
@@ -1345,9 +1404,9 @@ function openPrintBooklet() {
     makeLensSection("Bifocal", products.filter((item) => item.category === "Multifocal")),
     makeProgressiveSection(products.filter((item) => isProgressiveBaseItem(item))),
   ].filter((section) => section.rows.length);
-  const coatingRows = sortBookletRows(
-    state.catalog.addons.filter((item) => mainPrice(item) !== null && mainPrice(item) !== undefined)
-  );
+  const coatingRows = state.catalog.addons
+    .filter((item) => mainPrice(item) !== null && mainPrice(item) !== undefined)
+    .sort(compareAddons);
   const popup = window.open("", "client-price-guide", "width=1100,height=900");
   if (!popup) return window.alert("Please allow pop-ups so the booklet can open for printing.");
   popup.document.write(`
@@ -1363,7 +1422,7 @@ function openPrintBooklet() {
       .map((sectionName) => {
         const rows = coatingRows.filter((item) => (item.section || "Extras") === sectionName);
         return `<div class="coating-group"><h3>${esc(sectionName)}</h3><table class="booklet-table"><thead><tr><th>Add-On</th><th>Pricing</th></tr></thead><tbody>${rows
-          .map((item) => `<tr><td>${esc(item.name)}</td><td>${currency(mainPrice(item))}</td></tr>`)
+          .map((item) => `<tr><td>${esc(addonDisplayName(item))}</td><td>${currency(mainPrice(item))}</td></tr>`)
           .join("")}</tbody></table></div>`;
       })
       .join("")}</section>
@@ -1396,9 +1455,7 @@ function skuExportSections() {
   const otherRows = sortSkuProducts(products.filter((item) => !usedIds.has(item.id)));
   if (otherRows.length) sections.push({ name: "Other Lens SKUs", type: "product", rows: otherRows });
 
-  const addonRows = [...(state.catalog.addons || [])].sort(
-    (left, right) => String(left.section || "").localeCompare(String(right.section || "")) || String(left.name || "").localeCompare(String(right.name || ""))
-  );
+  const addonRows = [...(state.catalog.addons || [])].sort(compareAddons);
   if (addonRows.length) sections.push({ name: "Coatings Add-Ons", type: "addon", rows: addonRows });
 
   return sections;
@@ -1433,7 +1490,7 @@ function skuAddonExportRow(sectionName, item) {
     addonSku(item),
     ...segments.map((segment) => `${segment.code} = ${segment.value}`),
     item.section || "",
-    item.name || "",
+    addonDisplayName(item) || "",
     "Add-On",
     "",
     "",
