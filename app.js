@@ -2258,7 +2258,9 @@ function attachEvents() {
   el.priceEditorCancelButton.addEventListener("click", closePriceEditor);
   el.exportSkuButton.addEventListener("click", exportSkuWorkbook);
   el.exportDataButton.addEventListener("click", exportCatalog);
-  el.printBookletButton.addEventListener("click", openPrintBooklet);
+  if (el.printBookletButton) {
+    el.printBookletButton.addEventListener("click", openPrintBooklet);
+  }
   el.resetDataButton.addEventListener("click", resetCatalog);
   el.importFileInput.addEventListener("change", handleImport);
 }

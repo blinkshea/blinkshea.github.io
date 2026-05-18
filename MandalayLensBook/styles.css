@@ -762,6 +762,18 @@ select {
   color: var(--text);
 }
 
+.one-page-print-button {
+  min-height: 40px;
+  padding: 0 18px;
+  border-color: rgba(130, 208, 255, 0.62) !important;
+  background: linear-gradient(135deg, #66ceff, #2179ff) !important;
+  color: #031222 !important;
+  font-size: 0.9rem;
+  font-weight: 900;
+  white-space: nowrap;
+  box-shadow: 0 14px 34px rgba(35, 126, 255, 0.34);
+}
+
 .print-menu {
   position: relative;
   z-index: 25;

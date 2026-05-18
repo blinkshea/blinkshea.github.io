@@ -562,7 +562,9 @@
     renderResults();
   });
 
-  el.printViewButton.addEventListener("click", printCurrentView);
+  if (el.printViewButton) {
+    el.printViewButton.addEventListener("click", printCurrentView);
+  }
 
   el.copyLinkButton.addEventListener("click", async () => {
     const link = el.clientUrl.textContent.trim();
