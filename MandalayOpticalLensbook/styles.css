@@ -260,6 +260,18 @@ select {
   overflow: visible;
   position: relative;
   z-index: 12;
+  margin-top: 18px;
+}
+
+.consult-actions {
+  margin-top: 20px;
+}
+
+.consult-button {
+  min-width: 220px;
+  min-height: 48px;
+  padding: 0 22px;
+  font-weight: 900;
 }
 
 .admin-menu {
@@ -367,6 +379,17 @@ select {
   background: transparent;
   color: var(--text);
   border-color: rgba(122, 183, 255, 0.26);
+}
+
+.button-small {
+  min-height: 34px;
+  padding: 0 13px;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 800;
+  line-height: 1.1;
+  white-space: nowrap;
+  box-shadow: none;
 }
 
 .file-button input {
@@ -704,6 +727,72 @@ select {
   flex-wrap: wrap;
 }
 
+.catalog-heading-copy {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+
+.catalog-display-title {
+  margin: 4px 0 0;
+  color: var(--text);
+}
+
+.catalog-helper {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
+.catalog-toolbar {
+  align-items: flex-start;
+}
+
+.catalog-print-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.catalog-print-actions .button-small {
+  background: rgba(89, 184, 255, 0.08);
+  border-color: rgba(122, 183, 255, 0.26);
+  color: var(--text);
+}
+
+.print-menu {
+  position: relative;
+  z-index: 25;
+}
+
+.print-menu summary {
+  list-style: none;
+}
+
+.print-menu summary::-webkit-details-marker {
+  display: none;
+}
+
+.print-menu-panel {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  display: grid;
+  gap: 8px;
+  min-width: 178px;
+  padding: 10px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: rgba(7, 12, 19, 0.98);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.36);
+}
+
+.print-menu-panel .button-small {
+  width: 100%;
+}
+
 .antiglare-control {
   display: inline-flex;
   align-items: center;
@@ -923,11 +1012,10 @@ th {
 }
 
 tbody tr {
-  cursor: pointer;
+  cursor: default;
   transition: background 140ms ease;
 }
 
-tbody tr:hover,
 tbody tr.is-active {
   background: rgba(89, 184, 255, 0.12);
 }
@@ -1367,6 +1455,22 @@ tbody tr.is-active {
     white-space: normal;
     text-align: center;
     line-height: 1.2;
+  }
+
+  .catalog-toolbar,
+  .catalog-print-actions {
+    justify-content: flex-start;
+  }
+
+  .catalog-print-actions {
+    width: 100%;
+  }
+
+  .catalog-print-actions .button-small {
+    width: auto;
+    min-height: 36px;
+    padding: 0 12px;
+    flex: 0 0 auto;
   }
 
   .admin-menu {

@@ -35,8 +35,7 @@
             Independent Optometric Practice profitability.
           </p>
           <div class="hero-actions">
-            <button id="printBookletButton" class="button">Print Client Price Guide</button>
-            <a class="button" href="./one-page-price-list.html" target="_blank" rel="noopener">Print One-Page Price List</a>
+            <a class="button consult-button" href="https://outlook.office.com/book/MandalayOpticalQuestions@wecareri.com/?ismsaljsauthenabled" target="_blank" rel="noopener">Book Lens Consultation</a>
             <button id="clientViewButton" class="button button-ghost" type="button">Client View</button>
             <details class="admin-menu">
               <summary class="button button-ghost">Admin</summary>
@@ -137,13 +136,26 @@
 
         <section class="panel results-panel" id="contentGrid">
           <div class="section-heading">
-            <div>
+            <div class="catalog-heading-copy">
               <p class="section-label">Catalog</p>
+              <h2 class="catalog-display-title">Lens Price Book</h2>
+              <p class="catalog-helper">Live lens pricing is listed below.</p>
             </div>
-            <label class="antiglare-control" id="antiglareControl">
-              <span>Add anti-glare</span>
-              <select id="antiglareSelect" aria-label="Add anti-glare to displayed lens prices"></select>
-            </label>
+            <div class="results-actions catalog-toolbar">
+              <label class="antiglare-control" id="antiglareControl">
+                <span>Add anti-glare</span>
+                <select id="antiglareSelect" aria-label="Add anti-glare to displayed lens prices"></select>
+              </label>
+              <div class="catalog-print-actions" aria-label="Print options">
+                <details class="print-menu">
+                  <summary class="button button-ghost button-small">Print</summary>
+                  <div class="print-menu-panel">
+                    <button id="printBookletButton" class="button button-ghost button-small" type="button">Full Price Book</button>
+                    <a class="button button-ghost button-small" href="./one-page-price-list.html" target="_blank" rel="noopener">One-Page List</a>
+                  </div>
+                </details>
+              </div>
+            </div>
           </div>
           <div id="columnControls" class="column-controls"></div>
           <div class="table-wrap">

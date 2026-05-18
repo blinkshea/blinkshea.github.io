@@ -186,17 +186,21 @@
     return false;
   }
 
-  function matchesTreatment(item) {
+  function matchesTreatmentValue(item, treatment) {
     const usage = String(item.usage || "").toLowerCase();
     const feature = String(item.feature || "").toLowerCase();
-    if (state.treatment === "all") return true;
-    if (state.treatment === "clear") return usage === "clear";
-    if (state.treatment === "photochromic") return usage.includes("photo");
-    if (state.treatment === "transition") {
+    if (treatment === "all") return true;
+    if (treatment === "clear") return usage === "clear";
+    if (treatment === "photochromic") return usage.includes("photo");
+    if (treatment === "transition") {
       return usage.includes("transition") || feature.includes("vantage") || feature.includes("xtractive");
     }
-    if (state.treatment === "polarized") return feature.includes("polarized") || usage.includes("sun");
+    if (treatment === "polarized") return feature.includes("polarized") || usage.includes("sun");
     return true;
+  }
+
+  function matchesTreatment(item) {
+    return matchesTreatmentValue(item, state.treatment);
   }
 
   function searchableText(item) {
@@ -277,8 +281,12 @@
     });
   }
 
-  function availableIndexes() {
-    return [...new Set(sourceProductsForFilters().map((item) => displayMaterialName(item.material)).filter(Boolean))].sort((left, right) => {
+  function matchesMaterialValue(item, material) {
+    return material === "all" || displayMaterialName(item.material) === material;
+  }
+
+  function sortMaterialLabels(labels) {
+    return [...labels].sort((left, right) => {
       const leftRank = indexOrder.indexOf(left);
       const rightRank = indexOrder.indexOf(right);
       if (leftRank !== -1 || rightRank !== -1) {
@@ -287,6 +295,24 @@
         return leftRank - rightRank;
       }
       return left.localeCompare(right, undefined, { numeric: true });
+    });
+  }
+
+  function availableIndexes(sourceProducts, treatment) {
+    return sortMaterialLabels(
+      new Set(
+        sourceProducts
+          .filter((item) => matchesTreatmentValue(item, treatment))
+          .map((item) => displayMaterialName(item.material))
+          .filter(Boolean)
+      )
+    );
+  }
+
+  function availableTreatments(sourceProducts, material) {
+    return treatmentOptions.filter(([value]) => {
+      if (value === "all") return true;
+      return sourceProducts.some((item) => matchesMaterialValue(item, material) && matchesTreatmentValue(item, value));
     });
   }
 
@@ -343,14 +369,21 @@
   }
 
   function renderFilters() {
-    const indexes = availableIndexes();
+    const sourceProducts = sourceProductsForFilters();
+    let indexes = availableIndexes(sourceProducts, state.treatment);
     if (state.section === "multifocal") {
       state.index = "all";
       state.treatment = "all";
     }
     if (!indexes.includes(state.index)) state.index = "all";
+    let treatmentChoices = availableTreatments(sourceProducts, state.index);
+    if (!treatmentChoices.some(([value]) => value === state.treatment)) {
+      state.treatment = "all";
+      indexes = availableIndexes(sourceProducts, state.treatment);
+      treatmentChoices = availableTreatments(sourceProducts, state.index);
+    }
     fillSelect(el.indexFilter, indexes, state.index, "All materials");
-    fillSelect(el.treatmentFilter, treatmentOptions.slice(1).map((item) => item[1]), treatmentLabel(state.treatment), "All treatments");
+    fillSelect(el.treatmentFilter, treatmentChoices.slice(1).map((item) => item[1]), treatmentLabel(state.treatment), "All treatments");
     el.indexFilter.disabled = state.section === "coating" || state.section === "multifocal";
     el.treatmentFilter.disabled = state.section === "coating" || state.section === "multifocal";
   }
@@ -511,12 +544,12 @@
 
   el.indexFilter.addEventListener("change", () => {
     state.index = el.indexFilter.value;
-    renderResults();
+    render();
   });
 
   el.treatmentFilter.addEventListener("change", () => {
     state.treatment = treatmentValue(el.treatmentFilter.value);
-    renderResults();
+    render();
   });
 
   el.antiglareSelect.addEventListener("change", () => {

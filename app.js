@@ -833,8 +833,7 @@ function matchesProgressiveFilter(item) {
   return isProgressiveBaseItem(item);
 }
 
-function matchesSingleVisionTreatment(item) {
-  const treatment = state.filters.singleVisionTreatment;
+function matchesTreatmentValue(item, treatment) {
   const usage = String(item.usage || "").toLowerCase();
   const feature = String(item.feature || "").toLowerCase();
   if (treatment === "all") return true;
@@ -843,6 +842,10 @@ function matchesSingleVisionTreatment(item) {
   if (treatment === "transition") return usage.includes("transition") || feature.includes("vantage") || feature.includes("xtractive");
   if (treatment === "polarized") return feature.includes("polarized");
   return true;
+}
+
+function matchesSingleVisionTreatment(item) {
+  return matchesTreatmentValue(item, state.filters.singleVisionTreatment);
 }
 
 function matchesProviderMode(item) {
@@ -898,6 +901,52 @@ function availableProgressiveTiers(program) {
 function firstAvailableOr(currentValue, availableValues, fallbackValue) {
   if (availableValues.includes(currentValue)) return currentValue;
   return availableValues[0] ?? fallbackValue;
+}
+
+function lensFilterSourceProducts() {
+  if (state.filters.catalogSection === "progressive") {
+    return providerVisibleProducts().filter((item) => matchesProgressiveFilter(item));
+  }
+  return providerVisibleProducts().filter((item) => matchesSingleVisionType(item));
+}
+
+function lensMaterialLabel(item) {
+  return displayMaterialName(normalizeIndex(item.material));
+}
+
+function matchesMaterialValue(item, material) {
+  return material === "all" || lensMaterialLabel(item) === material;
+}
+
+function sortMaterialLabels(labels) {
+  return [...labels].sort((a, b) => {
+    const left = INDEX_DISPLAY_ORDER.indexOf(a);
+    const right = INDEX_DISPLAY_ORDER.indexOf(b);
+    if (left !== -1 || right !== -1) {
+      if (left === -1) return 1;
+      if (right === -1) return -1;
+      return left - right;
+    }
+    return a.localeCompare(b, undefined, { numeric: true });
+  });
+}
+
+function availableLensMaterials(sourceProducts, treatment) {
+  return sortMaterialLabels(
+    new Set(
+      sourceProducts
+        .filter((item) => matchesTreatmentValue(item, treatment))
+        .map(lensMaterialLabel)
+        .filter(Boolean)
+    )
+  );
+}
+
+function availableLensTreatments(sourceProducts, material) {
+  return TREATMENT_OPTIONS.filter((option) => {
+    if (option.value === "all") return true;
+    return sourceProducts.some((item) => matchesMaterialValue(item, material) && matchesTreatmentValue(item, option.value));
+  });
 }
 
 function ensureAvailableFilters() {
@@ -1008,21 +1057,18 @@ function renderLensFilters() {
   el.lensFiltersPanel.hidden = !showing;
   if (!showing) return;
 
-  const sourceProducts =
-    state.filters.catalogSection === "progressive"
-      ? providerVisibleProducts().filter((item) => matchesProgressiveFilter(item))
-      : providerVisibleProducts().filter((item) => matchesSingleVisionType(item));
+  const sourceProducts = lensFilterSourceProducts();
+  let indexes = availableLensMaterials(sourceProducts, state.filters.singleVisionTreatment);
+  if (state.filters.singleVisionIndex !== "all" && !indexes.includes(state.filters.singleVisionIndex)) {
+    state.filters.singleVisionIndex = "all";
+  }
 
-  const indexes = [...new Set(sourceProducts.map((item) => displayMaterialName(normalizeIndex(item.material))).filter(Boolean))].sort((a, b) => {
-    const left = INDEX_DISPLAY_ORDER.indexOf(a);
-    const right = INDEX_DISPLAY_ORDER.indexOf(b);
-    if (left !== -1 || right !== -1) {
-      if (left === -1) return 1;
-      if (right === -1) return -1;
-      return left - right;
-    }
-    return a.localeCompare(b, undefined, { numeric: true });
-  });
+  let treatmentChoices = availableLensTreatments(sourceProducts, state.filters.singleVisionIndex);
+  if (!treatmentChoices.some((item) => item.value === state.filters.singleVisionTreatment)) {
+    state.filters.singleVisionTreatment = "all";
+    indexes = availableLensMaterials(sourceProducts, state.filters.singleVisionTreatment);
+    treatmentChoices = availableLensTreatments(sourceProducts, state.filters.singleVisionIndex);
+  }
 
   el.lensFiltersTitle.textContent =
     state.filters.catalogSection === "progressive"
@@ -1043,7 +1089,7 @@ function renderLensFilters() {
   fillSelect(el.indexFilter, indexes, state.filters.singleVisionIndex, "All materials");
   fillSelect(
     el.treatmentFilter,
-    TREATMENT_OPTIONS.slice(1).map((item) => item.label),
+    treatmentChoices.slice(1).map((item) => item.label),
     selectedTreatmentLabel,
     TREATMENT_OPTIONS[0].label
   );

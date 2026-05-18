@@ -34,9 +34,8 @@
             Disrupting the industry with out of this world pricing designed to preserve Independent
             Optometric Practice profitability.
           </p>
-          <div class="hero-actions">
-            <button id="printViewButton" class="button" type="button">Print Client Price Guide</button>
-            <a class="button" href="./one-page-price-list.html" target="_blank" rel="noopener">Print One-Page Price List</a>
+          <div class="hero-actions consult-actions">
+            <a class="button consult-button" href="https://outlook.office.com/book/MandalayOpticalQuestions@wecareri.com/?ismsaljsauthenabled" target="_blank" rel="noopener">Book Lens Consultation</a>
           </div>
         </div>
       </header>
@@ -124,15 +123,26 @@
 
         <section class="panel results-panel" id="contentGrid">
           <div class="section-heading">
-            <div>
+            <div class="catalog-heading-copy">
               <p class="section-label">Catalog</p>
+              <h2 class="catalog-display-title">Lens Price Book</h2>
+              <p class="catalog-helper">Live lens pricing is listed below.</p>
               <h2 id="resultsTitle">Client lens prices</h2>
             </div>
-            <div class="results-actions">
+            <div class="results-actions catalog-toolbar">
               <label class="antiglare-control" id="antiglareControl">
                 <span>Add anti-glare</span>
                 <select id="antiglareSelect" aria-label="Add anti-glare to displayed lens prices"></select>
               </label>
+              <div class="catalog-print-actions" aria-label="Print options">
+                <details class="print-menu">
+                  <summary class="button button-ghost button-small">Print</summary>
+                  <div class="print-menu-panel">
+                    <button id="printViewButton" class="button button-ghost button-small" type="button">Full Price Book</button>
+                    <a class="button button-ghost button-small" href="./one-page-price-list.html" target="_blank" rel="noopener">One-Page List</a>
+                  </div>
+                </details>
+              </div>
               <div id="resultCount" class="count-pill">0 items</div>
             </div>
           </div>
