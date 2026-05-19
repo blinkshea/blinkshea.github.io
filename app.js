@@ -43,7 +43,7 @@ const PROGRESSIVE_TIER_LABELS = {
   iot: {
     good: "IOT Essential (Good)",
     better: "IOT Endless (Better)",
-    best: "CR Ultimate (Best)",
+    best: "MOR Ultimate lens (Best)",
   },
 };
 const INDEX_DISPLAY_ORDER = ["CR-39", "Poly", "1.56", "TriVex", "1.60", "1.67", "1.74"];
@@ -55,7 +55,9 @@ const HOUSE_BRAND_UPGRADES = [
 const IOT_UPGRADES = [
   { key: "iot-essential", tierLabel: "Good", label: "IOT Essential", amount: 15 },
   { key: "iot-endless", tierLabel: "Better", label: "IOT Endless", amount: 35 },
-  { key: "cr-ultimate", tierLabel: "Best", label: "CR Ultimate", amount: 60 },
+];
+const GERMAN_R_UPGRADES = [
+  { key: "mor-ultimate", tierLabel: "Best", label: "MOR Ultimate lens", amount: 60 },
 ];
 const LOCAL_CAMBER_UPGRADE = {
   key: "iot-camber",
@@ -66,7 +68,7 @@ const LOCAL_CAMBER_UPGRADE = {
   localOnly: true,
   note: "Hidden from all client and public views.",
 };
-const PROGRESSIVE_DESIGNS = [...HOUSE_BRAND_UPGRADES, ...IOT_UPGRADES, LOCAL_CAMBER_UPGRADE];
+const PROGRESSIVE_DESIGNS = [...HOUSE_BRAND_UPGRADES, ...IOT_UPGRADES, ...GERMAN_R_UPGRADES, LOCAL_CAMBER_UPGRADE];
 const ANTIGLARE_OPTIONS = [
   { key: "none", label: "No anti-glare", shortLabel: "No AG", aliases: [], fallback: 0 },
   { key: "standard", label: "Standard Antiglare", shortLabel: "Standard AG", aliases: ["Standard AR", "Standard Antiglare"], fallback: 20 },
@@ -151,6 +153,7 @@ const el = {
   progressiveTitle: document.querySelector("#progressiveTitle"),
   progressiveProgramSwitcher: document.querySelector("#progressiveProgramSwitcher"),
   progressiveTierSwitcher: document.querySelector("#progressiveTierSwitcher"),
+  germanRSeriesSwitcher: document.querySelector("#germanRSeriesSwitcher"),
   camberUnlockPanel: document.querySelector("#camberUnlockPanel"),
   camberUnlockStatus: document.querySelector("#camberUnlockStatus"),
   toggleCamberButton: document.querySelector("#toggleCamberButton"),
@@ -416,7 +419,7 @@ function visibleIotUpgrades() {
 }
 
 function availableProgressiveDesigns() {
-  return [...HOUSE_BRAND_UPGRADES, ...visibleIotUpgrades()];
+  return [...HOUSE_BRAND_UPGRADES, ...visibleIotUpgrades(), ...GERMAN_R_UPGRADES];
 }
 
 function isProgressiveBaseItem(item) {
@@ -1143,6 +1146,7 @@ function renderProgressiveFilters() {
   el.progressiveTitle.textContent = "Progressive design upgrades";
   el.progressiveProgramSwitcher.innerHTML = HOUSE_BRAND_UPGRADES.map(renderProgressiveUpgradeButton).join("");
   el.progressiveTierSwitcher.innerHTML = visibleIotUpgrades().map(renderProgressiveUpgradeButton).join("");
+  el.germanRSeriesSwitcher.innerHTML = GERMAN_R_UPGRADES.map(renderProgressiveUpgradeButton).join("");
 
   if (el.camberUnlockPanel) {
     const showLocalControl = IS_LOCAL_MASTER && !state.clientView;
@@ -2294,12 +2298,18 @@ function attachEvents() {
     state.filters.progressiveDesign = chip.dataset.progressiveDesign;
     render();
   });
+  el.germanRSeriesSwitcher.addEventListener("click", (event) => {
+    const chip = event.target.closest("[data-progressive-design]");
+    if (!chip) return;
+    state.filters.progressiveDesign = chip.dataset.progressiveDesign;
+    render();
+  });
   if (el.toggleCamberButton) {
     el.toggleCamberButton.addEventListener("click", () => {
       state.camberUnlocked = !state.camberUnlocked;
       saveCamberUnlockSetting();
       if (!canShowLocalCamberUpgrade() && state.filters.progressiveDesign === LOCAL_CAMBER_UPGRADE.key) {
-        state.filters.progressiveDesign = "cr-ultimate";
+        state.filters.progressiveDesign = "mor-ultimate";
       }
       render();
     });

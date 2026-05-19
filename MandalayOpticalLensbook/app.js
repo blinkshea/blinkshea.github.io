@@ -25,7 +25,7 @@
     { key: "mandalay-deluxe", tierLabel: "Deluxe", label: "Mandalay Deluxe", amount: 40, group: "mandalay" },
     { key: "iot-essential", tierLabel: "Good", label: "IOT Essential", amount: 15, group: "iot" },
     { key: "iot-endless", tierLabel: "Better", label: "IOT Endless", amount: 35, group: "iot" },
-    { key: "cr-ultimate", tierLabel: "Best", label: "CR Ultimate", amount: 60, group: "iot" },
+    { key: "mor-ultimate", tierLabel: "Best", label: "MOR Ultimate lens", amount: 60, group: "german-r" },
   ];
   const antiglareOptions = [
     { key: "none", label: "No anti-glare", shortLabel: "No AG", aliases: [], fallback: 0 },
@@ -73,6 +73,7 @@
     progressiveControls: document.querySelector("#progressiveControls"),
     mandalayDesignTabs: document.querySelector("#mandalayDesignTabs"),
     iotDesignTabs: document.querySelector("#iotDesignTabs"),
+    germanRDesignTabs: document.querySelector("#germanRDesignTabs"),
     indexFilter: document.querySelector("#indexFilter"),
     treatmentFilter: document.querySelector("#treatmentFilter"),
     searchInput: document.querySelector("#searchInput"),
@@ -419,6 +420,10 @@
       .join("");
     el.iotDesignTabs.innerHTML = progressiveDesigns
       .filter((item) => item.group === "iot")
+      .map(renderDesignButton)
+      .join("");
+    el.germanRDesignTabs.innerHTML = progressiveDesigns
+      .filter((item) => item.group === "german-r")
       .map(renderDesignButton)
       .join("");
   }

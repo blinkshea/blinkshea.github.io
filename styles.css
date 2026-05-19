@@ -661,11 +661,21 @@ select {
   gap: 8px;
 }
 
+.progressive-series-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 14px;
+}
+
 .progressive-upgrade-grid,
 .progressive-groups .family-switcher {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 10px;
+}
+
+.progressive-group-german .progressive-upgrade-grid {
+  grid-template-columns: 1fr;
 }
 
 .progressive-upgrade-card {
@@ -1732,6 +1742,10 @@ body {
     margin-inline: 0;
     padding: 0;
     overflow: visible;
+  }
+
+  .progressive-series-row {
+    grid-template-columns: 1fr;
   }
 
   .progressive-upgrade-card {
