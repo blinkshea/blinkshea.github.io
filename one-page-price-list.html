@@ -263,13 +263,13 @@
     }
 
     .upgrade-stack {
-      padding: 8px;
+      padding: 10px;
       background:
         linear-gradient(180deg, #fbfdff 0%, #eef6ff 100%);
     }
 
     .upgrade-group {
-      padding: 6px;
+      padding: 8px;
       border: 1px solid #c9dfef;
       border-radius: 7px;
       background: rgba(255, 255, 255, 0.72);
@@ -283,7 +283,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 5px;
+      margin-bottom: 6px;
       color: #0a2948;
       font-size: 7.8px;
       font-weight: 950;
@@ -296,13 +296,19 @@
       font-size: 7px;
     }
 
+    .upgrade-row + .upgrade-group-title {
+      margin-top: 9px;
+      padding-top: 7px;
+      border-top: 1px solid #d9e9f5;
+    }
+
     .upgrade-row {
       display: grid;
       grid-template-columns: minmax(0, 1fr) auto;
       gap: 8px;
       align-items: center;
-      min-height: 0.25in;
-      padding: 5.3px 7px;
+      min-height: 0.28in;
+      padding: 6px 8px;
       border: 1px solid #c9dfef;
       border-radius: 6px;
       background: #ffffff;
