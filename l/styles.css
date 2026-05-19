@@ -613,6 +613,9 @@ select {
 
 .family-chip:hover {
   transform: translateY(-1px);
+  border-color: transparent;
+  background: linear-gradient(135deg, #59b8ff, #3f73ff);
+  color: #04101c;
 }
 
 .family-chip:disabled {
@@ -622,15 +625,23 @@ select {
 }
 
 .family-chip.is-active {
-  background: linear-gradient(135deg, #59b8ff, #3f73ff);
-  border-color: transparent;
-  color: #04101c;
+  border-color: rgba(89, 184, 255, 0.58);
+  background: rgba(89, 184, 255, 0.12);
+  color: var(--text);
+  box-shadow: inset 0 0 0 1px rgba(89, 184, 255, 0.16);
 }
 
 .family-chip-coating.is-active {
-  background: linear-gradient(135deg, #59b8ff, #3f73ff);
+  border-color: rgba(89, 184, 255, 0.58);
+  background: rgba(89, 184, 255, 0.12);
+  color: var(--text);
+}
+
+.family-chip.is-active:hover,
+.family-chip-coating.is-active:hover {
   border-color: transparent;
-  color: #fff7fb;
+  background: linear-gradient(135deg, #59b8ff, #3f73ff);
+  color: #04101c;
 }
 
 .upgrade-chip {
@@ -716,13 +727,21 @@ select {
   white-space: nowrap;
 }
 
-.progressive-upgrade-card.is-active .upgrade-tier-label,
-.progressive-upgrade-card.is-active .upgrade-name,
-.progressive-upgrade-card.is-active .upgrade-price-label {
+.progressive-upgrade-card.is-active:hover .upgrade-tier-label,
+.progressive-upgrade-card.is-active:hover .upgrade-name,
+.progressive-upgrade-card.is-active:hover .upgrade-price-label,
+.progressive-upgrade-card:hover .upgrade-tier-label,
+.progressive-upgrade-card:hover .upgrade-name,
+.progressive-upgrade-card:hover .upgrade-price-label {
   color: #04101c;
 }
 
 .progressive-upgrade-card.is-active .upgrade-tier-label {
+  border-color: rgba(89, 184, 255, 0.58);
+  background: rgba(89, 184, 255, 0.16);
+}
+
+.progressive-upgrade-card:hover .upgrade-tier-label {
   border-color: rgba(4, 16, 28, 0.28);
   background: rgba(255, 255, 255, 0.28);
 }
