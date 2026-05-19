@@ -4104,11 +4104,11 @@
       "mandalayWholesale": 4,
       "togReference": 1.94,
       "mandalayRetail": 17,
-      "basePrice": 25,
-      "proposedPrice": 25,
+      "basePrice": 15,
+      "proposedPrice": 15,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 25
+      "targetSellingPrice": 15
     },
     {
       "id": "addon-2",

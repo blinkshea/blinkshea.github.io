@@ -538,7 +538,7 @@
     </section>
 
     <p class="fine-print">
-      <span><strong>Client pricing only.</strong> Internal Conant costs are intentionally excluded. Prices are per pair unless the billing agreement states otherwise. Quote high-power exceptions, remakes, uncommon combinations, and unavailable material or color combinations before billing.</span>
+      <span><strong>Client pricing only.</strong> Internal Conant costs are intentionally excluded. Prices are per pair unless the billing agreement states otherwise. <strong>Ask Us</strong> means the material, power, color, or treatment combination needs confirmation before pricing.</span>
       <span class="footer-mark">Mandalay Optical Lab</span>
     </p>
   </main>
@@ -571,7 +571,7 @@
     }
 
     function formatPrice(value) {
-      if (!Number.isFinite(Number(value)) || Number(value) <= 1) return "Quote";
+      if (!Number.isFinite(Number(value)) || Number(value) <= 1) return "Ask Us";
       const amount = Number(value);
       return Number.isInteger(amount) ? `$${amount}` : moneyFormatter.format(amount);
     }

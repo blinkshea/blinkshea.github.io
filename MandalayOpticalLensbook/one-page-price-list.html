@@ -89,6 +89,7 @@
       .upgrade-row { display: flex; justify-content: space-between; gap: 8px; min-height: 27px; padding: 6px 8px; border-top: 1px solid #e5eef8; align-items: center; }
       .upgrade-row + .upgrade-title { margin-top: 7px; border-top: 1px solid #d8e8f8; }
       .footer { display: flex; justify-content: space-between; gap: 10px; margin-top: 9px; color: var(--muted); font-size: 8.5px; font-weight: 700; }
+      .footer span:first-child { max-width: 58%; }
       @media print {
         body { background: white; }
         .print-actions { display: none; }
@@ -136,7 +137,7 @@
           <table><thead><tr><th>Option</th><th class="price">Price</th><th>Option</th><th class="price">Price</th></tr></thead><tbody id="addonRows"></tbody></table>
         </div>
       </section>
-      <div class="footer"><span>Mandalay Optical Lab</span><span>https://blinkshea.github.io/MandalayLensBook/</span></div>
+      <div class="footer"><span>Ask Us = confirm availability and pricing before ordering.</span><span>https://blinkshea.github.io/MandalayLensBook/</span></div>
     </main>
     <script src="./data/client-catalog-data.js"></script>
     <script>
@@ -145,7 +146,7 @@
       const materialAliases = { "CR-39": ["CR-39", "1.50", "1.499"], Poly: ["Poly", "1.59"], TriVex: ["TriVex", "Trivex", "Hi-Vex", "HI-VEX"], "1.60": ["1.60", "1.6"], "1.67": ["1.67"], "1.74": ["1.74"] };
       const usageAliases = { clear: ["Clear"], photo: ["Photo", "Photochromic"], transition: ["Transition", "Transition Gen S", "Transitions Gen S", "Transition 8", "Transitions 8"], polarized: ["Polarized", "Sun"] };
       function norm(value) { return String(value || "").toUpperCase().replace(/[^A-Z0-9]+/g, ""); }
-      function price(value) { const amount = Number(value); if (!Number.isFinite(amount) || amount <= 1) return "Quote"; return Number.isInteger(amount) ? `$${amount}` : fmt.format(amount); }
+      function price(value) { const amount = Number(value); if (!Number.isFinite(amount) || amount <= 1) return "Ask Us"; return Number.isInteger(amount) ? `$${amount}` : fmt.format(amount); }
       function mat(item, material) { const value = norm(item.material); return (materialAliases[material] || [material]).some((alias) => norm(alias) === value); }
       function use(item, usage) { const itemUsage = norm(item.usage); const itemFeature = norm(item.feature); if (usage === "polarized") return itemFeature.includes("POLARIZED") || itemUsage.includes("SUN"); return (usageAliases[usage] || []).some((alias) => itemUsage.includes(norm(alias))); }
       function findProduct(options) { return (data.products || []).find((item) => (!options.category || item.category === options.category) && (!options.family || item.family === options.family) && (!options.tier || item.tier === options.tier) && (!options.design || norm(item.design) === norm(options.design)) && (!options.material || mat(item, options.material)) && (!options.usage || use(item, options.usage))); }
