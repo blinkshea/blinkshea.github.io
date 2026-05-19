@@ -55,7 +55,7 @@ const HOUSE_BRAND_UPGRADES = [
 const IOT_UPGRADES = [
   { key: "iot-essential", tierLabel: "Good", label: "IOT Essential", amount: 15 },
   { key: "iot-endless", tierLabel: "Better", label: "IOT Endless", amount: 35 },
-  { key: "cr-ultimate", tierLabel: "Best", label: "CR Ultimate", amount: 60, note: "Same availability as IOT Endless." },
+  { key: "cr-ultimate", tierLabel: "Best", label: "CR Ultimate", amount: 60 },
 ];
 const LOCAL_CAMBER_UPGRADE = {
   key: "iot-camber",
@@ -1159,13 +1159,11 @@ function renderProgressiveFilters() {
 
 function renderProgressiveUpgradeButton(upgrade) {
   const priceLabel = upgrade.amount ? `+$${upgrade.amount}` : "base";
-  const note = upgrade.note ? `<span class="upgrade-note">${esc(upgrade.note)}</span>` : "";
   return `
     <button class="family-chip upgrade-chip progressive-upgrade-card ${upgrade.limited ? "upgrade-chip-limited" : ""} ${upgrade.localOnly ? "upgrade-chip-local" : ""} ${state.filters.progressiveDesign === upgrade.key ? "is-active" : ""}" data-progressive-design="${upgrade.key}" type="button">
       <span class="upgrade-tier-label">${esc(upgrade.tierLabel || "")}</span>
       <span class="upgrade-name">${esc(upgrade.label)}</span>
       <span class="upgrade-price-label">${esc(priceLabel)}</span>
-      ${note}
     </button>
   `;
 }

@@ -25,7 +25,7 @@
     { key: "mandalay-deluxe", tierLabel: "Deluxe", label: "Mandalay Deluxe", amount: 40, group: "mandalay" },
     { key: "iot-essential", tierLabel: "Good", label: "IOT Essential", amount: 15, group: "iot" },
     { key: "iot-endless", tierLabel: "Better", label: "IOT Endless", amount: 35, group: "iot" },
-    { key: "cr-ultimate", tierLabel: "Best", label: "CR Ultimate", amount: 60, group: "iot", note: "Same availability as IOT Endless." },
+    { key: "cr-ultimate", tierLabel: "Best", label: "CR Ultimate", amount: 60, group: "iot" },
   ];
   const antiglareOptions = [
     { key: "none", label: "No anti-glare", shortLabel: "No AG", aliases: [], fallback: 0 },
@@ -425,13 +425,11 @@
 
   function renderDesignButton(item) {
     const priceLabel = item.amount ? `+$${item.amount}` : "base";
-    const note = item.note ? `<span class="upgrade-note">${esc(item.note)}</span>` : "";
     return `
       <button class="family-chip upgrade-chip progressive-upgrade-card ${state.progressiveDesign === item.key ? "is-active" : ""}" type="button" data-progressive-design="${item.key}">
         <span class="upgrade-tier-label">${esc(item.tierLabel || "")}</span>
         <span class="upgrade-name">${esc(item.label)}</span>
         <span class="upgrade-price-label">${esc(priceLabel)}</span>
-        ${note}
       </button>
     `;
   }

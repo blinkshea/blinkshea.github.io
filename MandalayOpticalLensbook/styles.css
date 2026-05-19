@@ -639,70 +639,82 @@ select {
 
 .progressive-groups {
   display: grid;
-  gap: 18px;
+  gap: 16px;
 }
 
 .progressive-group {
   display: grid;
-  gap: 10px;
+  gap: 8px;
 }
 
 .progressive-upgrade-grid,
 .progressive-groups .family-switcher {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 12px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
 }
 
 .progressive-upgrade-card {
-  align-items: flex-start;
-  justify-content: flex-start;
-  min-height: 112px;
-  padding: 14px 16px;
-  border-radius: 18px;
+  display: grid;
+  grid-template-columns: minmax(68px, auto) minmax(0, 1fr) auto;
+  align-items: center;
+  justify-content: stretch;
+  gap: 10px;
+  min-height: 58px;
+  padding: 10px 12px;
+  border-radius: 14px;
   text-align: left;
   white-space: normal;
+  background: rgba(8, 15, 24, 0.96);
 }
 
 .progressive-upgrade-card:hover {
   transform: translateY(-2px);
+  border-color: rgba(89, 184, 255, 0.42);
 }
 
 .upgrade-tier-label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 26px;
+  padding: 0 9px;
+  border: 1px solid rgba(89, 184, 255, 0.22);
+  border-radius: 999px;
+  background: rgba(89, 184, 255, 0.08);
   color: var(--accent);
   font-family: "Barlow Condensed", sans-serif;
-  font-size: 0.82rem;
+  font-size: 0.76rem;
   font-weight: 700;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
+  white-space: nowrap;
 }
 
 .upgrade-name {
-  margin-top: 6px;
   color: var(--text);
+  font-size: 1rem;
   font-weight: 900;
   line-height: 1.15;
+  min-width: 0;
 }
 
 .upgrade-price-label {
-  margin-top: 8px;
   color: #e9f4ff;
+  font-size: 0.95rem;
   font-weight: 800;
-}
-
-.upgrade-note {
-  margin-top: 8px;
-  color: var(--muted);
-  font-size: 0.72rem;
-  font-weight: 700;
-  line-height: 1.25;
+  white-space: nowrap;
 }
 
 .progressive-upgrade-card.is-active .upgrade-tier-label,
 .progressive-upgrade-card.is-active .upgrade-name,
-.progressive-upgrade-card.is-active .upgrade-price-label,
-.progressive-upgrade-card.is-active .upgrade-note {
+.progressive-upgrade-card.is-active .upgrade-price-label {
   color: #04101c;
+}
+
+.progressive-upgrade-card.is-active .upgrade-tier-label {
+  border-color: rgba(4, 16, 28, 0.28);
+  background: rgba(255, 255, 255, 0.28);
 }
 
 .upgrade-chip-local {
@@ -1647,6 +1659,21 @@ tbody tr.is-active {
     flex: 0 0 auto;
     max-width: 84vw;
     white-space: nowrap;
+  }
+
+  .progressive-upgrade-grid,
+  .progressive-groups .family-switcher {
+    display: grid;
+    grid-template-columns: 1fr;
+    margin-inline: 0;
+    padding: 0;
+    overflow: visible;
+  }
+
+  .progressive-upgrade-card {
+    max-width: none;
+    grid-template-columns: minmax(60px, auto) minmax(0, 1fr) auto;
+    white-space: normal;
   }
 
   .compact-panel-toggle {
