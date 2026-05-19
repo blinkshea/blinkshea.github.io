@@ -20,12 +20,12 @@
   ];
   const indexOrder = ["CR-39", "Poly", "1.56", "TriVex", "1.60", "1.67", "1.74"];
   const progressiveDesigns = [
-    { key: "mandalay", label: "Mandalay", amount: 0, group: "mandalay" },
-    { key: "mandalay-plus", label: "Mandalay Plus", amount: 20, group: "mandalay" },
-    { key: "mandalay-deluxe", label: "Mandalay Deluxe", amount: 40, group: "mandalay" },
-    { key: "iot-essential", label: "IOT Essential", amount: 15, group: "iot" },
-    { key: "iot-endless", label: "IOT Endless", amount: 35, group: "iot" },
-    { key: "iot-camber", label: "IOT Camber", amount: 60, group: "iot", limited: true },
+    { key: "mandalay", tierLabel: "Base", label: "Mandalay", amount: 0, group: "mandalay" },
+    { key: "mandalay-plus", tierLabel: "Plus", label: "Mandalay Plus", amount: 20, group: "mandalay" },
+    { key: "mandalay-deluxe", tierLabel: "Deluxe", label: "Mandalay Deluxe", amount: 40, group: "mandalay" },
+    { key: "iot-essential", tierLabel: "Good", label: "IOT Essential", amount: 15, group: "iot" },
+    { key: "iot-endless", tierLabel: "Better", label: "IOT Endless", amount: 35, group: "iot" },
+    { key: "cr-ultimate", tierLabel: "Best", label: "CR Ultimate", amount: 60, group: "iot", note: "Same availability as IOT Endless." },
   ];
   const antiglareOptions = [
     { key: "none", label: "No anti-glare", shortLabel: "No AG", aliases: [], fallback: 0 },
@@ -221,7 +221,7 @@
     return item.category === "Digital Progressive" && item.family === "Mandalay" && item.tier === "Essential";
   }
 
-  function isCamberAvailable(item) {
+  function isLimitedProgressiveAvailable(item) {
     const material = displayMaterialName(item.material);
     const usage = String(item.usage || "").trim().toLowerCase();
     const feature = String(item.feature || "").trim();
@@ -230,7 +230,7 @@
 
   function progressivePrice(item) {
     const design = selectedProgressiveDesign();
-    if (design.limited && !isCamberAvailable(item)) return null;
+    if (design.limited && !isLimitedProgressiveAvailable(item)) return null;
     const base = Number(item.price);
     return Number.isFinite(base) ? Number((base + design.amount).toFixed(2)) : null;
   }
@@ -289,8 +289,8 @@
     return [...rows].sort((left, right) => {
       const design = selectedProgressiveDesign();
       if (state.section === "progressive" && design.limited) {
-        const leftAvailabilityRank = isCamberAvailable(left) ? 0 : 1;
-        const rightAvailabilityRank = isCamberAvailable(right) ? 0 : 1;
+        const leftAvailabilityRank = isLimitedProgressiveAvailable(left) ? 0 : 1;
+        const rightAvailabilityRank = isLimitedProgressiveAvailable(right) ? 0 : 1;
         if (leftAvailabilityRank !== rightAvailabilityRank) return leftAvailabilityRank - rightAvailabilityRank;
       }
 
@@ -424,9 +424,16 @@
   }
 
   function renderDesignButton(item) {
-    const priceLabel = item.amount ? ` +$${item.amount}` : " base";
-    const limitedLabel = item.limited ? " limited" : "";
-    return `<button class="family-chip upgrade-chip ${item.limited ? "upgrade-chip-limited" : ""} ${state.progressiveDesign === item.key ? "is-active" : ""}" type="button" data-progressive-design="${item.key}">${esc(item.label)}${priceLabel}${limitedLabel}</button>`;
+    const priceLabel = item.amount ? `+$${item.amount}` : "base";
+    const note = item.note ? `<span class="upgrade-note">${esc(item.note)}</span>` : "";
+    return `
+      <button class="family-chip upgrade-chip progressive-upgrade-card ${state.progressiveDesign === item.key ? "is-active" : ""}" type="button" data-progressive-design="${item.key}">
+        <span class="upgrade-tier-label">${esc(item.tierLabel || "")}</span>
+        <span class="upgrade-name">${esc(item.label)}</span>
+        <span class="upgrade-price-label">${esc(priceLabel)}</span>
+        ${note}
+      </button>
+    `;
   }
 
   function renderFilters() {

@@ -1,5 +1,8 @@
 const STORAGE_KEY = "optical-lens-book.catalog";
 const PASSWORD_STORAGE_KEY = "optical-lens-book.passwords";
+const CAMBER_UNLOCK_STORAGE_KEY = "optical-lens-book.local-camber-unlocked";
+const IS_LOCAL_MASTER =
+  window.location.protocol === "file:" || ["", "localhost", "127.0.0.1", "::1"].includes(window.location.hostname);
 const DEFAULT_CATALOG = { products: [], addons: [], shipping: [], stockReference: [] };
 const DEFAULT_PASSWORDS = {
   admin: "Mandalay905",
@@ -40,21 +43,30 @@ const PROGRESSIVE_TIER_LABELS = {
   iot: {
     good: "IOT Essential (Good)",
     better: "IOT Endless (Better)",
-    best: "IOT Camber (Best)",
+    best: "CR Ultimate (Best)",
   },
 };
 const INDEX_DISPLAY_ORDER = ["CR-39", "Poly", "1.56", "TriVex", "1.60", "1.67", "1.74"];
 const HOUSE_BRAND_UPGRADES = [
-  { key: "mandalay", label: "Mandalay", amount: 0 },
-  { key: "mandalay-plus", label: "Mandalay Plus", amount: 20 },
-  { key: "mandalay-deluxe", label: "Mandalay Deluxe", amount: 40 },
+  { key: "mandalay", tierLabel: "Base", label: "Mandalay", amount: 0 },
+  { key: "mandalay-plus", tierLabel: "Plus", label: "Mandalay Plus", amount: 20 },
+  { key: "mandalay-deluxe", tierLabel: "Deluxe", label: "Mandalay Deluxe", amount: 40 },
 ];
 const IOT_UPGRADES = [
-  { key: "iot-essential", label: "IOT Essential", amount: 15 },
-  { key: "iot-endless", label: "IOT Endless", amount: 35 },
-  { key: "iot-camber", label: "IOT Camber", amount: 60, limited: true },
+  { key: "iot-essential", tierLabel: "Good", label: "IOT Essential", amount: 15 },
+  { key: "iot-endless", tierLabel: "Better", label: "IOT Endless", amount: 35 },
+  { key: "cr-ultimate", tierLabel: "Best", label: "CR Ultimate", amount: 60, note: "Same availability as IOT Endless." },
 ];
-const PROGRESSIVE_DESIGNS = [...HOUSE_BRAND_UPGRADES, ...IOT_UPGRADES];
+const LOCAL_CAMBER_UPGRADE = {
+  key: "iot-camber",
+  tierLabel: "Local Only",
+  label: "IOT Camber",
+  amount: 60,
+  limited: true,
+  localOnly: true,
+  note: "Hidden from all client and public views.",
+};
+const PROGRESSIVE_DESIGNS = [...HOUSE_BRAND_UPGRADES, ...IOT_UPGRADES, LOCAL_CAMBER_UPGRADE];
 const ANTIGLARE_OPTIONS = [
   { key: "none", label: "No anti-glare", shortLabel: "No AG", aliases: [], fallback: 0 },
   { key: "standard", label: "Standard Antiglare", shortLabel: "Standard AG", aliases: ["Standard AR", "Standard Antiglare"], fallback: 20 },
@@ -100,6 +112,7 @@ const state = {
   providerMode: "default",
   adminUnlocked: false,
   ownerUnlocked: false,
+  camberUnlocked: loadCamberUnlockSetting(),
   editingProductId: null,
   addingItemType: "product",
   clientView: true,
@@ -138,6 +151,9 @@ const el = {
   progressiveTitle: document.querySelector("#progressiveTitle"),
   progressiveProgramSwitcher: document.querySelector("#progressiveProgramSwitcher"),
   progressiveTierSwitcher: document.querySelector("#progressiveTierSwitcher"),
+  camberUnlockPanel: document.querySelector("#camberUnlockPanel"),
+  camberUnlockStatus: document.querySelector("#camberUnlockStatus"),
+  toggleCamberButton: document.querySelector("#toggleCamberButton"),
   lensFiltersPanel: document.querySelector("#lensFiltersPanel"),
   lensFiltersTitle: document.querySelector("#lensFiltersTitle"),
   lensFiltersSummary: document.querySelector("#lensFiltersSummary"),
@@ -255,6 +271,18 @@ function loadLocalPasswordSettings() {
 
 function saveLocalPasswordSettings() {
   window.localStorage.setItem(PASSWORD_STORAGE_KEY, JSON.stringify(state.passwords));
+}
+
+function loadCamberUnlockSetting() {
+  try {
+    return window.localStorage.getItem(CAMBER_UNLOCK_STORAGE_KEY) === "true";
+  } catch (error) {
+    return false;
+  }
+}
+
+function saveCamberUnlockSetting() {
+  window.localStorage.setItem(CAMBER_UNLOCK_STORAGE_KEY, state.camberUnlocked ? "true" : "false");
 }
 
 function masterPassword() {
@@ -379,6 +407,18 @@ function sortProductRows(rows) {
   return [...rows].sort(compareProductRows);
 }
 
+function canShowLocalCamberUpgrade() {
+  return IS_LOCAL_MASTER && !state.clientView && state.camberUnlocked;
+}
+
+function visibleIotUpgrades() {
+  return canShowLocalCamberUpgrade() ? [...IOT_UPGRADES, LOCAL_CAMBER_UPGRADE] : IOT_UPGRADES;
+}
+
+function availableProgressiveDesigns() {
+  return [...HOUSE_BRAND_UPGRADES, ...visibleIotUpgrades()];
+}
+
 function isProgressiveBaseItem(item) {
   return item.category === "Digital Progressive" && item.family === "Mandalay" && item.tier === "Essential";
 }
@@ -400,7 +440,7 @@ function renderUpgradePrice(item, upgrade) {
 }
 
 function selectedProgressiveDesign() {
-  return PROGRESSIVE_DESIGNS.find((design) => design.key === state.filters.progressiveDesign) || PROGRESSIVE_DESIGNS[0];
+  return availableProgressiveDesigns().find((design) => design.key === state.filters.progressiveDesign) || availableProgressiveDesigns()[0];
 }
 
 function normalizeMandalayText(value) {
@@ -1019,7 +1059,7 @@ function ensureAvailableFilters() {
   }
 
   if (state.filters.catalogSection === "progressive") {
-    if (!PROGRESSIVE_DESIGNS.some((design) => design.key === state.filters.progressiveDesign)) {
+    if (!availableProgressiveDesigns().some((design) => design.key === state.filters.progressiveDesign)) {
       state.filters.progressiveDesign = "mandalay";
     }
     state.filters.progressiveProgram = firstAvailableOr(state.filters.progressiveProgram, availableProgressivePrograms(), "mandalay");
@@ -1101,14 +1141,33 @@ function renderProgressiveFilters() {
   if (!showing) return;
 
   el.progressiveTitle.textContent = "Progressive design upgrades";
-  el.progressiveProgramSwitcher.innerHTML = HOUSE_BRAND_UPGRADES.map(
-    (upgrade) =>
-      `<button class="family-chip upgrade-chip ${state.filters.progressiveDesign === upgrade.key ? "is-active" : ""}" data-progressive-design="${upgrade.key}" type="button">${esc(upgrade.label)}${upgrade.amount ? ` +$${upgrade.amount}` : " base"}</button>`
-  ).join("");
-  el.progressiveTierSwitcher.innerHTML = IOT_UPGRADES.map(
-    (upgrade) =>
-      `<button class="family-chip upgrade-chip ${upgrade.limited ? "upgrade-chip-limited" : ""} ${state.filters.progressiveDesign === upgrade.key ? "is-active" : ""}" data-progressive-design="${upgrade.key}" type="button">${esc(upgrade.label)} +$${upgrade.amount}${upgrade.limited ? " limited" : ""}</button>`
-  ).join("");
+  el.progressiveProgramSwitcher.innerHTML = HOUSE_BRAND_UPGRADES.map(renderProgressiveUpgradeButton).join("");
+  el.progressiveTierSwitcher.innerHTML = visibleIotUpgrades().map(renderProgressiveUpgradeButton).join("");
+
+  if (el.camberUnlockPanel) {
+    const showLocalControl = IS_LOCAL_MASTER && !state.clientView;
+    el.camberUnlockPanel.hidden = !showLocalControl;
+    if (showLocalControl) {
+      el.camberUnlockStatus.textContent = state.camberUnlocked
+        ? "Camber is unlocked for this local admin view only."
+        : "Camber data is saved locally but hidden from client and public views.";
+      el.toggleCamberButton.textContent = state.camberUnlocked ? "Lock Camber" : "Unlock Camber";
+      el.camberUnlockPanel.classList.toggle("is-unlocked", state.camberUnlocked);
+    }
+  }
+}
+
+function renderProgressiveUpgradeButton(upgrade) {
+  const priceLabel = upgrade.amount ? `+$${upgrade.amount}` : "base";
+  const note = upgrade.note ? `<span class="upgrade-note">${esc(upgrade.note)}</span>` : "";
+  return `
+    <button class="family-chip upgrade-chip progressive-upgrade-card ${upgrade.limited ? "upgrade-chip-limited" : ""} ${upgrade.localOnly ? "upgrade-chip-local" : ""} ${state.filters.progressiveDesign === upgrade.key ? "is-active" : ""}" data-progressive-design="${upgrade.key}" type="button">
+      <span class="upgrade-tier-label">${esc(upgrade.tierLabel || "")}</span>
+      <span class="upgrade-name">${esc(upgrade.label)}</span>
+      <span class="upgrade-price-label">${esc(priceLabel)}</span>
+      ${note}
+    </button>
+  `;
 }
 
 function renderLensFilters() {
@@ -2237,6 +2296,16 @@ function attachEvents() {
     state.filters.progressiveDesign = chip.dataset.progressiveDesign;
     render();
   });
+  if (el.toggleCamberButton) {
+    el.toggleCamberButton.addEventListener("click", () => {
+      state.camberUnlocked = !state.camberUnlocked;
+      saveCamberUnlockSetting();
+      if (!canShowLocalCamberUpgrade() && state.filters.progressiveDesign === LOCAL_CAMBER_UPGRADE.key) {
+        state.filters.progressiveDesign = "cr-ultimate";
+      }
+      render();
+    });
+  }
   el.clientViewButton.addEventListener("click", async () => {
     if (state.clientView) {
       const matches = await confirmPassword([masterPassword(), state.passwords.clientExit, DEFAULT_PASSWORDS.clientExit], {

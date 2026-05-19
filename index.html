@@ -95,10 +95,26 @@
           <div class="family-switcher-wrap subfilter-panel" id="progressiveFiltersPanel" hidden>
             <div>
               <p class="section-label">Progressive Selection</p>
-              <h2 id="progressiveTitle">Choose Mandalay or IOT</h2>
+              <h2 id="progressiveTitle">Progressive design upgrades</h2>
             </div>
-            <div id="progressiveProgramSwitcher" class="family-switcher"></div>
-            <div id="progressiveTierSwitcher" class="family-switcher"></div>
+            <div class="progressive-groups">
+              <div class="progressive-group">
+                <p class="section-label subtle-label">Mandalay Series</p>
+                <div id="progressiveProgramSwitcher" class="family-switcher progressive-upgrade-grid"></div>
+              </div>
+              <div class="progressive-group">
+                <p class="section-label subtle-label">IOT Good / Better / Best</p>
+                <div id="progressiveTierSwitcher" class="family-switcher progressive-upgrade-grid"></div>
+              </div>
+            </div>
+            <div id="camberUnlockPanel" class="camber-unlock-panel" hidden>
+              <div>
+                <p class="section-label subtle-label">Local-only placeholder</p>
+                <strong>Camber hidden mode</strong>
+                <span id="camberUnlockStatus">Camber data is saved locally but hidden from client and public views.</span>
+              </div>
+              <button id="toggleCamberButton" class="button button-small button-ghost" type="button">Unlock Camber</button>
+            </div>
           </div>
           <div class="family-switcher-wrap subfilter-panel collapsible-panel is-collapsed" id="lensFiltersPanel" hidden>
             <button
