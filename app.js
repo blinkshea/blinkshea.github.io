@@ -72,7 +72,7 @@ const PROGRESSIVE_DESIGNS = [...HOUSE_BRAND_UPGRADES, ...IOT_UPGRADES, ...GERMAN
 const ANTIGLARE_OPTIONS = [
   { key: "none", label: "No anti-glare", shortLabel: "No AG", aliases: [], fallback: 0 },
   { key: "standard", label: "Standard Antiglare", shortLabel: "Standard AG", aliases: ["Standard AR", "Standard Antiglare"], fallback: 20 },
-  { key: "premium", label: "Premium Antiglare", shortLabel: "Premium AG", aliases: ["Premium AR", "Premium Antiglare"], fallback: 15 },
+  { key: "premium", label: "Premium Antiglare", shortLabel: "Premium AG", aliases: ["Premium AR", "Premium Antiglare"], fallback: 25 },
   { key: "elite", label: "Elite Antiglare", shortLabel: "Elite AG", aliases: ["Elite AR", "Elite Antiglare", "Super AR"], fallback: 45 },
 ];
 const ADDON_DISPLAY_ORDER = [
@@ -459,6 +459,18 @@ function normalizeAddonDisplayName(value) {
   return /^super\s*ar$/i.test(name) ? "Elite AR" : name;
 }
 
+function normalizeAddonPricing(item) {
+  const name = normalizeAddonDisplayName(item?.name);
+  if (name !== "Bluelight Filter") return item;
+  return {
+    ...item,
+    name,
+    basePrice: 15,
+    proposedPrice: 15,
+    targetSellingPrice: 15,
+  };
+}
+
 function addonDisplayName(item) {
   return normalizeAddonDisplayName(typeof item === "string" ? item : item?.name);
 }
@@ -502,10 +514,12 @@ function normalizeCatalogSpelling(catalog) {
     method: normalizeMandalayText(item.method),
   }));
 
-  normalized.addons = (normalized.addons || []).map((item) => ({
-    ...item,
-    name: normalizeAddonDisplayName(item.name),
-  }));
+  normalized.addons = (normalized.addons || []).map((item) =>
+    normalizeAddonPricing({
+      ...item,
+      name: normalizeAddonDisplayName(item.name),
+    })
+  );
 
   normalized.generatedAt = catalog?.generatedAt;
   normalized.sourceWorkbook = catalog?.sourceWorkbook;
@@ -1698,7 +1712,7 @@ function resetCatalog() {
   if (!confirmed) return;
 
   window.localStorage.removeItem(STORAGE_KEY);
-  state.catalog = deepClone(window.DEFAULT_CATALOG || DEFAULT_CATALOG);
+  state.catalog = normalizeCatalogSpelling(window.DEFAULT_CATALOG || DEFAULT_CATALOG);
   state.filters = {
     search: "",
     catalogSection: "single-vision",

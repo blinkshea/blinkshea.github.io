@@ -120,13 +120,21 @@
     return /^super\s*ar$/i.test(name) ? "Elite AR" : name;
   }
 
+  function normalizeAddonPricing(item) {
+    const name = normalizeAddonDisplayName(item?.name);
+    if (name !== "Bluelight Filter") return item;
+    return { ...item, name, price: 15 };
+  }
+
   function normalizeClientCatalog(source) {
     return {
       ...source,
-      addons: (source.addons || []).map((item) => ({
-        ...item,
-        name: normalizeAddonDisplayName(item.name),
-      })),
+      addons: (source.addons || []).map((item) =>
+        normalizeAddonPricing({
+          ...item,
+          name: normalizeAddonDisplayName(item.name),
+        })
+      ),
     };
   }
 

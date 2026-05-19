@@ -4104,11 +4104,11 @@
       "mandalayWholesale": 4,
       "togReference": 1.94,
       "mandalayRetail": 17,
-      "basePrice": 15,
-      "proposedPrice": 15,
+      "basePrice": 25,
+      "proposedPrice": 25,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 15
+      "targetSellingPrice": 25
     },
     {
       "id": "addon-2",
@@ -4130,11 +4130,11 @@
       "mandalayWholesale": 5,
       "togReference": 1,
       "mandalayRetail": 10,
-      "basePrice": 25,
-      "proposedPrice": 25,
+      "basePrice": 15,
+      "proposedPrice": 15,
       "benchmarkRetail": null,
       "pivotalRetail": null,
-      "targetSellingPrice": 25
+      "targetSellingPrice": 15
     },
     {
       "id": "addon-4",
