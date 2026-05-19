@@ -625,7 +625,8 @@ select {
   transition: background 140ms ease, color 140ms ease, border-color 140ms ease, transform 140ms ease;
 }
 
-.family-chip:hover {
+.family-chip:hover,
+.progressive-upgrade-card:hover {
   transform: translateY(-1px);
   border-color: transparent;
   background: linear-gradient(135deg, #59b8ff, #3f73ff);
@@ -652,7 +653,8 @@ select {
 }
 
 .family-chip.is-active:hover,
-.family-chip-coating.is-active:hover {
+.family-chip-coating.is-active:hover,
+.progressive-upgrade-card.is-active:hover {
   border-color: transparent;
   background: linear-gradient(135deg, #59b8ff, #3f73ff);
   color: #04101c;
@@ -1521,7 +1523,9 @@ body {
 
 .family-chip:hover,
 .family-chip.is-active:hover,
-.family-chip-coating.is-active:hover {
+.family-chip-coating.is-active:hover,
+.progressive-upgrade-card:hover,
+.progressive-upgrade-card.is-active:hover {
   border-color: transparent;
   background: linear-gradient(135deg, #8b000f, #d1122a);
   color: #fff7f8;
