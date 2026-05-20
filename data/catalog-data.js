@@ -1,5 +1,5 @@
 window.DEFAULT_CATALOG = {
-  "generatedAt": "2026-05-15T10:20:00-04:00",
+  "generatedAt": "2026-05-20T10:52:36-04:00",
   "sourceWorkbook": "C:\\Users\\BRIAN\\Desktop\\dr.ormando pricing mandalay\\Ormando re pricing sheet.xlsx",
   "products": [
     {
@@ -12,7 +12,7 @@ window.DEFAULT_CATALOG = {
       "design": "Progressive",
       "usage": "Clear",
       "feature": "",
-      "mandalayWholesale": 18,
+      "mandalayWholesale": 15.5,
       "togReference": 14.72,
       "mandalayRetail": 27.97,
       "basePrice": 40,
@@ -20,7 +20,7 @@ window.DEFAULT_CATALOG = {
       "benchmarkRetail": 30,
       "pivotalRetail": null,
       "targetSellingPrice": 40,
-      "grossMarginPercent": 55
+      "grossMarginPercent": 61.3
     },
     {
       "id": "mandalay-essential-1",
@@ -72,7 +72,7 @@ window.DEFAULT_CATALOG = {
       "design": "Progressive",
       "usage": "Clear",
       "feature": "",
-      "mandalayWholesale": 20,
+      "mandalayWholesale": 16.5,
       "togReference": 14.72,
       "mandalayRetail": 29.97,
       "basePrice": 45,
@@ -80,7 +80,7 @@ window.DEFAULT_CATALOG = {
       "benchmarkRetail": 35,
       "pivotalRetail": null,
       "targetSellingPrice": 45,
-      "grossMarginPercent": 55.6
+      "grossMarginPercent": 63.3
     },
     {
       "id": "mandalay-essential-4",
@@ -132,7 +132,7 @@ window.DEFAULT_CATALOG = {
       "design": "Progressive",
       "usage": "Clear",
       "feature": "",
-      "mandalayWholesale": 82,
+      "mandalayWholesale": 45,
       "togReference": 39.76,
       "mandalayRetail": 107.97,
       "basePrice": 110,
@@ -140,7 +140,7 @@ window.DEFAULT_CATALOG = {
       "benchmarkRetail": 90,
       "pivotalRetail": null,
       "targetSellingPrice": 110,
-      "grossMarginPercent": 25.5
+      "grossMarginPercent": 59.1
     },
     {
       "id": "mandalay-essential-7",
@@ -252,7 +252,7 @@ window.DEFAULT_CATALOG = {
       "design": "Progressive",
       "usage": "Photo",
       "feature": "",
-      "mandalayWholesale": 27,
+      "mandalayWholesale": 21.5,
       "togReference": 17.5,
       "mandalayRetail": 34.97,
       "basePrice": 60,
@@ -260,7 +260,7 @@ window.DEFAULT_CATALOG = {
       "benchmarkRetail": 50,
       "pivotalRetail": null,
       "targetSellingPrice": 60,
-      "grossMarginPercent": 55
+      "grossMarginPercent": 64.2
     },
     {
       "id": "mandalay-essential-13",
@@ -272,7 +272,7 @@ window.DEFAULT_CATALOG = {
       "design": "Progressive",
       "usage": "Photo",
       "feature": "",
-      "mandalayWholesale": 27,
+      "mandalayWholesale": null,
       "togReference": null,
       "mandalayRetail": 37.97,
       "basePrice": 70,
@@ -280,7 +280,7 @@ window.DEFAULT_CATALOG = {
       "benchmarkRetail": 85,
       "pivotalRetail": null,
       "targetSellingPrice": 70,
-      "grossMarginPercent": 61.4
+      "grossMarginPercent": null
     },
     {
       "id": "mandalay-essential-14",
@@ -292,7 +292,7 @@ window.DEFAULT_CATALOG = {
       "design": "Progressive",
       "usage": "Photo",
       "feature": "",
-      "mandalayWholesale": 41,
+      "mandalayWholesale": 24.5,
       "togReference": 32,
       "mandalayRetail": 48.97,
       "basePrice": 80,
@@ -300,7 +300,7 @@ window.DEFAULT_CATALOG = {
       "benchmarkRetail": 60,
       "pivotalRetail": null,
       "targetSellingPrice": 80,
-      "grossMarginPercent": 48.8
+      "grossMarginPercent": 69.4
     },
     {
       "id": "mandalay-essential-15",
@@ -352,15 +352,15 @@ window.DEFAULT_CATALOG = {
       "design": "Progressive",
       "usage": "Photo",
       "feature": "",
-      "mandalayWholesale": null,
+      "mandalayWholesale": 65,
       "togReference": 62.3,
       "mandalayRetail": null,
-      "basePrice": 1,
-      "proposedPrice": 1,
+      "basePrice": 150,
+      "proposedPrice": 150,
       "benchmarkRetail": 110,
       "pivotalRetail": null,
-      "targetSellingPrice": 1,
-      "grossMarginPercent": null
+      "targetSellingPrice": 150,
+      "grossMarginPercent": 56.7
     },
     {
       "id": "mandalay-essential-19",
@@ -372,7 +372,7 @@ window.DEFAULT_CATALOG = {
       "design": "Progressive",
       "usage": "Transition Gen S",
       "feature": "",
-      "mandalayWholesale": 59,
+      "mandalayWholesale": null,
       "togReference": 41.8,
       "mandalayRetail": 78.97,
       "basePrice": 90,
@@ -380,7 +380,7 @@ window.DEFAULT_CATALOG = {
       "benchmarkRetail": 70,
       "pivotalRetail": null,
       "targetSellingPrice": 90,
-      "grossMarginPercent": 34.4
+      "grossMarginPercent": null
     },
     {
       "id": "mandalay-essential-20",
@@ -452,7 +452,7 @@ window.DEFAULT_CATALOG = {
       "design": "Progressive",
       "usage": "Transition Gen S",
       "feature": "",
-      "mandalayWholesale": 55,
+      "mandalayWholesale": null,
       "togReference": 53.92,
       "mandalayRetail": 88.97,
       "basePrice": 90,
@@ -460,7 +460,7 @@ window.DEFAULT_CATALOG = {
       "benchmarkRetail": 80,
       "pivotalRetail": null,
       "targetSellingPrice": 90,
-      "grossMarginPercent": 38.9
+      "grossMarginPercent": null
     },
     {
       "id": "mandalay-essential-25",
@@ -4129,7 +4129,7 @@ window.DEFAULT_CATALOG = {
       "name": "Bluelight Filter",
       "mandalayWholesale": 5,
       "togReference": 1,
-      "mandalayRetail": 10,
+      "mandalayRetail": 15,
       "basePrice": 15,
       "proposedPrice": 15,
       "benchmarkRetail": null,
@@ -4378,5 +4378,5 @@ window.DEFAULT_CATALOG = {
     }
   ],
   "costOfGoodsSourceWorkbook": "C:\\Users\\BRIAN\\Desktop\\Conant final pricing kinda\\Mandalay FINAL New Pricing Jan-Mar with corrections.xlsx",
-  "notes": "Client-facing prices are from the Ormando repricing workbook. Conant COG/wholesale values were applied where matched. Decimal fallback prices were rounded up to the next $5 for Ormando/default selling prices on 2026-05-14. Legacy transition product labels were normalized to Transition Gen S and duplicate rows were merged on 2026-05-14. A duplicate specialty CR-39 single-vision row was removed from the price book on 2026-05-15 because it uses standard single-vision pricing when needed."
+  "notes": "Client-facing prices are from the Ormando repricing workbook. Conant COG/wholesale values were applied where matched. Decimal fallback prices were rounded up to the next $5 for Ormando/default selling prices on 2026-05-14. Legacy transition product labels were normalized to Transition Gen S and duplicate rows were merged on 2026-05-14. A duplicate specialty CR-39 single-vision row was removed from the price book on 2026-05-15 because it uses standard single-vision pricing when needed. Ormando workbook cost/price corrections from 2026-05-20 were applied to the cleaned catalog without re-importing removed/unavailable rows."
 }
