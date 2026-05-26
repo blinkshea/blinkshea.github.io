@@ -22,7 +22,7 @@
   const progressiveDesigns = [
     { key: "mandalay", tierLabel: "Base", label: "Mandalay", amount: 0, group: "mandalay" },
     { key: "mandalay-plus", tierLabel: "Plus", label: "Mandalay Plus", amount: 20, group: "mandalay" },
-    { key: "mandalay-deluxe", tierLabel: "Deluxe", label: "Mandalay Deluxe", amount: 40, group: "mandalay" },
+    { key: "mandalay-elite", tierLabel: "Elite", label: "Mandalay Elite", amount: 40, group: "mandalay" },
     { key: "iot-essential", tierLabel: "Good", label: "IOT Essential", amount: 15, group: "iot" },
     { key: "iot-endless", tierLabel: "Better", label: "IOT Endless", amount: 35, group: "iot" },
     { key: "mor-ultimate", tierLabel: "Best", label: "MOR Ultimate lens", amount: 60, group: "german-r" },

@@ -38,7 +38,7 @@ const PROGRESSIVE_TIER_LABELS = {
   mandalay: {
     good: "Mandalay",
     better: "Mandalay Plus",
-    best: "Mandalay Deluxe",
+    best: "Mandalay Elite",
   },
   iot: {
     good: "IOT Essential (Good)",
@@ -50,7 +50,7 @@ const INDEX_DISPLAY_ORDER = ["CR-39", "Poly", "1.56", "TriVex", "1.60", "1.67", 
 const HOUSE_BRAND_UPGRADES = [
   { key: "mandalay", tierLabel: "Base", label: "Mandalay", amount: 0 },
   { key: "mandalay-plus", tierLabel: "Plus", label: "Mandalay Plus", amount: 20 },
-  { key: "mandalay-deluxe", tierLabel: "Deluxe", label: "Mandalay Deluxe", amount: 40 },
+  { key: "mandalay-elite", tierLabel: "Elite", label: "Mandalay Elite", amount: 40 },
 ];
 const IOT_UPGRADES = [
   { key: "iot-essential", tierLabel: "Good", label: "IOT Essential", amount: 15 },
