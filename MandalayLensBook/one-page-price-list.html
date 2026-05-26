@@ -141,7 +141,21 @@
     </main>
     <script src="./data/client-catalog-data.js"></script>
     <script>
-      const data = window.MANDALAY_CLIENT_CATALOG || { products: [], addons: [] };
+      const access = window.MANDALAY_CLIENT_ACCESS || { mode: "unlocked" };
+      function clientCacheKey() { return `mandalay-client-catalog:${access.cacheKey || access.generatedAt || "current"}`; }
+      function cachedClientCatalog() {
+        try {
+          const cached = sessionStorage.getItem(clientCacheKey());
+          return cached ? JSON.parse(cached) : null;
+        } catch (error) {
+          return null;
+        }
+      }
+      const data = window.MANDALAY_CLIENT_CATALOG || cachedClientCatalog() || { products: [], addons: [] };
+      if ((access.mode === "locked" || access.mode === "password") && (!data.products || !data.products.length)) {
+        document.body.innerHTML = '<main style="min-height:100vh;display:grid;place-items:center;padding:28px;background:#07111f;color:#eef6ff;font-family:Segoe UI,Arial,sans-serif;"><section style="width:min(520px,100%);border:1px solid rgba(127,199,255,.35);border-radius:18px;padding:32px;background:rgba(6,14,26,.92);box-shadow:0 24px 80px rgba(0,0,0,.42);"><p style="margin:0 0 10px;color:#59b8ff;font-weight:800;letter-spacing:.14em;text-transform:uppercase;">Mandalay Optical Labs</p><h1 style="margin:0 0 12px;font-size:34px;line-height:1;">Price list protected</h1><p style="margin:0;color:#b7c9df;line-height:1.5;">Open and unlock the main Mandalay Lens Book first, then use the One Page Price Print button again.</p></section></main>';
+        throw new Error("Client price list is protected.");
+      }
       const fmt = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 2 });
       const materialAliases = { "CR-39": ["CR-39", "1.50", "1.499"], Poly: ["Poly", "1.59"], TriVex: ["TriVex", "Trivex", "Hi-Vex", "HI-VEX"], "1.60": ["1.60", "1.6"], "1.67": ["1.67"], "1.74": ["1.74"] };
       const usageAliases = { clear: ["Clear"], photo: ["Photo", "Photochromic"], transition: ["Transition", "Transition Gen S", "Transitions Gen S", "Transition 8", "Transitions 8"], polarized: ["Polarized", "Sun"] };

@@ -11,8 +11,14 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./styles.css" />
+    <style>
+      body.client-access-pending .page-shell {
+        visibility: hidden;
+      }
+    </style>
   </head>
-  <body>
+  <body class="client-access-pending">
+    <div id="clientAccessGate" class="client-access-panel" hidden></div>
     <div class="page-shell">
       <header class="hero">
         <img
@@ -181,7 +187,6 @@
       })();
     </script>
     <script src="./data/client-catalog-data.js"></script>
-    <script src="./app.js"></script>
     <script>
       (function polishClientOnlyView() {
         const panelMap = {
@@ -265,5 +270,6 @@
         schedulePolish();
       })();
     </script>
+    <script src="./client-access.js"></script>
   </body>
 </html>
