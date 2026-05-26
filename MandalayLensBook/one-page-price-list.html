@@ -144,12 +144,17 @@
       const access = window.MANDALAY_CLIENT_ACCESS || { mode: "unlocked" };
       function clientCacheKey() { return `mandalay-client-catalog:${access.cacheKey || access.generatedAt || "current"}`; }
       function cachedClientCatalog() {
-        try {
-          const cached = sessionStorage.getItem(clientCacheKey());
-          return cached ? JSON.parse(cached) : null;
-        } catch (error) {
-          return null;
+        for (const store of [sessionStorage, localStorage]) {
+          try {
+            const cached = store.getItem(clientCacheKey());
+            if (!cached) continue;
+            const parsed = JSON.parse(cached);
+            return parsed.catalog || parsed;
+          } catch (error) {
+            // Try the next browser storage option.
+          }
         }
+        return null;
       }
       const data = window.MANDALAY_CLIENT_CATALOG || cachedClientCatalog() || { products: [], addons: [] };
       if ((access.mode === "locked" || access.mode === "password") && (!data.products || !data.products.length)) {

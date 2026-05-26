@@ -142,20 +142,31 @@
   }
 
   function saveCatalog(catalog) {
+    const payload = JSON.stringify({ savedAt: Date.now(), catalog });
     try {
-      sessionStorage.setItem(storageKey(), JSON.stringify(catalog));
+      sessionStorage.setItem(storageKey(), payload);
     } catch (error) {
       // Browser storage can be blocked; the current page can still use the decrypted catalog.
+    }
+    try {
+      localStorage.setItem(storageKey(), payload);
+    } catch (error) {
+      // Local storage carries the unlocked catalog to the print tab when available.
     }
   }
 
   function readCachedCatalog() {
-    try {
-      const cached = sessionStorage.getItem(storageKey());
-      return cached ? JSON.parse(cached) : null;
-    } catch (error) {
-      return null;
+    for (const store of [sessionStorage, localStorage]) {
+      try {
+        const cached = store.getItem(storageKey());
+        if (!cached) continue;
+        const parsed = JSON.parse(cached);
+        return parsed.catalog || parsed;
+      } catch (error) {
+        // Try the next browser storage option.
+      }
     }
+    return null;
   }
 
   function loadApp() {
