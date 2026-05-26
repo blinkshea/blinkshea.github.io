@@ -186,7 +186,6 @@
           });
       })();
     </script>
-    <script src="./data/client-catalog-data.js"></script>
     <script>
       (function polishClientOnlyView() {
         const panelMap = {
@@ -270,6 +269,27 @@
         schedulePolish();
       })();
     </script>
-    <script src="./client-access.js"></script>
+    <script>
+      (function loadClientAccessFresh() {
+        const version = String(Date.now());
+        const dataScript = document.createElement("script");
+        dataScript.src = `./data/client-catalog-data.js?v=${version}`;
+        dataScript.onload = () => {
+          const accessScript = document.createElement("script");
+          accessScript.src = `./client-access.js?v=${window.MANDALAY_CLIENT_ACCESS?.cacheKey || version}`;
+          document.body.appendChild(accessScript);
+        };
+        dataScript.onerror = () => {
+          document.body.classList.remove("client-access-pending");
+          document.body.classList.add("client-access-locked");
+          const gate = document.getElementById("clientAccessGate");
+          if (gate) {
+            gate.hidden = false;
+            gate.innerHTML = '<div class="client-access-card"><p class="client-access-eyebrow">Mandalay Optical Labs</p><h1>Lens Book Locked</h1><p class="client-access-message">The client lens book could not be loaded.</p></div>';
+          }
+        };
+        document.body.appendChild(dataScript);
+      })();
+    </script>
   </body>
 </html>
