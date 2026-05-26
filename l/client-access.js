@@ -120,6 +120,20 @@
         cursor: pointer;
       }
 
+      .client-access-action {
+        display: inline-flex;
+        min-height: 44px;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid rgba(127, 199, 255, 0.42);
+        border-radius: 999px;
+        padding: 0 18px;
+        color: #eef6ff;
+        background: rgba(4, 14, 28, 0.72);
+        font: 900 14px Manrope, "Segoe UI", Arial, sans-serif;
+        cursor: pointer;
+      }
+
       .client-access-error {
         min-height: 20px;
         margin: 2px 0 0;
@@ -219,7 +233,7 @@
   function startAccessMonitor() {
     if (monitorStarted) return;
     monitorStarted = true;
-    window.setInterval(checkAccessState, 30000);
+    window.setInterval(checkAccessState, access.mode === "locked" ? 5000 : 30000);
     window.addEventListener("focus", checkAccessState);
     document.addEventListener("visibilitychange", () => {
       if (!document.hidden) checkAccessState();
@@ -302,9 +316,12 @@
         <p class="client-access-eyebrow">Mandalay Optical Labs</p>
         <h1>${escapeHtml(title || access.title || "Lens Book Locked")}</h1>
         <p class="client-access-message">${escapeHtml(message || access.message || "This client lens book is temporarily locked.")}</p>
+        <button class="client-access-action" id="clientAccessCheckButton" type="button">Check Access Again</button>
       </div>
     `;
     gate.hidden = false;
+    document.getElementById("clientAccessCheckButton")?.addEventListener("click", checkAccessState);
+    window.setTimeout(checkAccessState, 1000);
   }
 
   function showPasswordGate() {
