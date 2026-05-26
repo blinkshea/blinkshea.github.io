@@ -233,7 +233,7 @@
   function startAccessMonitor() {
     if (monitorStarted) return;
     monitorStarted = true;
-    window.setInterval(checkAccessState, access.mode === "locked" ? 5000 : 30000);
+    window.setInterval(checkAccessState, 5000);
     window.addEventListener("focus", checkAccessState);
     document.addEventListener("visibilitychange", () => {
       if (!document.hidden) checkAccessState();
