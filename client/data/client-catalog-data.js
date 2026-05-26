@@ -1,5 +1,5 @@
 (function(){
-  window.MANDALAY_CLIENT_ACCESS={"mode":"unlocked","generatedAt":"2026-05-20T10:52:36-04:00","updatedAt":"2026-05-26T16:57:00.3123955-04:00","cacheKey":"8c685516b4e0e729"};
+  window.MANDALAY_CLIENT_ACCESS={"mode":"unlocked","generatedAt":"2026-05-20T10:52:36-04:00","updatedAt":"2026-05-26T16:57:32.7409127-04:00","cacheKey":"b2b4310e66f01412"};
   const productFields=["id","family","tier","category","material","design","usage","feature","price"];
   const addonFields=["id","section","name","price"];
   const hydrate=(fields,rows)=>rows.map(row=>Object.fromEntries(fields.map((field,index)=>[field,row[index]])));
