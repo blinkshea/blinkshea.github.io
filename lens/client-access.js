@@ -3,6 +3,8 @@
   const gateId = "clientAccessGate";
   const appScript = "./app.js";
   let appLoaded = false;
+  let monitorStarted = false;
+  let reloadingForAccessChange = false;
 
   function storageKey() {
     return `mandalay-client-catalog:${access.cacheKey || access.generatedAt || "current"}`;
@@ -155,6 +157,21 @@
     }
   }
 
+  function clearCachedCatalogs() {
+    for (const store of [sessionStorage, localStorage]) {
+      try {
+        for (let index = store.length - 1; index >= 0; index -= 1) {
+          const key = store.key(index);
+          if (key && key.indexOf("mandalay-client-catalog:") === 0) {
+            store.removeItem(key);
+          }
+        }
+      } catch (error) {
+        // Storage can be blocked; the lock still applies to the visible page.
+      }
+    }
+  }
+
   function readCachedCatalog() {
     for (const store of [sessionStorage, localStorage]) {
       try {
@@ -169,6 +186,46 @@
     return null;
   }
 
+  function reloadForAccessChange(state) {
+    if (reloadingForAccessChange) return;
+    reloadingForAccessChange = true;
+    const url = new URL(window.location.href);
+    url.searchParams.set("v", state.cacheKey || String(Date.now()));
+    window.location.replace(url.toString());
+  }
+
+  async function checkAccessState() {
+    try {
+      const response = await fetch(`./data/client-access-state.json?v=${Date.now()}`, {
+        cache: "no-store",
+      });
+      if (!response.ok) return;
+      const state = await response.json();
+      const changed = state.mode !== access.mode || state.cacheKey !== access.cacheKey;
+      if (!changed) return;
+
+      if (state.mode === "locked") {
+        clearCachedCatalogs();
+        showLocked(state.title || "Mandalay Lens Book is locked", state.message || "This client lens book is temporarily locked.");
+        return;
+      }
+
+      reloadForAccessChange(state);
+    } catch (error) {
+      // If the network is unavailable, keep the current visible state and try again later.
+    }
+  }
+
+  function startAccessMonitor() {
+    if (monitorStarted) return;
+    monitorStarted = true;
+    window.setInterval(checkAccessState, 30000);
+    window.addEventListener("focus", checkAccessState);
+    document.addEventListener("visibilitychange", () => {
+      if (!document.hidden) checkAccessState();
+    });
+  }
+
   function loadApp() {
     if (appLoaded) return;
     appLoaded = true;
@@ -180,6 +237,7 @@
   }
 
   function openClient(catalog) {
+    startAccessMonitor();
     if (catalog) {
       window.MANDALAY_CLIENT_CATALOG = catalog;
       saveCatalog(catalog);
@@ -233,6 +291,8 @@
   }
 
   function showLocked(title, message) {
+    clearCachedCatalogs();
+    startAccessMonitor();
     injectStyles();
     document.body.classList.remove("client-access-pending", "client-access-gated");
     document.body.classList.add("client-access-locked");
@@ -248,6 +308,7 @@
   }
 
   function showPasswordGate() {
+    startAccessMonitor();
     const cached = readCachedCatalog();
     if (cached) {
       openClient(cached);
