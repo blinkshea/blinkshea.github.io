@@ -1,9 +1,9 @@
 {
-  "mode": "unlocked",
+  "mode": "locked",
   "generatedAt": "2026-05-20T10:52:36-04:00",
-  "updatedAt": "2026-05-26T15:42:25.3289805-04:00",
-  "cacheKey": "ff1f1bfa3142c088",
-  "title": "",
-  "message": "",
+  "updatedAt": "2026-05-26T15:51:46.5127088-04:00",
+  "cacheKey": "395ed892ee16df87",
+  "title": "Mandalay Lens Book is locked",
+  "message": "This client lens book is temporarily locked.",
   "passwordProtected": false
 }
