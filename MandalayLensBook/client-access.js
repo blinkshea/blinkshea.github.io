@@ -326,11 +326,7 @@
 
   function showPasswordGate() {
     startAccessMonitor();
-    const cached = readCachedCatalog();
-    if (cached) {
-      openClient(cached);
-      return;
-    }
+    clearCachedCatalogs();
 
     injectStyles();
     document.body.classList.remove("client-access-pending", "client-access-locked");
