@@ -1,8 +1,8 @@
 {
   "mode": "password",
   "generatedAt": "2026-05-20T10:52:36-04:00",
-  "updatedAt": "2026-06-25T17:09:20.8748545-04:00",
-  "cacheKey": "c53e9bf3ff7f3caa",
+  "updatedAt": "2026-06-25T17:10:09.8374443-04:00",
+  "cacheKey": "d8a11b83d84d328e",
   "title": "Enter client access password",
   "message": "This Mandalay Lens Book is password protected.",
   "passwordProtected": true
