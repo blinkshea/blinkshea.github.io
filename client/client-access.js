@@ -1,7 +1,7 @@
 (function () {
   const access = window.MANDALAY_CLIENT_ACCESS || { mode: "unlocked" };
   const gateId = "clientAccessGate";
-  const appScript = "./app.js";
+  const appScript = "./app.js?v=progressive-controls-20260713";
   let appLoaded = false;
   let monitorStarted = false;
   let reloadingForAccessChange = false;

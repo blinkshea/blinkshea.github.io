@@ -275,11 +275,12 @@
     <script>
       (function loadClientAccessFresh() {
         const version = String(Date.now());
+        const clientBuildVersion = "progressive-controls-20260713";
         const dataScript = document.createElement("script");
         dataScript.src = `./data/client-catalog-data.js?v=${version}`;
         dataScript.onload = () => {
           const accessScript = document.createElement("script");
-          accessScript.src = `./client-access.js?v=${window.MANDALAY_CLIENT_ACCESS?.cacheKey || version}`;
+          accessScript.src = `./client-access.js?v=${clientBuildVersion}-${window.MANDALAY_CLIENT_ACCESS?.cacheKey || version}`;
           document.body.appendChild(accessScript);
         };
         dataScript.onerror = () => {

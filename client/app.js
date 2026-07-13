@@ -438,8 +438,9 @@
 
   function renderDesignButton(item) {
     const priceLabel = item.amount ? `+$${item.amount}` : "base";
+    const isActive = state.progressiveDesign === item.key;
     return `
-      <button class="family-chip upgrade-chip progressive-upgrade-card ${state.progressiveDesign === item.key ? "is-active" : ""}" type="button" data-progressive-design="${item.key}">
+      <button class="family-chip upgrade-chip progressive-upgrade-card ${isActive ? "is-active" : ""}" type="button" data-progressive-design="${item.key}" aria-pressed="${isActive}">
         <span class="upgrade-tier-label">${esc(item.tierLabel || "")}</span>
         <span class="upgrade-name">${esc(item.label)}</span>
         <span class="upgrade-price-label">${esc(priceLabel)}</span>
@@ -599,23 +600,23 @@
   }
 
   document.addEventListener("click", (event) => {
-    const target = event.target;
-    const section = target.getAttribute?.("data-section");
-    const singleVision = target.getAttribute?.("data-single-vision");
-    const progressiveDesign = target.getAttribute?.("data-progressive-design");
+    const target = event.target instanceof Element ? event.target : null;
+    if (!target) return;
+
+    const section = target.closest("[data-section]")?.getAttribute("data-section");
+    const singleVision = target.closest("[data-single-vision]")?.getAttribute("data-single-vision");
+    const progressiveDesign = target.closest("[data-progressive-design]")?.getAttribute("data-progressive-design");
     if (section) {
       state.section = section;
       state.index = "all";
       state.treatment = "all";
       render();
-    }
-    if (singleVision) {
+    } else if (singleVision) {
       state.singleVisionType = singleVision;
       state.index = "all";
       state.treatment = "all";
       render();
-    }
-    if (progressiveDesign) {
+    } else if (progressiveDesign) {
       state.progressiveDesign = progressiveDesign;
       render();
     }
