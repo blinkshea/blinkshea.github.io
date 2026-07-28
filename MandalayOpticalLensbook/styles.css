@@ -1896,6 +1896,42 @@ tbody tr.is-active {
     gap: 4px;
   }
 }
+
+.lens-book-footer {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 18px;
+  padding: 24px 28px;
+}
+
+.lens-book-footer h2 {
+  margin: 2px 0 6px;
+}
+
+.lens-book-footer p:last-child {
+  max-width: 720px;
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.terms-button {
+  flex: 0 0 auto;
+}
+
+@media (max-width: 720px) {
+  .lens-book-footer {
+    display: grid;
+    gap: 18px;
+    padding: 22px 18px;
+  }
+
+  .terms-button {
+    width: 100%;
+  }
+}
 /* Client-only website: same layout as local client view, hosted in blue and without admin-only public UI. */
 .updated-label,
 .count-pill,

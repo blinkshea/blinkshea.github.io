@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+    <title>Terms &amp; Conditions | Mandalay Optical Labs</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&amp;family=Manrope:wght@400;500;600;700;800&amp;display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        color-scheme: light;
+        --ink: #091727;
+        --muted: #536579;
+        --line: #d9e4ee;
+        --accent: #1769aa;
+        --accent-dark: #0e4878;
+        --paper: #ffffff;
+        --page: #eaf0f5;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        background: var(--page);
+      }
+
+      body {
+        min-height: 100vh;
+        margin: 0;
+        padding: 32px 18px 48px;
+        color: var(--ink);
+        background:
+          radial-gradient(circle at top left, rgba(23, 105, 170, 0.13), transparent 32rem),
+          var(--page);
+        font-family: "Manrope", Arial, sans-serif;
+      }
+
+      .page-actions {
+        display: flex;
+        gap: 12px;
+        justify-content: flex-end;
+        width: min(8.5in, 100%);
+        margin: 0 auto 16px;
+      }
+
+      .action {
+        display: inline-flex;
+        min-height: 44px;
+        align-items: center;
+        justify-content: center;
+        padding: 0 18px;
+        border: 1px solid var(--accent);
+        border-radius: 999px;
+        color: var(--accent);
+        background: transparent;
+        font: 800 0.88rem/1 "Manrope", Arial, sans-serif;
+        text-decoration: none;
+        cursor: pointer;
+      }
+
+      .action-primary {
+        color: white;
+        background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+        box-shadow: 0 10px 24px rgba(14, 72, 120, 0.22);
+      }
+
+      .document {
+        width: min(8.5in, 100%);
+        min-height: 10.4in;
+        margin: 0 auto;
+        padding: 0.65in 0.72in;
+        border: 1px solid rgba(9, 23, 39, 0.08);
+        border-top: 7px solid var(--accent);
+        background: var(--paper);
+        box-shadow: 0 24px 65px rgba(9, 23, 39, 0.14);
+      }
+
+      .document-header {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 24px;
+        align-items: start;
+        padding-bottom: 26px;
+        border-bottom: 2px solid var(--ink);
+      }
+
+      .eyebrow {
+        margin: 0 0 7px;
+        color: var(--accent);
+        font: 700 0.78rem/1.2 "Manrope", Arial, sans-serif;
+        text-transform: uppercase;
+        letter-spacing: 0.13em;
+      }
+
+      h1,
+      h2 {
+        font-family: "Barlow Condensed", "Arial Narrow", Arial, sans-serif;
+        text-transform: uppercase;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: clamp(2.35rem, 7vw, 4rem);
+        line-height: 0.92;
+        letter-spacing: -0.025em;
+      }
+
+      .version {
+        margin: 2px 0 0;
+        color: var(--muted);
+        font-size: 0.78rem;
+        font-weight: 700;
+        line-height: 1.5;
+        text-align: right;
+      }
+
+      .intro {
+        margin: 26px 0 8px;
+        font-size: 0.98rem;
+        line-height: 1.65;
+      }
+
+      .term-section {
+        display: grid;
+        grid-template-columns: 52px minmax(0, 1fr);
+        gap: 18px;
+        padding: 25px 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .term-number {
+        display: grid;
+        width: 42px;
+        height: 42px;
+        place-items: center;
+        border-radius: 50%;
+        color: white;
+        background: var(--accent);
+        font: 700 1rem/1 "Barlow Condensed", "Arial Narrow", Arial, sans-serif;
+      }
+
+      h2 {
+        margin: 0 0 8px;
+        font-size: 1.62rem;
+        line-height: 1;
+        letter-spacing: 0.01em;
+      }
+
+      .term-section p {
+        margin: 0;
+        color: #27394c;
+        font-size: 0.94rem;
+        line-height: 1.68;
+      }
+
+      .term-section strong {
+        color: var(--ink);
+      }
+
+      .document-note {
+        margin-top: 26px;
+        padding: 18px 20px;
+        border-left: 4px solid var(--accent);
+        background: #f0f6fb;
+      }
+
+      .document-note h2 {
+        margin-bottom: 6px;
+        font-size: 1.2rem;
+      }
+
+      .document-note p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 0.84rem;
+        line-height: 1.6;
+      }
+
+      .document-footer {
+        display: flex;
+        gap: 20px;
+        justify-content: space-between;
+        margin-top: 32px;
+        padding-top: 18px;
+        border-top: 2px solid var(--ink);
+        color: var(--muted);
+        font-size: 0.74rem;
+        font-weight: 700;
+        line-height: 1.5;
+      }
+
+      @media (max-width: 620px) {
+        body {
+          padding: 18px 10px 32px;
+        }
+
+        .page-actions {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+        }
+
+        .document {
+          min-height: 0;
+          padding: 34px 24px;
+        }
+
+        .document-header {
+          grid-template-columns: 1fr;
+          gap: 14px;
+        }
+
+        .version {
+          text-align: left;
+        }
+
+        .term-section {
+          grid-template-columns: 42px minmax(0, 1fr);
+          gap: 12px;
+        }
+
+        .document-footer {
+          display: grid;
+        }
+      }
+
+      @page {
+        size: letter;
+        margin: 0.35in;
+      }
+
+      @media print {
+        html,
+        body {
+          background: white;
+        }
+
+        body {
+          min-height: 0;
+          padding: 0;
+          print-color-adjust: exact;
+          -webkit-print-color-adjust: exact;
+        }
+
+        .page-actions {
+          display: none;
+        }
+
+        .document {
+          width: auto;
+          min-height: 0;
+          margin: 0;
+          padding: 0.35in 0.4in;
+          border: 0;
+          border-top: 6px solid var(--accent);
+          box-shadow: none;
+        }
+
+        .document-header {
+          padding-bottom: 18px;
+        }
+
+        h1 {
+          font-size: 3rem;
+        }
+
+        .intro {
+          margin-top: 18px;
+        }
+
+        .term-section {
+          break-inside: avoid;
+          padding: 18px 0;
+        }
+
+        .document-note {
+          break-inside: avoid;
+          margin-top: 18px;
+        }
+
+        .document-footer {
+          margin-top: 22px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="page-actions" aria-label="Terms page actions">
+      <a class="action" href="./index.html">Back to Lens Book</a>
+      <button class="action action-primary" type="button" onclick="window.print()">Print Terms &amp; Conditions</button>
+    </nav>
+
+    <main class="document">
+      <header class="document-header">
+        <div>
+          <p class="eyebrow">Mandalay Optical Labs</p>
+          <h1>Terms &amp; Conditions</h1>
+        </div>
+        <p class="version">Effective July 28, 2026<br />Version 1.0</p>
+      </header>
+
+      <p class="intro">
+        These terms apply to client orders for prescription lenses and related lens products
+        supplied by Mandalay Optical Labs. By submitting an order, the client agrees to the
+        terms in effect on the date of that order.
+      </p>
+
+      <section class="term-section" aria-labelledby="payment-terms">
+        <div class="term-number" aria-hidden="true">01</div>
+        <div>
+          <h2 id="payment-terms">Payment Terms — Net 30</h2>
+          <p>
+            All client invoices are billed on <strong>Net 30 terms</strong>. Payment in full is
+            due within 30 calendar days of the invoice date.
+          </p>
+        </div>
+      </section>
+
+      <section class="term-section" aria-labelledby="exchange-terms">
+        <div class="term-number" aria-hidden="true">02</div>
+        <div>
+          <h2 id="exchange-terms">Exchanges &amp; Warranty</h2>
+          <p>
+            Exchange and warranty requests are subject to review and approval by Mandalay Optical
+            Labs. <strong>Approved exchanges and warranty replacements are billed at 50% of the
+            original invoiced lens price.</strong>
+          </p>
+        </div>
+      </section>
+
+      <aside class="document-note">
+        <h2>Policy Updates</h2>
+        <p>
+          These are Mandalay Optical Labs’ current starting terms. Additional provisions may be
+          added as the policy is expanded. The version in effect when an order is placed governs
+          that order.
+        </p>
+      </aside>
+
+      <footer class="document-footer">
+        <span>Mandalay Optical Labs</span>
+        <span>Client Lens Terms &amp; Conditions</span>
+      </footer>
+    </main>
+  </body>
+</html>
