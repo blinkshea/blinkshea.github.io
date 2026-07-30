@@ -53,6 +53,79 @@
       href: "./elite-ar-marketing.html",
     },
   };
+  const visualThemeStorageKey = "mandalay-lens-book.visual-theme.v1";
+  const visualThemeAccents = [
+    "deep-emerald",
+    "garnet",
+    "sapphire",
+    "peacock",
+    "brilliant-lapis",
+    "ruby",
+  ];
+  const visualThemeState = loadVisualTheme();
+
+  function loadVisualTheme() {
+    const fallback = { mode: "classic", accent: "deep-emerald" };
+    try {
+      const saved = JSON.parse(window.localStorage.getItem(visualThemeStorageKey) || "null");
+      return {
+        mode: saved?.mode === "editorial" ? "editorial" : "classic",
+        accent: visualThemeAccents.includes(saved?.accent) ? saved.accent : fallback.accent,
+      };
+    } catch (error) {
+      return fallback;
+    }
+  }
+
+  function saveVisualTheme() {
+    try {
+      window.localStorage.setItem(visualThemeStorageKey, JSON.stringify(visualThemeState));
+    } catch (error) {
+      // The theme still works for this visit when browser storage is unavailable.
+    }
+  }
+
+  function renderVisualTheme() {
+    const isEditorial = visualThemeState.mode === "editorial";
+    document.documentElement.dataset.lensTheme = visualThemeState.mode;
+    document.documentElement.dataset.lensAccent = visualThemeState.accent;
+
+    const toggle = document.querySelector("#visualThemeToggle");
+    const picker = document.querySelector("#accentThemePicker");
+    if (toggle) {
+      toggle.textContent = isEditorial ? "Use Classic Design" : "Use New Mandalay Design";
+      toggle.setAttribute("aria-pressed", String(isEditorial));
+    }
+    if (picker) picker.hidden = !isEditorial;
+
+    document.querySelectorAll("[data-accent-theme]").forEach((button) => {
+      const isActive = button.dataset.accentTheme === visualThemeState.accent;
+      button.classList.toggle("is-active", isActive);
+      button.setAttribute("aria-pressed", String(isActive));
+    });
+  }
+
+  function initializeVisualThemeControls() {
+    renderVisualTheme();
+    const toggle = document.querySelector("#visualThemeToggle");
+    if (toggle) {
+      toggle.addEventListener("click", () => {
+        visualThemeState.mode = visualThemeState.mode === "editorial" ? "classic" : "editorial";
+        saveVisualTheme();
+        renderVisualTheme();
+      });
+    }
+
+    document.querySelectorAll("[data-accent-theme]").forEach((button) => {
+      button.addEventListener("click", () => {
+        if (!visualThemeAccents.includes(button.dataset.accentTheme)) return;
+        visualThemeState.accent = button.dataset.accentTheme;
+        visualThemeState.mode = "editorial";
+        saveVisualTheme();
+        renderVisualTheme();
+      });
+    });
+  }
 
   const state = {
     section: "single-vision",
@@ -659,5 +732,6 @@
     }
   });
 
+  initializeVisualThemeControls();
   render();
 })();

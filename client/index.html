@@ -10,10 +10,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&amp;family=Inter:wght@400;500;600;700;800&amp;family=Manrope:wght@400;500;600;700;800&amp;family=Noto+Serif+Display:opsz,wght@6..72,400;6..72,500;6..72,600;6..72,700&amp;display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="./styles.css?v=mandalay-editorial-20260730" />
     <style>
       body.client-access-pending .page-shell {
         visibility: hidden;
@@ -44,6 +44,39 @@
             Optometric Practice profitability.
           </p>
           <div class="hero-actions consult-actions">
+            <div class="visual-theme-controls" aria-label="Lens Book design controls">
+              <button
+                id="visualThemeToggle"
+                class="button button-ghost visual-theme-toggle"
+                type="button"
+                aria-pressed="false"
+              >
+                Use New Mandalay Design
+              </button>
+              <div id="accentThemePicker" class="accent-theme-picker" hidden>
+                <span class="accent-theme-label">Accent color</span>
+                <div class="accent-theme-options" role="group" aria-label="Mandalay accent color">
+                  <button class="accent-theme-option" type="button" data-accent-theme="deep-emerald" style="--swatch: #0b3d32">
+                    <span class="accent-theme-swatch" aria-hidden="true"></span>Deep Emerald
+                  </button>
+                  <button class="accent-theme-option" type="button" data-accent-theme="garnet" style="--swatch: #651c2c">
+                    <span class="accent-theme-swatch" aria-hidden="true"></span>Garnet
+                  </button>
+                  <button class="accent-theme-option" type="button" data-accent-theme="sapphire" style="--swatch: #153f6b">
+                    <span class="accent-theme-swatch" aria-hidden="true"></span>Sapphire
+                  </button>
+                  <button class="accent-theme-option" type="button" data-accent-theme="peacock" style="--swatch: #0b4550">
+                    <span class="accent-theme-swatch" aria-hidden="true"></span>Peacock
+                  </button>
+                  <button class="accent-theme-option" type="button" data-accent-theme="brilliant-lapis" style="--swatch: #2447d8">
+                    <span class="accent-theme-swatch" aria-hidden="true"></span>Brilliant Lapis
+                  </button>
+                  <button class="accent-theme-option" type="button" data-accent-theme="ruby" style="--swatch: #b51d45">
+                    <span class="accent-theme-swatch" aria-hidden="true"></span>Ruby
+                  </button>
+                </div>
+              </div>
+            </div>
             <a class="button consult-button" href="https://outlook.office.com/book/MandalayOpticalQuestions@wecareri.com/?ismsaljsauthenabled" target="_blank" rel="noopener">Book Lens Consultation</a>
           </div>
         </div>
@@ -289,7 +322,7 @@
     <script>
       (function loadClientAccessFresh() {
         const version = String(Date.now());
-        const clientBuildVersion = "progressive-controls-20260713";
+        const clientBuildVersion = "mandalay-editorial-20260730";
         const dataScript = document.createElement("script");
         dataScript.src = `./data/client-catalog-data.js?v=${version}`;
         dataScript.onload = () => {
