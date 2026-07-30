@@ -3510,7 +3510,7 @@
       "sourceSheet": "CONVENTIONAL SV",
       "material": "1.74",
       "design": "Single Vision",
-      "usage": "Transition",
+      "usage": "Photochromic",
       "feature": "",
       "mandalayWholesale": null,
       "togReference": 83.5,
@@ -4378,5 +4378,5 @@
     }
   ],
   "costOfGoodsSourceWorkbook": "C:\\Users\\BRIAN\\Desktop\\Conant final pricing kinda\\Mandalay FINAL New Pricing Jan-Mar with corrections.xlsx",
-  "notes": "Client-facing prices are from the Ormando repricing workbook. Conant COG/wholesale values were applied where matched. Decimal fallback prices were rounded up to the next $5 for Ormando/default selling prices on 2026-05-14. Legacy transition product labels were normalized to Transition Gen S and duplicate rows were merged on 2026-05-14. A duplicate specialty CR-39 single-vision row was removed from the price book on 2026-05-15 because it uses standard single-vision pricing when needed. Ormando workbook cost/price corrections from 2026-05-20 were applied to the cleaned catalog without re-importing removed/unavailable rows."
+  "notes": "Client-facing prices are from the Ormando repricing workbook. Conant COG/wholesale values were applied where matched. Decimal fallback prices were rounded up to the next $5 for Ormando/default selling prices on 2026-05-14. Legacy transition product labels were normalized to Transition Gen S and duplicate rows were merged on 2026-05-14. A duplicate specialty CR-39 single-vision row was removed from the price book on 2026-05-15 because it uses standard single-vision pricing when needed. Ormando workbook cost/price corrections from 2026-05-20 were applied to the cleaned catalog without re-importing removed/unavailable rows. The 1.74 single-vision product was switched from Transition to Photochromic on 2026-07-30, with its $170 client price unchanged."
 }

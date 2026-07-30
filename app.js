@@ -587,6 +587,7 @@ const SKU_CODE_BOOK = {
     CLEAR: "100",
     SUN: "200",
     PHOTO: "300",
+    PHOTOCHROMIC: "300",
     TRANSITION: "400",
     "TRANSITION 8": "408",
     "TRANSITIONS 8": "408",
