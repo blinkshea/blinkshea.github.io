@@ -502,11 +502,20 @@ function renderAddonNameCell(item) {
 function normalizeCatalogSpelling(catalog) {
   const normalized = deepClone(catalog || DEFAULT_CATALOG);
 
-  normalized.products = (normalized.products || []).map((item) => ({
-    ...item,
-    family: normalizeMandalayText(item.family),
-    sourceSheet: normalizeMandalayText(item.sourceSheet),
-  }));
+  normalized.products = (normalized.products || []).map((item) => {
+    const normalizedItem = {
+      ...item,
+      family: normalizeMandalayText(item.family),
+      sourceSheet: normalizeMandalayText(item.sourceSheet),
+    };
+
+    // Product availability corrections must also update older catalogs saved in the browser.
+    if (normalizedItem.id === "conventional-sv-28") {
+      normalizedItem.usage = "Photochromic";
+    }
+
+    return normalizedItem;
+  });
 
   normalized.shipping = (normalized.shipping || []).map((item) => ({
     ...item,
