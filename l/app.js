@@ -86,17 +86,14 @@
   }
 
   function renderVisualTheme() {
-    const isEditorial = visualThemeState.mode === "editorial";
     document.documentElement.dataset.lensTheme = visualThemeState.mode;
     document.documentElement.dataset.lensAccent = visualThemeState.accent;
 
-    const toggle = document.querySelector("#visualThemeToggle");
-    const picker = document.querySelector("#accentThemePicker");
-    if (toggle) {
-      toggle.textContent = isEditorial ? "Use Classic Design" : "Use New Mandalay Design";
-      toggle.setAttribute("aria-pressed", String(isEditorial));
-    }
-    if (picker) picker.hidden = !isEditorial;
+    document.querySelectorAll("[data-lens-mode]").forEach((button) => {
+      const isActive = button.dataset.lensMode === visualThemeState.mode;
+      button.classList.toggle("is-active", isActive);
+      button.setAttribute("aria-pressed", String(isActive));
+    });
 
     document.querySelectorAll("[data-accent-theme]").forEach((button) => {
       const isActive = button.dataset.accentTheme === visualThemeState.accent;
@@ -105,16 +102,35 @@
     });
   }
 
+  function setVisualThemePanelOpen(isOpen) {
+    const panel = document.querySelector("#visualThemePanel");
+    const toggle = document.querySelector("#themePanelToggle");
+    if (panel) panel.hidden = !isOpen;
+    if (toggle) toggle.setAttribute("aria-expanded", String(isOpen));
+  }
+
   function initializeVisualThemeControls() {
     renderVisualTheme();
-    const toggle = document.querySelector("#visualThemeToggle");
+    const toggle = document.querySelector("#themePanelToggle");
+    const close = document.querySelector("#themePanelClose");
+    const panel = document.querySelector("#visualThemePanel");
     if (toggle) {
       toggle.addEventListener("click", () => {
-        visualThemeState.mode = visualThemeState.mode === "editorial" ? "classic" : "editorial";
+        setVisualThemePanelOpen(panel?.hidden !== false);
+      });
+    }
+    if (close) {
+      close.addEventListener("click", () => setVisualThemePanelOpen(false));
+    }
+
+    document.querySelectorAll("[data-lens-mode]").forEach((button) => {
+      button.addEventListener("click", () => {
+        if (!["classic", "editorial"].includes(button.dataset.lensMode)) return;
+        visualThemeState.mode = button.dataset.lensMode;
         saveVisualTheme();
         renderVisualTheme();
       });
-    }
+    });
 
     document.querySelectorAll("[data-accent-theme]").forEach((button) => {
       button.addEventListener("click", () => {
@@ -124,6 +140,10 @@
         saveVisualTheme();
         renderVisualTheme();
       });
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") setVisualThemePanelOpen(false);
     });
   }
 
