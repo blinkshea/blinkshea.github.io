@@ -151,7 +151,34 @@ function setVisualThemePanelOpen(isOpen) {
   if (toggle) toggle.setAttribute("aria-expanded", String(isOpen));
 }
 
+function anchorVisualThemeControlsToHero() {
+  const hero = document.querySelector(".hero");
+  const controls = document.querySelector(".visual-theme-controls");
+  const panel = document.querySelector("#visualThemePanel");
+  if (!hero || !controls) return;
+
+  if (controls.parentElement !== hero) {
+    hero.appendChild(controls);
+  }
+
+  hero.style.setProperty("position", "relative", "important");
+  controls.style.setProperty("position", "absolute", "important");
+  controls.style.setProperty("right", "22px", "important");
+  controls.style.setProperty("bottom", "22px", "important");
+  controls.style.setProperty("top", "auto", "important");
+  controls.style.setProperty("left", "auto", "important");
+
+  if (panel) {
+    panel.style.setProperty("position", "absolute", "important");
+    panel.style.setProperty("right", "0", "important");
+    panel.style.setProperty("bottom", "calc(100% + 12px)", "important");
+    panel.style.setProperty("top", "auto", "important");
+    panel.style.setProperty("left", "auto", "important");
+  }
+}
+
 function initializeVisualThemeControls() {
+  anchorVisualThemeControlsToHero();
   renderVisualTheme();
   const toggle = document.querySelector("#themePanelToggle");
   const close = document.querySelector("#themePanelClose");

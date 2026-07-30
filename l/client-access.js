@@ -1,7 +1,7 @@
 (function () {
   const access = window.MANDALAY_CLIENT_ACCESS || { mode: "unlocked" };
   const gateId = "clientAccessGate";
-  const appScript = "./app.js?v=mandalay-hero-hard-anchor-20260730a";
+  const appScript = "./app.js?v=mandalay-hero-hard-anchor-20260730b";
   let appLoaded = false;
   let monitorStarted = false;
   let reloadingForAccessChange = false;
