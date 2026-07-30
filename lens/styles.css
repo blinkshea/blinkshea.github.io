@@ -1935,7 +1935,7 @@ tbody tr.is-active {
 
 /* Mandalay editorial skin: brand manual v4.4, pages 34 and 51-64. */
 .visual-theme-controls {
-  position: fixed;
+  position: absolute;
   right: 22px;
   bottom: 22px;
   z-index: 1000;
@@ -2473,12 +2473,12 @@ html[data-lens-theme="editorial"] .price-editor-dialog::backdrop {
   }
 
   .visual-theme-panel {
-    position: fixed;
-    right: 12px;
-    bottom: 70px;
-    left: 12px;
-    width: auto;
-    max-height: calc(100dvh - 92px);
+    position: absolute;
+    right: 0;
+    bottom: calc(100% + 12px);
+    left: auto;
+    width: min(340px, calc(100vw - 24px));
+    max-height: calc(100dvh - 110px);
     overflow-y: auto;
   }
 
